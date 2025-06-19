@@ -63,19 +63,19 @@ input {
   }
 
   input {
-    width: 50px;
-    font-size: 1.2rem;
+    width: 80px;       /* más ancho */
+    font-size: 1.5rem; /* más grande */
   }
 
   button {
-    width: 100%;
+    width: 80%;         /* más ancho para tocar mejor */
     min-width: unset;
-    font-size: 1.2rem;
-    margin-top: 10px;
+    font-size: 1.5rem;  /* más grande */
+    margin-top: 20px;
   }
 
   button + button {
     margin-left: 0;
-    margin-top: 10px;
+    margin-top: 20px;
   }
 }
