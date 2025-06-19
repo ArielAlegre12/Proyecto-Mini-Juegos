@@ -1,49 +1,57 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>El Número del Día</title>
   <link rel="stylesheet" href="/css/style.css" />
 </head>
+
 <body>
- <div class="accordion">
+  <div class="accordion">
 
-  <div class="accordion-item" id="juegoAdivinanza">
-    <button class="accordion-header">🎯 El Número del Día</button>
-    <div class="accordion-content">
-      <!-- Juego número aquí -->
-      <p>Adiviná el número entre 1 y el 1.</p>
-      <input type="number" id="userGuess" min="1" max="10" placeholder="Tu número" />
-      <br />
-      <button id="playButton">Probar suerte</button>
-      <button id="resetButton" style="display:none; margin-left: 0;">Jugar de nuevo</button>
-      <p id="result"></p>
-      <video id="winVideo" width="320" height="180" controls style="display:none; margin-top: 20px;">
-        <source src="/videos/file_download..webm" type="video/webm" />
-        Tu navegador no soporta el video.
-      </video>
+    <div class="accordion-item" id="juegoAdivinanza">
+      <button class="accordion-header">🎯 El Número del Día</button>
+      <div class="accordion-content">
+        <!-- Juego número aquí -->
+        <p>Adiviná el número entre 1 y el 10.</p>
+        <input type="number" id="userGuess" min="1" max="10" placeholder="Tu número" />
+        <br />
+        <button id="playButton">Probar suerte</button>
+        <button id="resetButton" style="display:none; margin-left: 0;">Jugar de nuevo</button>
+        <p id="result"></p>
+        <video id="winVideo" width="320" height="180" controls style="display:none; margin-top: 20px;">
+          <source src="/videos/file_download..webm" type="video/webm" />
+          Tu navegador no soporta el video.
+        </video>
+        <video id="failVideo" width="320" height="180" style="display:none;" muted>
+          <source src="/videos/gambare.mp4" type="video/webm">
+          Tu navegador no soporta el video.
+        </video>
+
+      </div>
     </div>
-  </div>
 
-  <div class="accordion-item" id="juegoAdivinanza">
-    <button class="accordion-header">➕ Juego de Sumas</button>
-    <div class="accordion-content">
-      <!-- Juego suma aquí -->
-      <p>Resolvé la suma:</p>
-      <p id="sumaPregunta"></p>
-      <input type="number" id="respuestaSuma" placeholder="Tu respuesta" />
-      <br />
-      <button id="botonSumar">Comprobar</button>
-      <button id="botonResetSuma" style="display:none;">Jugar de nuevo</button>
-      <p id="resultadoSuma"></p>
+    <div class="accordion-item" id="juegoSuma">
+      <button class="accordion-header">➕ Juego de Sumas</button>
+      <div class="accordion-content">
+        <!-- Juego suma aquí -->
+        <p>Resolvé la suma:</p>
+        <p id="sumaPregunta"></p>
+        <input type="number" id="respuestaSuma" placeholder="Tu respuesta" />
+        <br />
+        <button id="botonSumar">Comprobar</button>
+        <button id="botonResetSuma" style="display:none;">Jugar de nuevo</button>
+        <p id="resultadoSuma"></p>
+      </div>
     </div>
-  </div>
 
-</div>
+  </div>
 
 
 
   <script src="/js/main.js"></script>
 </body>
+
 </html>

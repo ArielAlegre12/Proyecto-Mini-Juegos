@@ -1,5 +1,7 @@
 // Juego 1: Número del Día
 let secretNumber = Math.floor(Math.random() * 10) + 1;
+let erroresConsecutivos = 0;
+
 
 const guessInput = document.getElementById("userGuess");
 const result = document.getElementById("result");
@@ -27,16 +29,34 @@ playButton.addEventListener("click", () => {
     winVideo.play();
   } else {
     result.textContent = `❌ Nada aún. El número secreto era: ${secretNumber}. Probá con otro número.`;
-    result.style.color = "black";
+result.style.color = "black";
 
-    winVideo.pause();
-    winVideo.currentTime = 0;
-    winVideo.style.display = "none";
+// Ocultar win video
+winVideo.pause();
+winVideo.currentTime = 0;
+winVideo.style.display = "none";
+
+// Incrementar fallos
+erroresConsecutivos++;
+
+const failVideo = document.getElementById("failVideo");
+failVideo.pause();
+failVideo.currentTime = 0;
+failVideo.style.display = "none";
+
+// Si llega a 5 errores, mostrar video de castigo
+if (erroresConsecutivos >= 5) {
+  failVideo.style.display = "block";
+  failVideo.play();
+  erroresConsecutivos = 0; // Reiniciamos contador
+}
+
   }
 
   playButton.style.display = "none";
   resetButton.style.display = "inline-block";
 });
+
 
 resetButton.addEventListener("click", () => {
   // Reiniciamos el estado del juego sin cerrar el panel
@@ -48,6 +68,12 @@ resetButton.addEventListener("click", () => {
   winVideo.currentTime = 0;
   winVideo.style.display = "none";
   secretNumber = Math.floor(Math.random() * 10) + 1;
+  erroresConsecutivos = 0;
+
+  const failVideo = document.getElementById("failVideo");
+  failVideo.pause();
+  failVideo.currentTime = 0;
+  failVideo.style.display = "none";
 
   abrirPanel("juegoAdivinanza");
 });
