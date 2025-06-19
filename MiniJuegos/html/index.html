@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>El Número del Día</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="container">
+  <h2>🎯 El Número del Día</h2>
+  <p>Adiviná el número entre 1 y 10.</p>
+  <input type="number" id="userGuess" min="1" max="10" placeholder="Tu número" />
+  <br />
+  <button id="playButton">Probar suerte</button>
+<button id="resetButton" style="margin-left: 10px;">Jugar de nuevo</button>
+  <p id="result"></p>
+</div>
+
+<div id="winVideoContainer" style="display:none; margin-top: 20px;">
+  <iframe id="winVideo" width="320" height="180" 
+    src="/videos/file_download..webm" 
+    title="Video de felicitaciones" frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+  </iframe>
+</div>
+
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
