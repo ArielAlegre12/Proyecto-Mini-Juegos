@@ -2,15 +2,16 @@
 let secretNumber = Math.floor(Math.random() * 10) + 1;
 let erroresConsecutivos = 0;
 
-
 const guessInput = document.getElementById("userGuess");
 const result = document.getElementById("result");
 const playButton = document.getElementById("playButton");
 const resetButton = document.getElementById("resetButton");
 const winVideo = document.getElementById("winVideo");
+const failVideo = document.getElementById("failVideo");
 
 resetButton.style.display = "none";
 winVideo.style.display = "none";
+failVideo.style.display = "none";
 
 playButton.addEventListener("click", () => {
   const guess = parseInt(guessInput.value);
@@ -27,57 +28,66 @@ playButton.addEventListener("click", () => {
 
     winVideo.style.display = "block";
     winVideo.play();
+
+    erroresConsecutivos = 0;
+
+    failVideo.pause();
+    failVideo.currentTime = 0;
+    failVideo.style.display = "none";
+
   } else {
+    erroresConsecutivos++;
+    console.log("Errores acumulados:", erroresConsecutivos);
     result.textContent = `❌ Nada aún. El número secreto era: ${secretNumber}. Probá con otro número.`;
-result.style.color = "black";
+    result.style.color = "black";
 
-// Ocultar win video
-winVideo.pause();
-winVideo.currentTime = 0;
-winVideo.style.display = "none";
+    winVideo.pause();
+    winVideo.currentTime = 0;
+    winVideo.style.display = "none";
 
-// Incrementar fallos
-erroresConsecutivos++;
-
-const failVideo = document.getElementById("failVideo");
-failVideo.pause();
-failVideo.currentTime = 0;
-failVideo.style.display = "none";
-
-// Si llega a 5 errores, mostrar video de castigo
-if (erroresConsecutivos >= 5) {
+    if (erroresConsecutivos >= 2) {
   failVideo.style.display = "block";
-  failVideo.play();
-  erroresConsecutivos = 0; // Reiniciamos contador
+  abrirPanel("juegoAdivinanza");  // asegurá que el panel esté abierto para que el video sea visible
+  failVideo.play().catch(e => console.log("Error al reproducir failVideo:", e));
+
+  playButton.disabled = true;
 }
 
   }
 
-  playButton.style.display = "none";
-  resetButton.style.display = "inline-block";
+  if (erroresConsecutivos < 5) {
+    playButton.style.display = "none";
+    resetButton.style.display = "inline-block";
+  }
 });
 
-
 resetButton.addEventListener("click", () => {
-  // Reiniciamos el estado del juego sin cerrar el panel
+  // Reiniciar el input y mensajes
   guessInput.value = "";
   result.textContent = "";
+  result.style.color = "black";
+
+  // Mostrar botón jugar, ocultar reset y habilitar botón jugar
   playButton.style.display = "inline-block";
+  playButton.disabled = false;
   resetButton.style.display = "none";
+
+  // Ocultar y pausar videos
   winVideo.pause();
   winVideo.currentTime = 0;
   winVideo.style.display = "none";
-  secretNumber = Math.floor(Math.random() * 10) + 1;
-  erroresConsecutivos = 0;
 
-  const failVideo = document.getElementById("failVideo");
   failVideo.pause();
   failVideo.currentTime = 0;
   failVideo.style.display = "none";
 
+  // Reiniciar número secreto y contador de errores
+  secretNumber = Math.floor(Math.random() * 10) + 1;
+  erroresConsecutivos = 0;
+
+  // Abrir el panel para que quede visible
   abrirPanel("juegoAdivinanza");
 });
-
 
 // Juego 2: Sumas
 const sumaPregunta = document.getElementById("sumaPregunta");
@@ -128,7 +138,6 @@ botonResetSuma.addEventListener("click", () => {
 
 generarSuma();
 
-
 // Código acordeón para abrir/cerrar paneles
 const headers = document.querySelectorAll(".accordion-header");
 
@@ -144,7 +153,6 @@ headers.forEach(header => {
     content.classList.toggle("active");
   });
 });
-
 
 // Función reutilizable para abrir un panel específico
 function abrirPanel(idPanel) {
