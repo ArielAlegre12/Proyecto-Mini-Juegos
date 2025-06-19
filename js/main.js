@@ -40,3 +40,49 @@ playButton.addEventListener("click", () => {
 resetButton.addEventListener("click", () => {
   location.reload();
 });
+
+
+const sumaPregunta = document.getElementById("sumaPregunta");
+const respuestaSuma = document.getElementById("respuestaSuma");
+const botonSumar = document.getElementById("botonSumar");
+const botonResetSuma = document.getElementById("botonResetSuma");
+const resultadoSuma = document.getElementById("resultadoSuma");
+
+let num1, num2;
+
+function generarSuma() {
+  num1 = Math.floor(Math.random() * 10) + 1; // 1 a 10
+  num2 = Math.floor(Math.random() * 10) + 1;
+  sumaPregunta.textContent = `${num1} + ${num2} = ?`;
+  resultadoSuma.textContent = "";
+  respuestaSuma.value = "";
+  botonResetSuma.style.display = "none";
+  botonSumar.style.display = "inline-block";
+  respuestaSuma.disabled = false;
+}
+
+botonSumar.addEventListener("click", () => {
+  const respuesta = parseInt(respuestaSuma.value);
+  if (isNaN(respuesta)) {
+    resultadoSuma.textContent = "⚠️ Ingresá un número válido.";
+    resultadoSuma.style.color = "red";
+    return;
+  }
+
+  if (respuesta === num1 + num2) {
+    resultadoSuma.textContent = "🎉 ¡Correcto!";
+    resultadoSuma.style.color = "green";
+  } else {
+    resultadoSuma.textContent = `❌ Incorrecto. La respuesta correcta era ${num1 + num2}.`;
+    resultadoSuma.style.color = "black";
+  }
+
+  botonSumar.style.display = "none";
+  botonResetSuma.style.display = "inline-block";
+  respuestaSuma.disabled = true;
+});
+
+botonResetSuma.addEventListener("click", generarSuma);
+
+// Iniciar el juego de suma cuando cargue la página
+generarSuma();
