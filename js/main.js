@@ -1,10 +1,11 @@
+// Juego 1: Número del Día
 let secretNumber = Math.floor(Math.random() * 10) + 1;
 
 const guessInput = document.getElementById("userGuess");
 const result = document.getElementById("result");
 const playButton = document.getElementById("playButton");
 const resetButton = document.getElementById("resetButton");
-const winVideo = document.getElementById("winVideo"); // Este es el <video> directamente
+const winVideo = document.getElementById("winVideo");
 
 resetButton.style.display = "none";
 winVideo.style.display = "none";
@@ -22,8 +23,8 @@ playButton.addEventListener("click", () => {
     result.textContent = `🎉 ¡Felicitaciones! Adivinaste el número: ${secretNumber}.`;
     result.style.color = "green";
 
-    winVideo.style.display = "block"; // Primero se muestra
-    winVideo.play(); // Luego se reproduce
+    winVideo.style.display = "block";
+    winVideo.play();
   } else {
     result.textContent = `❌ Nada aún. El número secreto era: ${secretNumber}. Probá con otro número.`;
     result.style.color = "black";
@@ -42,6 +43,7 @@ resetButton.addEventListener("click", () => {
 });
 
 
+// Juego 2: Sumas
 const sumaPregunta = document.getElementById("sumaPregunta");
 const respuestaSuma = document.getElementById("respuestaSuma");
 const botonSumar = document.getElementById("botonSumar");
@@ -51,7 +53,7 @@ const resultadoSuma = document.getElementById("resultadoSuma");
 let num1, num2;
 
 function generarSuma() {
-  num1 = Math.floor(Math.random() * 10) + 1; // 1 a 10
+  num1 = Math.floor(Math.random() * 10) + 1; // números del 1 al 10
   num2 = Math.floor(Math.random() * 10) + 1;
   sumaPregunta.textContent = `${num1} + ${num2} = ?`;
   resultadoSuma.textContent = "";
@@ -63,6 +65,7 @@ function generarSuma() {
 
 botonSumar.addEventListener("click", () => {
   const respuesta = parseInt(respuestaSuma.value);
+
   if (isNaN(respuesta)) {
     resultadoSuma.textContent = "⚠️ Ingresá un número válido.";
     resultadoSuma.style.color = "red";
@@ -84,5 +87,21 @@ botonSumar.addEventListener("click", () => {
 
 botonResetSuma.addEventListener("click", generarSuma);
 
-// Iniciar el juego de suma cuando cargue la página
 generarSuma();
+
+
+// Código acordeón para abrir/cerrar paneles
+const headers = document.querySelectorAll(".accordion-header");
+
+headers.forEach(header => {
+  header.addEventListener("click", () => {
+    const openItem = document.querySelector(".accordion-content.active");
+    const content = header.nextElementSibling;
+
+    if (openItem && openItem !== content) {
+      openItem.classList.remove("active");
+    }
+
+    content.classList.toggle("active");
+  });
+});

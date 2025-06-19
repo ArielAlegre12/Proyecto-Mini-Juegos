@@ -145,3 +145,106 @@ input {
     margin-top: 20px;
   }
 }
+
+/* --- CSS para acordeón --- */
+
+.accordion {
+  max-width: 420px;
+  margin: 30px auto;
+  font-family: Arial, sans-serif;
+}
+
+.accordion-item {
+  background: white;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+  overflow: hidden;
+}
+
+.accordion-header {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 20px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  font-size: 1.2rem;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease;
+  user-select: none;
+  border-radius: 10px 10px 0 0;
+}
+
+.accordion-header:hover {
+  background-color: #45a049;
+}
+
+.accordion-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0 20px;
+  transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+}
+
+.accordion-content.active {
+  max-height: 500px; /* o un valor alto para que quepa el contenido */
+  opacity: 1;
+  padding: 20px;
+}
+
+/* Aplico inputs y buttons dentro del acordeón igual que antes */
+.accordion-content input {
+  padding: 8px;
+  margin-top: 10px;
+  width: 80px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.accordion-content button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+  min-width: 120px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.accordion-content button:hover {
+  background-color: #45a049;
+}
+
+/* Botones azules para el juego de suma */
+#botonSumar, #botonResetSuma {
+  background-color: #2196F3;
+}
+
+#botonSumar:hover, #botonResetSuma:hover {
+  background-color: #1976D2;
+}
+
+/* Responsive móvil */
+@media (max-width: 480px) {
+  .accordion {
+    max-width: 95vw;
+  }
+
+  .accordion-content input {
+    width: 80px;
+    font-size: 1.3rem;
+  }
+
+  .accordion-content button {
+    width: 80%;
+    font-size: 1.3rem;
+    min-width: unset;
+    margin-top: 20px;
+  }
+}

@@ -7,32 +7,41 @@
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
-  <div class="container">
-    <h2>🎯 El Número del Día</h2>
-    <p>Adiviná el número entre 1 y 10.</p>
-    <input type="number" id="userGuess" min="1" max="10" placeholder="Tu número" />
-    <br />
-    <button id="playButton">Probar suerte</button>
-    <button id="resetButton" style="margin-left: 10px;">Jugar de nuevo</button>
-    <p id="result"></p>
+ <div class="accordion">
 
-    <!-- Video local oculto al inicio -->
-    <video id="winVideo" width="320" height="180" controls style="display: none; margin-top: 20px;">
-      <source src="/videos/file_download..webm" type="video/webm" />
-      Tu navegador no soporta el video.
-    </video>
+  <div class="accordion-item">
+    <button class="accordion-header">🎯 El Número del Día</button>
+    <div class="accordion-content">
+      <!-- Juego número aquí -->
+      <p>Adiviná el número entre 1 y 10.</p>
+      <input type="number" id="userGuess" min="1" max="10" placeholder="Tu número" />
+      <br />
+      <button id="playButton">Probar suerte</button>
+      <button id="resetButton" style="display:none; margin-left: 0;">Jugar de nuevo</button>
+      <p id="result"></p>
+      <video id="winVideo" width="320" height="180" controls style="display:none; margin-top: 20px;">
+        <source src="videos/mi-video.webm" type="video/webm" />
+        Tu navegador no soporta el video.
+      </video>
+    </div>
   </div>
 
-  <div class="container-suma">
-  <h2>➕ Juego de Sumas</h2>
-  <p>Resolvé la suma:</p>
-  <p id="sumaPregunta"></p>
-  <input type="number" id="respuestaSuma" placeholder="Tu respuesta" />
-  <br />
-  <button id="botonSumar">Comprobar</button>
-  <button id="botonResetSuma" style="display:none;">Jugar de nuevo</button>
-  <p id="resultadoSuma"></p>
+  <div class="accordion-item">
+    <button class="accordion-header">➕ Juego de Sumas</button>
+    <div class="accordion-content">
+      <!-- Juego suma aquí -->
+      <p>Resolvé la suma:</p>
+      <p id="sumaPregunta"></p>
+      <input type="number" id="respuestaSuma" placeholder="Tu respuesta" />
+      <br />
+      <button id="botonSumar">Comprobar</button>
+      <button id="botonResetSuma" style="display:none;">Jugar de nuevo</button>
+      <p id="resultadoSuma"></p>
+    </div>
+  </div>
+
 </div>
+
 
 
   <script src="/js/main.js"></script>
