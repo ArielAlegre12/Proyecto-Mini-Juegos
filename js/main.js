@@ -4,10 +4,10 @@ const guessInput = document.getElementById("userGuess");
 const result = document.getElementById("result");
 const playButton = document.getElementById("playButton");
 const resetButton = document.getElementById("resetButton");
-const videoContainer = document.getElementById("winVideoContainer");
+const winVideo = document.getElementById("winVideo"); // Este es el <video> directamente
 
 resetButton.style.display = "none";
-videoContainer.style.display = "none";
+winVideo.style.display = "none";
 
 playButton.addEventListener("click", () => {
   const guess = parseInt(guessInput.value);
@@ -22,14 +22,15 @@ playButton.addEventListener("click", () => {
     result.textContent = `🎉 ¡Felicitaciones! Adivinaste el número: ${secretNumber}.`;
     result.style.color = "green";
 
-    // Mostrar video embebido de YouTube
-    videoContainer.style.display = "block";
+    winVideo.style.display = "block"; // Primero se muestra
+    winVideo.play(); // Luego se reproduce
   } else {
     result.textContent = `❌ Nada aún. El número secreto era: ${secretNumber}. Probá con otro número.`;
     result.style.color = "black";
 
-    // Ocultar video
-    videoContainer.style.display = "none";
+    winVideo.pause();
+    winVideo.currentTime = 0;
+    winVideo.style.display = "none";
   }
 
   playButton.style.display = "none";

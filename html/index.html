@@ -7,25 +7,21 @@
 </head>
 <body>
   <div class="container">
-  <h2>🎯 El Número del Día</h2>
-  <p>Adiviná el número entre 1 y 10.</p>
-  <input type="number" id="userGuess" min="1" max="10" placeholder="Tu número" />
-  <br />
-  <button id="playButton">Probar suerte</button>
-<button id="resetButton" style="margin-left: 10px;">Jugar de nuevo</button>
-  <p id="result"></p>
-</div>
+    <h2>🎯 El Número del Día</h2>
+    <p>Adiviná el número entre 1 y 10.</p>
+    <input type="number" id="userGuess" min="1" max="10" placeholder="Tu número" />
+    <br />
+    <button id="playButton">Probar suerte</button>
+    <button id="resetButton" style="margin-left: 10px;">Jugar de nuevo</button>
+    <p id="result"></p>
 
-<div id="winVideoContainer" style="display:none; margin-top: 20px;">
-  <iframe id="winVideo" width="320" height="180" 
-    src="/videos/file_download..webm" 
-    title="Video de felicitaciones" frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-    allowfullscreen>
-  </iframe>
-</div>
-
+    <!-- Video local oculto al inicio -->
+    <video id="winVideo" width="320" height="180" controls style="display: none; margin-top: 20px;">
+      <source src="/videos/file_download..webm" type="video/webm" />
+      Tu navegador no soporta el video.
+    </video>
+  </div>
 
   <script src="/js/main.js"></script>
-</body>e
+</body>
 </html>
