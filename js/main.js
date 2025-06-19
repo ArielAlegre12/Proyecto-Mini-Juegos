@@ -39,7 +39,17 @@ playButton.addEventListener("click", () => {
 });
 
 resetButton.addEventListener("click", () => {
-  location.reload();
+  // Reiniciamos el estado del juego sin cerrar el panel
+  guessInput.value = "";
+  result.textContent = "";
+  playButton.style.display = "inline-block";
+  resetButton.style.display = "none";
+  winVideo.pause();
+  winVideo.currentTime = 0;
+  winVideo.style.display = "none";
+  secretNumber = Math.floor(Math.random() * 10) + 1;
+
+  abrirPanel("juegoAdivinanza");
 });
 
 
@@ -85,7 +95,10 @@ botonSumar.addEventListener("click", () => {
   respuestaSuma.disabled = true;
 });
 
-botonResetSuma.addEventListener("click", generarSuma);
+botonResetSuma.addEventListener("click", () => {
+  generarSuma();
+  abrirPanel("juegoSuma");
+});
 
 generarSuma();
 
@@ -105,3 +118,12 @@ headers.forEach(header => {
     content.classList.toggle("active");
   });
 });
+
+
+// Función reutilizable para abrir un panel específico
+function abrirPanel(idPanel) {
+  const panel = document.getElementById(idPanel);
+  if (panel && !panel.classList.contains("active")) {
+    panel.classList.add("active");
+  }
+}
