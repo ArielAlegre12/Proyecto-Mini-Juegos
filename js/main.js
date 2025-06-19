@@ -53,7 +53,7 @@ const resultadoSuma = document.getElementById("resultadoSuma");
 let num1, num2;
 
 function generarSuma() {
-  num1 = Math.floor(Math.random() * 10) + 1; // números del 1 al 10
+  num1 = Math.floor(Math.random() * 100) + 1; // números del 1 al 100
   num2 = Math.floor(Math.random() * 10) + 1;
   sumaPregunta.textContent = `${num1} + ${num2} = ?`;
   resultadoSuma.textContent = "";
