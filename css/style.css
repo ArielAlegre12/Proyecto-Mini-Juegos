@@ -20,7 +20,7 @@ body {
 
 button {
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: #4CAF50; /* Verde por defecto para la mayoría de los botones */
   color: white;
   border: none;
   border-radius: 5px;
@@ -32,7 +32,7 @@ button {
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #45a049; /* Verde más oscuro al pasar el ratón */
 }
 
 input {
@@ -107,7 +107,7 @@ input {
 
 .container-suma button {
   padding: 10px 20px;
-  background-color: #2196F3;
+  background-color: #2196F3; /* Botones de suma en azul */
   color: white;
   border: none;
   border-radius: 5px;
@@ -163,7 +163,7 @@ input {
 }
 
 .accordion-header {
-  background-color: #4CAF50;
+  background-color: #4CAF50; /* Encabezados de acordeón en verde */
   color: white;
   padding: 15px 20px;
   width: 100%;
@@ -178,7 +178,7 @@ input {
 }
 
 .accordion-header:hover {
-  background-color: #45a049;
+  background-color: #45a049; /* Verde oscuro al pasar el ratón */
 }
 
 .accordion-content {
@@ -205,7 +205,7 @@ input {
 
 .accordion-content button {
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: #4CAF50; /* Verde por defecto para los botones dentro de acordeones */
   color: white;
   border: none;
   border-radius: 5px;
@@ -220,13 +220,22 @@ input {
   background-color: #45a049;
 }
 
+/* Botones específicos que deben ser azules */
+#playButton { /* Botón "Probar suerte" del Número del Día */
+  background-color: #2196F3; /* Color azul */
+}
+
+#playButton:hover {
+  background-color: #1976D2; /* Un azul un poco más oscuro al pasar el ratón */
+}
+
 /* Botones azules para juego suma */
 #botonSumar, #botonResetSuma {
-  background-color: #2196F3;
+  background-color: #2196F3; /* Color azul */
 }
 
 #botonSumar:hover, #botonResetSuma:hover {
-  background-color: #1976D2;
+  background-color: #1976D2; /* Azul más oscuro al pasar el ratón */
 }
 
 @media (max-width: 480px) {
@@ -247,16 +256,33 @@ input {
   }
 }
 
-
 /* --- Estilos para el juego de trivia --- */
 
-/* Estilos para el juego de trivia */
-#trivia button {
+#trivia button { /* Botones de respuesta de trivia (serán verdes) */
+  background-color: #4CAF50; /* ¡Color verde para las opciones de respuesta! */
   margin: 5px;
   padding: 8px 12px;
   font-size: 16px;
   cursor: pointer;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
+
+#trivia button:hover {
+  background-color: #45a049; /* Verde más oscuro al pasar el ratón */
+}
+
+/* ¡Solo el botón "Siguiente pregunta" será azul! */
+#nextQuestionButton {
+  background-color: #2196F3; /* Color azul */
+}
+
+#nextQuestionButton:hover {
+  background-color: #1976D2; /* Azul más oscuro al pasar el ratón */
+}
+
 #trivia h3 {
   font-size: 18px;
   margin-bottom: 10px;
