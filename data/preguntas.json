@@ -1,0 +1,1181 @@
+[
+  {
+    "question": "¿Cuál es el país más grande del mundo por superficie?",
+    "correct_answer": "Rusia",
+    "incorrect_answers": [
+      "China",
+      "Canadá",
+      "Estados Unidos"
+    ]
+  },
+  {
+    "question": "¿Cuál es el océano más grande y profundo de la Tierra?",
+    "correct_answer": "Océano Pacífico",
+    "incorrect_answers": [
+      "Océano Atlántico",
+      "Océano Índico",
+      "Océano Ártico"
+    ]
+  },
+  {
+    "question": "¿Cuántos huesos tiene el cuerpo humano adulto?",
+    "correct_answer": "206",
+    "incorrect_answers": [
+      "212",
+      "198",
+      "220"
+    ]
+  },
+  {
+    "question": "¿Quién pintó la 'Mona Lisa'?",
+    "correct_answer": "Leonardo da Vinci",
+    "incorrect_answers": [
+      "Vincent van Gogh",
+      "Pablo Picasso",
+      "Claude Monet"
+    ]
+  },
+  {
+    "question": "¿Cuál es el planeta más cercano al Sol?",
+    "correct_answer": "Mercurio",
+    "incorrect_answers": [
+      "Venus",
+      "Marte",
+      "Júpiter"
+    ]
+  },
+  {
+    "question": "¿Qué animal es conocido como 'el rey de la selva'?",
+    "correct_answer": "León",
+    "incorrect_answers": [
+      "Tigre",
+      "Elefante",
+      "Gorila"
+    ]
+  },
+  {
+    "question": "¿Cuál es la moneda oficial de Japón?",
+    "correct_answer": "Yen",
+    "incorrect_answers": [
+      "Won",
+      "Yuan",
+      "Dólar"
+    ]
+  },
+  {
+    "question": "¿En qué año llegó el hombre a la Luna?",
+    "correct_answer": "1969",
+    "incorrect_answers": [
+      "1959",
+      "1971",
+      "1965"
+    ]
+  },
+  {
+    "question": "¿Qué instrumento musical tiene cuerdas y se toca con un arco?",
+    "correct_answer": "Violín",
+    "incorrect_answers": [
+      "Guitarra",
+      "Piano",
+      "Batería"
+    ]
+  },
+  {
+    "question": "¿Cuál es el deporte nacional de Japón?",
+    "correct_answer": "Sumo",
+    "incorrect_answers": [
+      "Judo",
+      "Kárate",
+      "Béisbol"
+    ]
+  },
+  {
+    "question": "¿Qué país es famoso por sus pirámides?",
+    "correct_answer": "Egipto",
+    "incorrect_answers": [
+      "México",
+      "Perú",
+      "China"
+    ]
+  },
+  {
+    "question": "¿Cuántos lados tiene un hexágono?",
+    "correct_answer": "Seis",
+    "incorrect_answers": [
+      "Cinco",
+      "Siete",
+      "Ocho"
+    ]
+  },
+  {
+    "question": "¿Cuál es el símbolo químico del agua?",
+    "correct_answer": "H2O",
+    "incorrect_answers": [
+      "CO2",
+      "O2",
+      "NaCl"
+    ]
+  },
+  {
+    "question": "¿Quién escribió 'Romeo y Julieta'?",
+    "correct_answer": "William Shakespeare",
+    "incorrect_answers": [
+      "Jane Austen",
+      "Charles Dickens",
+      "Miguel de Cervantes"
+    ]
+  },
+  {
+    "question": "¿Cuál es la capital de España?",
+    "correct_answer": "Madrid",
+    "incorrect_answers": [
+      "Barcelona",
+      "Lisboa",
+      "Roma"
+    ]
+  },
+  {
+    "question": "¿Qué fruta es la base del vino?",
+    "correct_answer": "Uva",
+    "incorrect_answers": [
+      "Manzana",
+      "Naranja",
+      "Pera"
+    ]
+  },
+  {
+    "question": "¿Cuál es el metal más abundante en la corteza terrestre?",
+    "correct_answer": "Aluminio",
+    "incorrect_answers": [
+      "Hierro",
+      "Oro",
+      "Cobre"
+    ]
+  },
+  {
+    "question": "¿Cuál es la capital de Canadá?",
+    "correct_answer": "Ottawa",
+    "incorrect_answers": [
+      "Toronto",
+      "Vancouver",
+      "Montreal"
+    ]
+  },
+  {
+    "question": "¿Qué gas respiran las plantas?",
+    "correct_answer": "Dióxido de carbono",
+    "incorrect_answers": [
+      "Oxígeno",
+      "Nitrógeno",
+      "Hidrógeno"
+    ]
+  },
+  {
+    "question": "¿Cuál es el animal terrestre más rápido?",
+    "correct_answer": "Guepardo",
+    "incorrect_answers": [
+      "Leopardo",
+      "León",
+      "Antílope"
+    ]
+  },
+  {
+    "question": "¿Cuál es el hueso más largo del cuerpo humano?",
+    "correct_answer": "Fémur",
+    "incorrect_answers": [
+      "Tibia",
+      "Peroné",
+      "Húmero"
+    ]
+  },
+  {
+    "question": "¿Quién descubrió América?",
+    "correct_answer": "Cristóbal Colón",
+    "incorrect_answers": [
+      "Fernando de Magallanes",
+      "Américo Vespucio",
+      "Vasco da Gama"
+    ]
+  },
+  {
+    "question": "¿Cuál es el idioma más hablado en el mundo?",
+    "correct_answer": "Mandarín",
+    "incorrect_answers": [
+      "Inglés",
+      "Español",
+      "Hindi"
+    ]
+  },
+  {
+    "question": "¿Qué es un 'byte' en informática?",
+    "correct_answer": "Un conjunto de 8 bits",
+    "incorrect_answers": [
+      "Una unidad de velocidad",
+      "Un tipo de programa",
+      "Un disco duro"
+    ]
+  },
+  {
+    "question": "¿Cuál es la montaña más alta del mundo?",
+    "correct_answer": "Monte Everest",
+    "incorrect_answers": [
+      "K2",
+      "Monte Kilimanjaro",
+      "Monte McKinley"
+    ]
+  },
+  {
+    "question": "¿Qué país tiene forma de bota?",
+    "correct_answer": "Italia",
+    "incorrect_answers": [
+      "Grecia",
+      "Portugal",
+      "España"
+    ]
+  },
+  {
+    "question": "¿Cuál es el animal más grande del planeta?",
+    "correct_answer": "Ballena azul",
+    "incorrect_answers": [
+      "Elefante africano",
+      "Tiburón ballena",
+      "Jirafa"
+    ]
+  },
+  {
+    "question": "¿Qué ciudad es conocida como la 'Ciudad Eterna'?",
+    "correct_answer": "Roma",
+    "incorrect_answers": [
+      "París",
+      "Atenas",
+      "Estambul"
+    ]
+  },
+  {
+    "question": "¿Cuál es el elemento químico más ligero?",
+    "correct_answer": "Hidrógeno",
+    "incorrect_answers": [
+      "Helio",
+      "Oxígeno",
+      "Litio"
+    ]
+  },
+  {
+    "question": "¿Cuál es el autor de 'Don Quijote de la Mancha'?",
+    "correct_answer": "Miguel de Cervantes",
+    "incorrect_answers": [
+      "Lope de Vega",
+      "Federico García Lorca",
+      "Gabriel García Márquez"
+    ]
+  },
+  {
+    "question": "¿Qué planeta es conocido como el 'Planeta Rojo'?",
+    "correct_answer": "Marte",
+    "incorrect_answers": [
+      "Júpiter",
+      "Venus",
+      "Saturno"
+    ]
+  },
+  {
+    "question": "¿Cuál es el mamífero volador?",
+    "correct_answer": "Murciélago",
+    "incorrect_answers": [
+      "Ave",
+      "Pájaro",
+      "Libélula"
+    ]
+  },
+  {
+    "question": "¿Cuál es la capital de Argentina?",
+    "correct_answer": "Buenos Aires",
+    "incorrect_answers": [
+      "Córdoba",
+      "Rosario",
+      "Mendoza"
+    ]
+  },
+  {
+    "question": "¿Qué famosa banda de rock británica lanzó el álbum 'Abbey Road'?",
+    "correct_answer": "The Beatles",
+    "incorrect_answers": [
+      "Led Zeppelin",
+      "The Rolling Stones",
+      "Queen"
+    ]
+  },
+  {
+    "question": "¿Cuál es el proceso por el cual las plantas fabrican su propio alimento?",
+    "correct_answer": "Fotosíntesis",
+    "incorrect_answers": [
+      "Respiración",
+      "Transpiración",
+      "Germinación"
+    ]
+  },
+  {
+    "question": "¿Qué gas constituye la mayor parte de la atmósfera terrestre?",
+    "correct_answer": "Nitrógeno",
+    "incorrect_answers": [
+      "Oxígeno",
+      "Dióxido de carbono",
+      "Argón"
+    ]
+  },
+  {
+    "question": "¿En qué continente se encuentra el desierto del Sahara?",
+    "correct_answer": "África",
+    "incorrect_answers": [
+      "Asia",
+      "América del Sur",
+      "Australia"
+    ]
+  },
+  {
+    "question": "¿Cuántos minutos tiene una hora?",
+    "correct_answer": "60",
+    "incorrect_answers": [
+      "30",
+      "90",
+      "120"
+    ]
+  },
+  {
+    "question": "¿Cuál es el río que pasa por París?",
+    "correct_answer": "Sena",
+    "incorrect_answers": [
+      "Támesis",
+      "Danubio",
+      "Loira"
+    ]
+  },
+  {
+    "question": "¿Quién es el autor de la teoría de la relatividad?",
+    "correct_answer": "Albert Einstein",
+    "incorrect_answers": [
+      "Isaac Newton",
+      "Stephen Hawking",
+      "Galileo Galilei"
+    ]
+  },
+  {
+    "question": "¿Cuál es el mamífero más grande del mundo?",
+    "correct_answer": "Ballena azul",
+    "incorrect_answers": [
+      "Elefante",
+      "Oso polar",
+      "Jirafa"
+    ]
+  },
+  {
+    "question": "¿Qué país es conocido como la 'Tierra del Sol Naciente'?",
+    "correct_answer": "Japón",
+    "incorrect_answers": [
+      "China",
+      "Corea del Sur",
+      "Tailandia"
+    ]
+  },
+  {
+    "question": "¿Cuál es el nombre del famoso detective creado por Arthur Conan Doyle?",
+    "correct_answer": "Sherlock Holmes",
+    "incorrect_answers": [
+      "Hércules Poirot",
+      "Philip Marlowe",
+      "Miss Marple"
+    ]
+  },
+  {
+    "question": "¿Cuál es la galaxia en la que se encuentra nuestro Sistema Solar?",
+    "correct_answer": "Vía Láctea",
+    "incorrect_answers": [
+      "Andrómeda",
+      "Triángulo",
+      "Remolino"
+    ]
+  },
+  {
+    "question": "¿Qué número representa el prefijo telefónico internacional de España?",
+    "correct_answer": "+34",
+    "incorrect_answers": [
+      "+44",
+      "+33",
+      "+52"
+    ]
+  },
+  {
+    "question": "¿Cuál es la sustancia más dura conocida?",
+    "correct_answer": "Diamante",
+    "incorrect_answers": [
+      "Acero",
+      "Titanio",
+      "Grafeno"
+    ]
+  },
+  {
+    "question": "¿En qué ciudad se encuentra la Torre Eiffel?",
+    "correct_answer": "París",
+    "incorrect_answers": [
+      "Londres",
+      "Nueva York",
+      "Roma"
+    ]
+  },
+  {
+    "question": "¿Cuál es el gas que da el color azul al cielo?",
+    "correct_answer": "Nitrógeno y oxígeno (dispersión de Rayleigh)",
+    "incorrect_answers": [
+      "Ozono",
+      "Argón",
+      "Helio"
+    ]
+  },
+  {
+    "question": "¿Quién fue el primer presidente de los Estados Unidos?",
+    "correct_answer": "George Washington",
+    "incorrect_answers": [
+      "Thomas Jefferson",
+      "Abraham Lincoln",
+      "John Adams"
+    ]
+  },
+  {
+    "question": "¿Cuál es la fruta más consumida en el mundo?",
+    "correct_answer": "Plátano",
+    "incorrect_answers": [
+      "Manzana",
+      "Naranja",
+      "Uva"
+    ]
+  },
+  {
+    "question": "¿Qué animal produce la miel?",
+    "correct_answer": "Abeja",
+    "incorrect_answers": [
+      "Hormiga",
+      "Mariposa",
+      "Mosca"
+    ]
+  },
+  {
+    "question": "¿Cuál es la ciencia que estudia los terremotos?",
+    "correct_answer": "Sismología",
+    "incorrect_answers": [
+      "Vulcanología",
+      "Geología",
+      "Meteorología"
+    ]
+  },
+  {
+    "question": "¿Qué día se celebra el Día de la Independencia de Estados Unidos?",
+    "correct_answer": "4 de julio",
+    "incorrect_answers": [
+      "14 de julio",
+      "10 de mayo",
+      "1 de enero"
+    ]
+  },
+  {
+    "question": "¿Cuál es el país más poblado del mundo?",
+    "correct_answer": "China",
+    "incorrect_answers": [
+      "India",
+      "Estados Unidos",
+      "Indonesia"
+    ]
+  },
+  {
+    "question": "¿Qué significan las siglas 'WWW' en una dirección web?",
+    "correct_answer": "World Wide Web",
+    "incorrect_answers": [
+      "Web World Wide",
+      "Wide Web World",
+      "World Web Wide"
+    ]
+  },
+  {
+    "question": "¿Cuál es el nombre del hueso de la rodilla?",
+    "correct_answer": "Rótula",
+    "incorrect_answers": [
+      "Peroné",
+      "Tibia",
+      "Fémur"
+    ]
+  },
+  {
+    "question": "¿Qué famoso escultor creó el 'David'?",
+    "correct_answer": "Miguel Ángel",
+    "incorrect_answers": [
+      "Donatello",
+      "Bernini",
+      "Rodin"
+    ]
+  },
+  {
+    "question": "¿Cuántos colores tiene el arcoíris?",
+    "correct_answer": "Siete",
+    "incorrect_answers": [
+      "Cinco",
+      "Seis",
+      "Ocho"
+    ]
+  },
+  {
+    "question": "¿Cuál es el río más caudaloso del mundo?",
+    "correct_answer": "Amazonas",
+    "incorrect_answers": [
+      "Nilo",
+      "Yangtsé",
+      "Misisipi"
+    ]
+  },
+  {
+    "question": "¿Qué bebida alcohólica se hace del agave?",
+    "correct_answer": "Tequila",
+    "incorrect_answers": [
+      "Ron",
+      "Vodka",
+      "Whisky"
+    ]
+  },
+  {
+    "question": "¿Cuál es el órgano más grande del cuerpo humano?",
+    "correct_answer": "Piel",
+    "incorrect_answers": [
+      "Hígado",
+      "Corazón",
+      "Cerebro"
+    ]
+  },
+  {
+    "question": "¿Qué país es la cuna de la democracia?",
+    "correct_answer": "Grecia",
+    "incorrect_answers": [
+      "Roma",
+      "Egipto",
+      "India"
+    ]
+  },
+  {
+    "question": "¿Cuál es el autor de 'El principito'?",
+    "correct_answer": "Antoine de Saint-Exupéry",
+    "incorrect_answers": [
+      "Julio Verne",
+      "Victor Hugo",
+      "Hans Christian Andersen"
+    ]
+  },
+  {
+    "question": "¿Cuál es el nombre del rey del rock and roll?",
+    "correct_answer": "Elvis Presley",
+    "incorrect_answers": [
+      "Michael Jackson",
+      "Freddie Mercury",
+      "Chuck Berry"
+    ]
+  },
+  {
+    "question": "¿Cuál es el continente más frío?",
+    "correct_answer": "Antártida",
+    "incorrect_answers": [
+      "Ártico",
+      "Asia",
+      "América del Norte"
+    ]
+  },
+  {
+    "question": "¿Qué tipo de animal es un cocodrilo?",
+    "correct_answer": "Reptil",
+    "incorrect_answers": [
+      "Anfibio",
+      "Mamífero",
+      "Pez"
+    ]
+  },
+  {
+    "question": "¿Cuál es el país con más islas en el mundo?",
+    "correct_answer": "Suecia",
+    "incorrect_answers": [
+      "Indonesia",
+      "Filipinas",
+      "Canadá"
+    ]
+  },
+  {
+    "question": "¿Qué película ganó el primer Óscar a la Mejor Película?",
+    "correct_answer": "Alas",
+    "incorrect_answers": [
+      "El Padrino",
+      "Casablanca",
+      "Lo que el viento se llevó"
+    ]
+  },
+  {
+    "question": "¿Cuál es el hueso de la cabeza?",
+    "correct_answer": "Craneo",
+    "incorrect_answers": [
+      "Costilla",
+      "Columna",
+      "Pelvis"
+    ]
+  },
+  {
+    "question": "¿Qué bebida se obtiene de la fermentación de la cebada?",
+    "correct_answer": "Cerveza",
+    "incorrect_answers": [
+      "Vino",
+      "Sidra",
+      "Vodka"
+    ]
+  },
+  {
+    "question": "¿Cuál es la moneda de México?",
+    "correct_answer": "Peso mexicano",
+    "incorrect_answers": [
+      "Dólar",
+      "Real",
+      "Euro"
+    ]
+  },
+  {
+    "question": "¿Cuál es el nombre del océano que separa Europa de América?",
+    "correct_answer": "Océano Atlántico",
+    "incorrect_answers": [
+      "Océano Pacífico",
+      "Océano Índico",
+      "Océano Ártico"
+    ]
+  },
+  {
+    "question": "¿Qué instrumento es la base de una orquesta sinfónica?",
+    "correct_answer": "Violín",
+    "incorrect_answers": [
+      "Piano",
+      "Flauta",
+      "Trompeta"
+    ]
+  },
+  {
+    "question": "¿Cuál es el punto más bajo de la Tierra?",
+    "correct_answer": "Fosa de las Marianas",
+    "incorrect_answers": [
+      "Mar Muerto",
+      "Valle de la Muerte",
+      "Lago Baikal"
+    ]
+  },
+  {
+    "question": "¿Qué país es el mayor productor de café del mundo?",
+    "correct_answer": "Brasil",
+    "incorrect_answers": [
+      "Vietnam",
+      "Colombia",
+      "Etiopía"
+    ]
+  },
+  {
+    "question": "¿Cuál es el nombre del primer hombre en el espacio?",
+    "correct_answer": "Yuri Gagarin",
+    "incorrect_answers": [
+      "Neil Armstrong",
+      "Buzz Aldrin",
+      "Alan Shepard"
+    ]
+  },
+  {
+    "question": "¿Qué órgano del cuerpo humano es el encargado de bombear la sangre?",
+    "correct_answer": "Corazón",
+    "incorrect_answers": [
+      "Pulmones",
+      "Hígado",
+      "Riñones"
+    ]
+  },
+  {
+    "question": "¿Cuál es la capital de Italia?",
+    "correct_answer": "Roma",
+    "incorrect_answers": [
+      "Milán",
+      "Venecia",
+      "Florencia"
+    ]
+  },
+  {
+    "question": "¿Qué animal es el símbolo de la paz?",
+    "correct_answer": "Paloma",
+    "incorrect_answers": [
+      "Águila",
+      "Cisne",
+      "Lobo"
+    ]
+  },
+  {
+    "question": "¿Cuántos lados tiene un triángulo?",
+    "correct_answer": "Tres",
+    "incorrect_answers": [
+      "Cuatro",
+      "Dos",
+      "Cinco"
+    ]
+  },
+  {
+    "question": "¿Qué tipo de energía utiliza el Sol?",
+    "correct_answer": "Fusión nuclear",
+    "incorrect_answers": [
+      "Fisión nuclear",
+      "Energía eólica",
+      "Energía geotérmica"
+    ]
+  },
+  {
+    "question": "¿Cuál es el nombre del autor de 'Harry Potter'?",
+    "correct_answer": "J.K. Rowling",
+    "incorrect_answers": [
+      "Stephen King",
+      "George R.R. Martin",
+      "Tolkien"
+    ]
+  },
+  {
+    "question": "¿Cuál es el edificio más alto del mundo?",
+    "correct_answer": "Burj Khalifa",
+    "incorrect_answers": [
+      "Torre de Shanghái",
+      "Abraj Al-Bait Clock Tower",
+      "One World Trade Center"
+    ]
+  },
+  {
+    "question": "¿Qué es la unidad básica de la vida?",
+    "correct_answer": "Célula",
+    "incorrect_answers": [
+      "Átomo",
+      "Molécula",
+      "Tejido"
+    ]
+  },
+  {
+    "question": "¿Cuál es el nombre del famoso pintor español con las orejas cortadas?",
+    "correct_answer": "Vincent van Gogh",
+    "incorrect_answers": [
+      "Pablo Picasso",
+      "Salvador Dalí",
+      "Diego Velázquez"
+    ]
+  },
+  {
+    "question": "¿Cuál es el deporte más popular del mundo?",
+    "correct_answer": "Fútbol",
+    "incorrect_answers": [
+      "Baloncesto",
+      "Tenis",
+      "Críquet"
+    ]
+  },
+  {
+    "question": "¿Qué ciudad es la capital de Estados Unidos?",
+    "correct_answer": "Washington D.C.",
+    "incorrect_answers": [
+      "Nueva York",
+      "Los Ángeles",
+      "Chicago"
+    ]
+  },
+  {
+    "question": "¿Cuál es la nación más pequeña del mundo?",
+    "correct_answer": "Ciudad del Vaticano",
+    "incorrect_answers": [
+      "Mónaco",
+      "Nauru",
+      "San Marino"
+    ]
+  },
+  {
+    "question": "¿Qué se celebra el 25 de diciembre?",
+    "correct_answer": "Navidad",
+    "incorrect_answers": [
+      "Año Nuevo",
+      "Halloween",
+      "Pascua"
+    ]
+  },
+  {
+    "question": "¿Cuál es el país con mayor número de volcanes activos?",
+    "correct_answer": "Indonesia",
+    "incorrect_answers": [
+      "Japón",
+      "Estados Unidos",
+      "Chile"
+    ]
+  },
+  {
+    "question": "¿Qué tipo de sangre se considera el 'donante universal'?",
+    "correct_answer": "O negativo",
+    "incorrect_answers": [
+      "A positivo",
+      "B negativo",
+      "AB positivo"
+    ]
+  },
+  {
+    "question": "¿Cuál es el nombre del supercontinente que existió hace millones de años?",
+    "correct_answer": "Pangea",
+    "incorrect_answers": [
+      "Gondwana",
+      "Laurasia",
+      "Rodinia"
+    ]
+  },
+  {
+    "question": "¿Cuál es la capital de Rusia?",
+    "correct_answer": "Moscú",
+    "incorrect_answers": [
+      "San Petersburgo",
+      "Kiev",
+      "Varsovia"
+    ]
+  },
+  {
+    "question": "¿Qué océano rodea la Antártida?",
+    "correct_answer": "Océano Antártico",
+    "incorrect_answers": [
+      "Océano Atlántico",
+      "Océano Pacífico",
+      "Océano Índico"
+    ]
+  },
+  {
+    "question": "¿Qué famoso personaje de Disney tiene dos orejas grandes y redondas?",
+    "correct_answer": "Mickey Mouse",
+    "incorrect_answers": [
+      "Pato Donald",
+      "Goofy",
+      "Pluto"
+    ]
+  },
+  {
+    "question": "¿Cuál es el punto de ebullición del agua en grados Celsius?",
+    "correct_answer": "100",
+    "incorrect_answers": [
+      "0",
+      "50",
+      "212"
+    ]
+  },
+  {
+    "question": "¿Quién fue el autor de 'El origen de las especies'?",
+    "correct_answer": "Charles Darwin",
+    "incorrect_answers": [
+      "Gregor Mendel",
+      "Louis Pasteur",
+      "Alfred Russel Wallace"
+    ]
+  },
+  {
+    "question": "¿Qué se estudia en la botánica?",
+    "correct_answer": "Las plantas",
+    "incorrect_answers": [
+      "Los animales",
+      "Los hongos",
+      "Las rocas"
+    ]
+  },
+  {
+    "question": "¿Cuál es la ciudad más poblada del mundo?",
+    "correct_answer": "Tokio",
+    "incorrect_answers": [
+      "Shanghái",
+      "Delhi",
+      "São Paulo"
+    ]
+  },
+  {
+    "question": "¿Qué gas se utiliza para inflar globos y globos aerostáticos?",
+    "correct_answer": "Helio",
+    "incorrect_answers": [
+      "Hidrógeno",
+      "Nitrógeno",
+      "Oxígeno"
+    ]
+  },
+  {
+    "question": "¿Qué es la criptomoneda más conocida?",
+    "correct_answer": "Bitcoin",
+    "incorrect_answers": [
+      "Ethereum",
+      "Ripple",
+      "Litecoin"
+    ]
+  },
+  {
+    "question": "¿Qué animal es el mamífero terrestre más grande de América del Norte?",
+    "correct_answer": "Bisonte americano",
+    "incorrect_answers": [
+      "Oso grizzly",
+      "Alce",
+      "Ciervo"
+    ]
+  },
+  {
+    "question": "¿Cuál es la capital de Brasil?",
+    "correct_answer": "Brasilia",
+    "incorrect_answers": [
+      "Río de Janeiro",
+      "São Paulo",
+      "Salvador"
+    ]
+  },
+  {
+    "question": "¿Qué metal es líquido a temperatura ambiente?",
+    "correct_answer": "Mercurio",
+    "incorrect_answers": [
+      "Plata",
+      "Oro",
+      "Cobre"
+    ]
+  },
+  {
+    "question": "¿Qué país es famoso por el tango?",
+    "correct_answer": "Argentina",
+    "incorrect_answers": [
+      "España",
+      "México",
+      "Colombia"
+    ]
+  },
+  {
+    "question": "¿Qué son los 'glóbulos rojos'?",
+    "correct_answer": "Células sanguíneas que transportan oxígeno",
+    "incorrect_answers": [
+      "Células que combaten infecciones",
+      "Fragmentos de células que ayudan a la coagulación",
+      "Células que producen anticuerpos"
+    ]
+  },
+  {
+    "question": "¿Qué actor interpretó a James Bond en la mayoría de las películas?",
+    "correct_answer": "Roger Moore",
+    "incorrect_answers": [
+      "Sean Connery",
+      "Daniel Craig",
+      "Pierce Brosnan"
+    ]
+  },
+  {
+    "question": "¿Cuál es el desierto más grande del mundo?",
+    "correct_answer": "Sahara",
+    "incorrect_answers": [
+      "Gobi",
+      "Atacama",
+      "Antártico"
+    ]
+  },
+  {
+    "question": "¿Qué planeta es el segundo más grande del Sistema Solar?",
+    "correct_answer": "Saturno",
+    "incorrect_answers": [
+      "Júpiter",
+      "Urano",
+      "Neptuno"
+    ]
+  },
+  {
+    "question": "¿Qué parte de la planta realiza la fotosíntesis?",
+    "correct_answer": "Hojas",
+    "incorrect_answers": [
+      "Raíces",
+      "Tallo",
+      "Flores"
+    ]
+  },
+  {
+    "question": "¿Quién es el dios romano del amor?",
+    "correct_answer": "Cupido",
+    "incorrect_answers": [
+      "Marte",
+      "Neptuno",
+      "Júpiter"
+    ]
+  },
+  {
+    "question": "¿Qué es la aurora boreal?",
+    "correct_answer": "Un fenómeno luminoso en el cielo nocturno",
+    "incorrect_answers": [
+      "Una tormenta solar",
+      "Un tipo de nube",
+      "Un arcoíris nocturno"
+    ]
+  },
+  {
+    "question": "¿Cuál es el hueso de la pierna entre la rodilla y el tobillo?",
+    "correct_answer": "Tibia",
+    "incorrect_answers": [
+      "Fémur",
+      "Peroné",
+      "Rótula"
+    ]
+  },
+  {
+    "question": "¿Qué país se encuentra en el 'Cuerno de África'?",
+    "correct_answer": "Somalia",
+    "incorrect_answers": [
+      "Nigeria",
+      "Egipto",
+      "Sudáfrica"
+    ]
+  },
+  {
+    "question": "¿Cuál es la capital de Sudáfrica?",
+    "correct_answer": "Pretoria (administrativa), Ciudad del Cabo (legislativa), Bloemfontein (judicial)",
+    "incorrect_answers": [
+      "Johannesburgo",
+      "Durban",
+      "Nairobi"
+    ]
+  },
+  {
+    "question": "¿Cuál es el nombre de la famosa escultura 'El Pensador'?",
+    "correct_answer": "Auguste Rodin",
+    "incorrect_answers": [
+      "Michelangelo",
+      "Leonardo da Vinci",
+      "Donatello"
+    ]
+  },
+  {
+    "question": "¿Qué animal es el mamífero más grande de Australia?",
+    "correct_answer": "Canguro rojo",
+    "incorrect_answers": [
+      "Koala",
+      "Ualabí",
+      "Demonio de Tasmania"
+    ]
+  },
+  {
+    "question": "¿Cuál es la ciencia que estudia la vida y los organismos vivos?",
+    "correct_answer": "Biología",
+    "incorrect_answers": [
+      "Física",
+      "Química",
+      "Geología"
+    ]
+  },
+  {
+    "question": "¿Qué famoso director de cine es conocido por películas como 'Pulp Fiction' y 'Kill Bill'?",
+    "correct_answer": "Quentin Tarantino",
+    "incorrect_answers": [
+      "Steven Spielberg",
+      "Martin Scorsese",
+      "Christopher Nolan"
+    ]
+  },
+  {
+    "question": "¿Cuál es la capital de Egipto?",
+    "correct_answer": "El Cairo",
+    "incorrect_answers": [
+      "Alejandría",
+      "Luxor",
+      "Giza"
+    ]
+  },
+  {
+    "question": "¿Qué instrumento se toca con un teclado y tiene martillos que golpean cuerdas?",
+    "correct_answer": "Piano",
+    "incorrect_answers": [
+      "Guitarra",
+      "Violín",
+      "Flauta"
+    ]
+  },
+  {
+    "question": "¿Cuál es el animal que pone los huevos más grandes?",
+    "correct_answer": "Avestruz",
+    "incorrect_answers": [
+      "Gallina",
+      "Pato",
+      "Tortuga"
+    ]
+  },
+  {
+    "question": "¿Cuál es el nombre del famoso físico que propuso las leyes del movimiento y la gravitación universal?",
+    "correct_answer": "Isaac Newton",
+    "incorrect_answers": [
+      "Albert Einstein",
+      "Galileo Galilei",
+      "Stephen Hawking"
+    ]
+  },
+  {
+    "question": "¿Qué metal es el principal componente de la sangre?",
+    "correct_answer": "Hierro",
+    "incorrect_answers": [
+      "Cobre",
+      "Zinc",
+      "Magnesio"
+    ]
+  },
+  {
+    "question": "¿Qué país es conocido por la Gran Muralla?",
+    "correct_answer": "China",
+    "incorrect_answers": [
+      "Japón",
+      "India",
+      "Corea del Sur"
+    ]
+  },
+  {
+    "question": "¿Qué gas usan las plantas para crecer?",
+    "correct_answer": "Dióxido de carbono",
+    "incorrect_answers": [
+      "Oxígeno",
+      "Nitrógeno",
+      "Hidrógeno"
+    ]
+  },
+  {
+    "question": "¿Cuál es el planeta más pequeño de nuestro Sistema Solar?",
+    "correct_answer": "Mercurio",
+    "incorrect_answers": [
+      "Marte",
+      "Venus",
+      "Plutón"
+    ]
+  },
+  {
+    "question": "¿Cuál es la capital de Suecia?",
+    "correct_answer": "Estocolmo",
+    "incorrect_answers": [
+      "Oslo",
+      "Copenhague",
+      "Helsinki"
+    ]
+  },
+  {
+    "question": "¿Qué tipo de animal es un delfín?",
+    "correct_answer": "Mamífero",
+    "incorrect_answers": [
+      "Pez",
+      "Anfibio",
+      "Reptil"
+    ]
+  },
+  {
+    "question": "¿Cuál es el nombre de la obra de arte de Edvard Munch?",
+    "correct_answer": "El Grito",
+    "incorrect_answers": [
+      "La Noche Estrellada",
+      "Guernica",
+      "La persistencia de la memoria"
+    ]
+  },
+  {
+    "question": "¿Qué país es famoso por el Oktoberfest?",
+    "correct_answer": "Alemania",
+    "incorrect_answers": [
+      "Austria",
+      "Suiza",
+      "Bélgica"
+    ]
+  }
+]

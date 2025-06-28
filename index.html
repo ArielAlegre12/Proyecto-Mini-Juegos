@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>El Número del Día y Juego de Sumas</title>
+  <title>El Número del Día y Juegos</title>
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 
 <body>
   <h1>Mini juegos</h1>
-  <p>En este sitio encontrarás unos pequeños mini-juegos que iremos subiendo. Aún no sé si también agregaremos otras cosas. </p>
-  
+  <p>En este sitio encontrarás unos pequeños mini-juegos que iremos subiendo. Aún no sé si también agregaremos otras cosas.</p>
+
   <div class="accordion">
 
     <div class="accordion-item" id="juegoAdivinanza">
@@ -21,17 +20,16 @@
         <input type="number" id="userGuess" min="1" max="10" placeholder="Tu número" />
         <br />
         <button id="playButton">Probar suerte</button>
-        <button id="resetButton" style="display:none; margin-left: 0;">Jugar de nuevo</button>
+        <button id="resetButton" style="display:none;">Jugar de nuevo</button>
         <p id="result"></p>
         <video id="winVideo" width="320" height="180" controls style="display:none; margin-top: 20px;">
           <source src="/videos/file_download..webm" type="video/webm" />
           Tu navegador no soporta el video.
         </video>
-        <video id="failVideo" width="320" height="180" style="display:none;" muted controls>
+        <video id="failVideo" width="320" height="180" muted controls style="display:none;">
           <source src="/videos/gambare.mp4" type="video/mp4" />
           Tu navegador no soporta el video.
         </video>
-
       </div>
     </div>
 
@@ -48,9 +46,17 @@
       </div>
     </div>
 
+    <div class="accordion-item" id="juegoTrivia">
+      <button class="accordion-header">❓ Juego de Trivia</button>
+      <div class="accordion-content">
+        <div id="trivia">
+          <p>Cargando pregunta...</p>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <script src="/js/main.js"></script>
 </body>
-
 </html>

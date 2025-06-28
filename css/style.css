@@ -246,3 +246,18 @@ input {
     margin-top: 20px;
   }
 }
+
+
+/* --- Estilos para el juego de trivia --- */
+
+/* Estilos para el juego de trivia */
+#trivia button {
+  margin: 5px;
+  padding: 8px 12px;
+  font-size: 16px;
+  cursor: pointer;
+}
+#trivia h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
