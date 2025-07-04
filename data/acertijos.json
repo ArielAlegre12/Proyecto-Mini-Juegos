@@ -395,1408 +395,283 @@
       "Una lámpara"
     ]
   },
-  {
-    "acertijo": "Este es un acertijo imaginario número 44. ¿Qué soy?",
-    "respuesta": "Respuesta 44",
+   {
+    "acertijo": "Me construyen cuando hay calma, me destruyen cuando hay guerra. ¿Qué soy?",
+    "respuesta": "Un puente",
     "respuestaIncorrectas": [
-      "Una alfombra",
+      "Un muro",
+      "Una plaza",
+      "Una torre"
+    ]
+  },
+  {
+    "acertijo": "No tengo alma, pero canto. Me abres y me dejas hablar. ¿Qué soy?",
+    "respuesta": "Un libro de poemas",
+    "respuestaIncorrectas": [
+      "Una radio",
+      "Un micrófono",
+      "Una pintura"
+    ]
+  },
+  {
+    "acertijo": "Soy invisible pero dejo rastro, cruzo océanos sin moverme. ¿Qué soy?",
+    "respuesta": "Una señal de radio",
+    "respuestaIncorrectas": [
+      "Una idea",
+      "Una carta",
+      "Un suspiro"
+    ]
+  },
+  {
+    "acertijo": "Habito en las paredes pero no tengo cuerpo. ¿Qué soy?",
+    "respuesta": "La electricidad",
+    "respuestaIncorrectas": [
+      "Una sombra",
+      "El eco",
+      "Un grillo"
+    ]
+  },
+  {
+    "acertijo": "Mi cara brilla sin maquillaje, cambio de forma y no me puedes tocar. ¿Qué soy?",
+    "respuesta": "La luna en el agua",
+    "respuestaIncorrectas": [
       "Un espejo",
-      "Una estrella"
+      "Un diamante",
+      "Una luciérnaga"
     ]
   },
   {
-    "acertijo": "Este es un acertijo imaginario número 45. ¿Qué soy?",
-    "respuesta": "Respuesta 45",
+    "acertijo": "Mis dedos te tocan sin piel, mi ritmo te mueve sin corazón. ¿Qué soy?",
+    "respuesta": "La música",
     "respuestaIncorrectas": [
-      "Una sombra",
-      "El aire",
-      "Una taza"
+      "El viento",
+      "El mar",
+      "La poesía"
     ]
   },
   {
-    "acertijo": "Este es un acertijo imaginario número 46. ¿Qué soy?",
-    "respuesta": "Respuesta 46",
+    "acertijo": "Me llevas sin peso, me hablas sin voz. ¿Qué soy?",
+    "respuesta": "Un pensamiento",
     "respuestaIncorrectas": [
-      "Una piedra",
-      "Una sombra",
-      "El aire"
+      "Una nube",
+      "Un recuerdo",
+      "Un deseo"
     ]
   },
   {
-    "acertijo": "Este es un acertijo imaginario número 47. ¿Qué soy?",
-    "respuesta": "Respuesta 47",
+    "acertijo": "Duermo durante siglos hasta que me despiertan con fuego. ¿Qué soy?",
+    "respuesta": "Un volcán dormido",
     "respuestaIncorrectas": [
-      "Un avión",
-      "Una montaña",
-      "Un edificio"
+      "Una bomba",
+      "Una estrella",
+      "Un oso polar"
     ]
   },
   {
-    "acertijo": "Este es un acertijo imaginario número 48. ¿Qué soy?",
-    "respuesta": "Respuesta 48",
+    "acertijo": "No tengo motor pero te llevo lejos. ¿Qué soy?",
+    "respuesta": "Un libro de aventuras",
     "respuestaIncorrectas": [
-      "Una piedra",
-      "Una alfombra",
+      "Un tren",
+      "Un avión de papel",
+      "Un mapa"
+    ]
+  },
+  {
+    "acertijo": "Nací del miedo y muero con la verdad. ¿Qué soy?",
+    "respuesta": "Una mentira",
+    "respuestaIncorrectas": [
+      "El silencio",
+      "Un secreto",
+      "Un disfraz"
+    ]
+  },
+  {
+    "acertijo": "Soy parte del día, pero nunca salgo de noche. ¿Qué soy?",
+    "respuesta": "La sombra del mediodía",
+    "respuestaIncorrectas": [
+      "El sol",
+      "El viento",
       "Una nube"
     ]
   },
   {
-    "acertijo": "Este es un acertijo imaginario número 49. ¿Qué soy?",
-    "respuesta": "Respuesta 49",
+    "acertijo": "Pido permiso sin hablar, entro sin golpear. ¿Qué soy?",
+    "respuesta": "La luz por la ventana",
     "respuestaIncorrectas": [
-      "Un volcán",
-      "Un espejo",
-      "Un río"
+      "El sonido",
+      "El eco",
+      "Una carta"
     ]
   },
   {
-    "acertijo": "Este es un acertijo imaginario número 50. ¿Qué soy?",
-    "respuesta": "Respuesta 50",
+    "acertijo": "Vivo en una jaula y canto, pero si me liberas, muero. ¿Qué soy?",
+    "respuesta": "Una llama de vela",
     "respuestaIncorrectas": [
-      "Una estrella",
-      "Un espejo",
+      "Un pájaro",
+      "Un fuego artificial",
+      "Un poema"
+    ]
+  },
+  {
+    "acertijo": "Soy una firma sin nombre, una obra sin autor. ¿Qué soy?",
+    "respuesta": "El grafiti",
+    "respuestaIncorrectas": [
+      "Un cuadro antiguo",
+      "Un tatuaje",
+      "Un rumor"
+    ]
+  },
+  {
+    "acertijo": "Camino por cables sin pies, y hablo sin lengua. ¿Qué soy?",
+    "respuesta": "Un mensaje de texto",
+    "respuestaIncorrectas": [
+      "Un fax",
+      "Una carta",
+      "Un holograma"
+    ]
+  },
+  {
+    "acertijo": "Muero cada noche y renazco sin llanto. ¿Qué soy?",
+    "respuesta": "El día",
+    "respuestaIncorrectas": [
+      "Una flor",
+      "Un sueño",
+      "La luna"
+    ]
+  },
+  {
+    "acertijo": "Me construyes de promesas, pero caigo con hechos. ¿Qué soy?",
+    "respuesta": "Una expectativa",
+    "respuestaIncorrectas": [
+      "Una mentira",
+      "Una torre de cartas",
+      "Una hipótesis"
+    ]
+  },
+  {
+    "acertijo": "Visto al mundo de blanco, pero nadie me ve llegar. ¿Qué soy?",
+    "respuesta": "La niebla matinal",
+    "respuestaIncorrectas": [
+      "La nieve",
+      "Una nube",
+      "El rocío"
+    ]
+  },
+  {
+    "acertijo": "Me escribes y no me lees. ¿Qué soy?",
+    "respuesta": "Una contraseña",
+    "respuestaIncorrectas": [
+      "Un diario",
+      "Un contrato",
+      "Una señal"
+    ]
+  },
+  {
+    "acertijo": "Me llevas en el bolsillo, pero peso toneladas. ¿Qué soy?",
+    "respuesta": "Una decisión difícil",
+    "respuestaIncorrectas": [
+      "Una llave",
+      "Un celular",
+      "Una nota"
+    ]
+  },
+  {
+    "acertijo": "Me encuentras cuando te pierdes. ¿Qué soy?",
+    "respuesta": "El instinto",
+    "respuestaIncorrectas": [
+      "El GPS",
+      "Un mapa",
+      "La brújula"
+    ]
+  },
+  {
+    "acertijo": "Puedo hacer llorar sin tocar. ¿Qué soy?",
+    "respuesta": "Una canción triste",
+    "respuestaIncorrectas": [
+      "Una cebolla",
+      "Una carta",
+      "Una película"
+    ]
+  },
+  {
+    "acertijo": "Cuento tu historia sin conocerte. ¿Qué soy?",
+    "respuesta": "Tus huellas",
+    "respuestaIncorrectas": [
+      "Un libro",
+      "Una cámara",
+      "Un cuadro"
+    ]
+  },
+  {
+    "acertijo": "Nací para cerrar, pero me odian cuando lo hago. ¿Qué soy?",
+    "respuesta": "El portón del examen",
+    "respuestaIncorrectas": [
+      "Un candado",
+      "Una reja",
+      "Una puerta de tren"
+    ]
+  },
+  {
+    "acertijo": "Brillo sin oro, y todos me desean. ¿Qué soy?",
+    "respuesta": "La oportunidad",
+    "respuestaIncorrectas": [
+      "Una estrella fugaz",
+      "Una moneda",
       "Una lámpara"
     ]
   },
   {
-    "acertijo": "Este es un acertijo imaginario número 51. ¿Qué soy?",
-    "respuesta": "Respuesta 51",
+    "acertijo": "Puedes escucharme pero no verme, y cuando hablo te asustas. ¿Qué soy?",
+    "respuesta": "Un trueno",
     "respuestaIncorrectas": [
-      "Un globo",
-      "Un faro",
-      "Una taza"
+      "Una tormenta",
+      "Un rugido",
+      "Un disparo"
     ]
   },
   {
-    "acertijo": "Este es un acertijo imaginario número 52. ¿Qué soy?",
-    "respuesta": "Respuesta 52",
+    "acertijo": "Aparezco cuando dudas, y desaparezco con fe. ¿Qué soy?",
+    "respuesta": "El miedo",
     "respuestaIncorrectas": [
-      "El aire",
-      "Un volcán",
-      "Un árbol"
+      "La sospecha",
+      "La lógica",
+      "La ignorancia"
     ]
   },
   {
-    "acertijo": "Este es un acertijo imaginario número 53. ¿Qué soy?",
-    "respuesta": "Respuesta 53",
+    "acertijo": "Cuido de ti pero no me ves, solo me extrañas cuando no estoy. ¿Qué soy?",
+    "respuesta": "El wifi",
     "respuestaIncorrectas": [
-      "Una taza",
-      "Una alfombra",
-      "Una nube"
+      "El sol",
+      "La electricidad",
+      "El gas"
     ]
   },
   {
-    "acertijo": "Este es un acertijo imaginario número 54. ¿Qué soy?",
-    "respuesta": "Respuesta 54",
+    "acertijo": "Vuelo sin cuerpo, canto sin boca. ¿Qué soy?",
+    "respuesta": "Un silbido",
     "respuestaIncorrectas": [
-      "Un faro",
-      "Un edificio",
-      "Un río"
+      "Una gaviota",
+      "El viento",
+      "Un tambor"
     ]
   },
   {
-    "acertijo": "Este es un acertijo imaginario número 55. ¿Qué soy?",
-    "respuesta": "Respuesta 55",
+    "acertijo": "Cambia la historia sin escribirla. ¿Qué soy?",
+    "respuesta": "Una decisión",
     "respuestaIncorrectas": [
-      "Un avión",
-      "Un árbol",
-      "Un edificio"
+      "Un mensaje",
+      "Un sueño",
+      "Una conversación"
     ]
   },
   {
-    "acertijo": "Este es un acertijo imaginario número 56. ¿Qué soy?",
-    "respuesta": "Respuesta 56",
+    "acertijo": "Soy invisible, pero todos creen conocerme. ¿Qué soy?",
+    "respuesta": "La suerte",
     "respuestaIncorrectas": [
-      "Una sombra",
-      "Un pez",
-      "Un avión"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 57. ¿Qué soy?",
-    "respuesta": "Respuesta 57",
-    "respuestaIncorrectas": [
-      "Una ventana",
-      "Un pez",
-      "Una nube"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 58. ¿Qué soy?",
-    "respuesta": "Respuesta 58",
-    "respuestaIncorrectas": [
-      "Un carro",
-      "Una nube",
-      "Un edificio"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 59. ¿Qué soy?",
-    "respuesta": "Respuesta 59",
-    "respuestaIncorrectas": [
-      "Un edificio",
-      "Una montaña",
-      "Un árbol"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 60. ¿Qué soy?",
-    "respuesta": "Respuesta 60",
-    "respuestaIncorrectas": [
-      "Una taza",
-      "Un volcán",
-      "Un globo"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 61. ¿Qué soy?",
-    "respuesta": "Respuesta 61",
-    "respuestaIncorrectas": [
-      "Una estrella",
-      "Una lámpara",
-      "El aire"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 62. ¿Qué soy?",
-    "respuesta": "Respuesta 62",
-    "respuestaIncorrectas": [
-      "Una piedra",
-      "Un avión",
-      "Una montaña"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 63. ¿Qué soy?",
-    "respuesta": "Respuesta 63",
-    "respuestaIncorrectas": [
-      "Una nube",
-      "Un faro",
-      "Un avión"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 64. ¿Qué soy?",
-    "respuesta": "Respuesta 64",
-    "respuestaIncorrectas": [
-      "Una nube",
-      "Un pez",
-      "Un carro"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 65. ¿Qué soy?",
-    "respuesta": "Respuesta 65",
-    "respuestaIncorrectas": [
-      "El aire",
-      "Un avión",
-      "Un pez"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 66. ¿Qué soy?",
-    "respuesta": "Respuesta 66",
-    "respuestaIncorrectas": [
-      "Una estrella",
-      "Una lámpara",
-      "Un globo"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 67. ¿Qué soy?",
-    "respuesta": "Respuesta 67",
-    "respuestaIncorrectas": [
-      "El aire",
-      "Un faro",
-      "Una taza"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 68. ¿Qué soy?",
-    "respuesta": "Respuesta 68",
-    "respuestaIncorrectas": [
-      "Un volcán",
-      "Una montaña",
-      "Una alfombra"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 69. ¿Qué soy?",
-    "respuesta": "Respuesta 69",
-    "respuestaIncorrectas": [
-      "Una sombra",
-      "Una montaña",
-      "Un carro"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 70. ¿Qué soy?",
-    "respuesta": "Respuesta 70",
-    "respuestaIncorrectas": [
-      "Una taza",
-      "Un pez",
-      "Un espejo"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 71. ¿Qué soy?",
-    "respuesta": "Respuesta 71",
-    "respuestaIncorrectas": [
-      "Un pez",
-      "Un edificio",
-      "Una lámpara"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 72. ¿Qué soy?",
-    "respuesta": "Respuesta 72",
-    "respuestaIncorrectas": [
-      "Un faro",
-      "Una ventana",
-      "Una piedra"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 73. ¿Qué soy?",
-    "respuesta": "Respuesta 73",
-    "respuestaIncorrectas": [
-      "Una alfombra",
-      "Un edificio",
-      "Un río"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 74. ¿Qué soy?",
-    "respuesta": "Respuesta 74",
-    "respuestaIncorrectas": [
-      "Un espejo",
-      "Un árbol",
-      "Una piedra"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 75. ¿Qué soy?",
-    "respuesta": "Respuesta 75",
-    "respuestaIncorrectas": [
-      "Un árbol",
-      "Un espejo",
-      "Una lámpara"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 76. ¿Qué soy?",
-    "respuesta": "Respuesta 76",
-    "respuestaIncorrectas": [
-      "Una ventana",
-      "Un río",
-      "Un espejo"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 77. ¿Qué soy?",
-    "respuesta": "Respuesta 77",
-    "respuestaIncorrectas": [
-      "Una lámpara",
-      "Una ventana",
-      "Un edificio"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 78. ¿Qué soy?",
-    "respuesta": "Respuesta 78",
-    "respuestaIncorrectas": [
-      "Una taza",
-      "Un edificio",
-      "Una ventana"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 79. ¿Qué soy?",
-    "respuesta": "Respuesta 79",
-    "respuestaIncorrectas": [
-      "Una montaña",
-      "Un faro",
-      "Un espejo"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 80. ¿Qué soy?",
-    "respuesta": "Respuesta 80",
-    "respuestaIncorrectas": [
-      "Una nube",
-      "Una piedra",
-      "Un pez"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 81. ¿Qué soy?",
-    "respuesta": "Respuesta 81",
-    "respuestaIncorrectas": [
-      "Una estrella",
-      "Un espejo",
-      "Una taza"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 82. ¿Qué soy?",
-    "respuesta": "Respuesta 82",
-    "respuestaIncorrectas": [
-      "Una estrella",
-      "Un faro",
-      "Un carro"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 83. ¿Qué soy?",
-    "respuesta": "Respuesta 83",
-    "respuestaIncorrectas": [
-      "Una lámpara",
-      "Una piedra",
-      "Una taza"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 84. ¿Qué soy?",
-    "respuesta": "Respuesta 84",
-    "respuestaIncorrectas": [
-      "Una cueva",
-      "Un río",
-      "Un faro"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 85. ¿Qué soy?",
-    "respuesta": "Respuesta 85",
-    "respuestaIncorrectas": [
-      "Un avión",
-      "Un árbol",
-      "Una nube"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 86. ¿Qué soy?",
-    "respuesta": "Respuesta 86",
-    "respuestaIncorrectas": [
-      "Una sombra",
-      "Una taza",
-      "Un río"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 87. ¿Qué soy?",
-    "respuesta": "Respuesta 87",
-    "respuestaIncorrectas": [
-      "Una estrella",
-      "Una ventana",
-      "Una taza"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 88. ¿Qué soy?",
-    "respuesta": "Respuesta 88",
-    "respuestaIncorrectas": [
-      "Un faro",
-      "Una montaña",
-      "Una taza"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 89. ¿Qué soy?",
-    "respuesta": "Respuesta 89",
-    "respuestaIncorrectas": [
-      "Una estrella",
-      "Un globo",
-      "Un faro"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 90. ¿Qué soy?",
-    "respuesta": "Respuesta 90",
-    "respuestaIncorrectas": [
-      "Un pez",
-      "El aire",
-      "Un faro"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 91. ¿Qué soy?",
-    "respuesta": "Respuesta 91",
-    "respuestaIncorrectas": [
-      "Una sombra",
-      "Un carro",
-      "El aire"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 92. ¿Qué soy?",
-    "respuesta": "Respuesta 92",
-    "respuestaIncorrectas": [
-      "Una cueva",
-      "Un pez",
-      "Una montaña"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 93. ¿Qué soy?",
-    "respuesta": "Respuesta 93",
-    "respuestaIncorrectas": [
-      "Un espejo",
-      "Un avión",
-      "Un volcán"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 94. ¿Qué soy?",
-    "respuesta": "Respuesta 94",
-    "respuestaIncorrectas": [
-      "Un globo",
-      "Un faro",
-      "Una lámpara"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 95. ¿Qué soy?",
-    "respuesta": "Respuesta 95",
-    "respuestaIncorrectas": [
-      "Una ventana",
-      "Un río",
-      "Un pez"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 96. ¿Qué soy?",
-    "respuesta": "Respuesta 96",
-    "respuestaIncorrectas": [
-      "Un espejo",
-      "Un globo",
-      "Una piedra"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 97. ¿Qué soy?",
-    "respuesta": "Respuesta 97",
-    "respuestaIncorrectas": [
-      "Una alfombra",
-      "Una estrella",
-      "Un globo"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 98. ¿Qué soy?",
-    "respuesta": "Respuesta 98",
-    "respuestaIncorrectas": [
-      "Una sombra",
-      "Una piedra",
-      "Una nube"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 99. ¿Qué soy?",
-    "respuesta": "Respuesta 99",
-    "respuestaIncorrectas": [
-      "Una montaña",
-      "Un carro",
-      "Un río"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 100. ¿Qué soy?",
-    "respuesta": "Respuesta 100",
-    "respuestaIncorrectas": [
-      "Un pez",
-      "Un carro",
-      "Una nube"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 101. ¿Qué soy?",
-    "respuesta": "Respuesta 101",
-    "respuestaIncorrectas": [
-      "Una estrella",
-      "Una alfombra",
-      "Un volcán"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 102. ¿Qué soy?",
-    "respuesta": "Respuesta 102",
-    "respuestaIncorrectas": [
-      "El aire",
-      "Un globo",
-      "Un espejo"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 103. ¿Qué soy?",
-    "respuesta": "Respuesta 103",
-    "respuestaIncorrectas": [
-      "Una estrella",
-      "Un edificio",
-      "Un faro"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 104. ¿Qué soy?",
-    "respuesta": "Respuesta 104",
-    "respuestaIncorrectas": [
-      "Una estrella",
-      "El aire",
-      "Un volcán"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 105. ¿Qué soy?",
-    "respuesta": "Respuesta 105",
-    "respuestaIncorrectas": [
-      "Una alfombra",
-      "Un espejo",
-      "Una cueva"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 106. ¿Qué soy?",
-    "respuesta": "Respuesta 106",
-    "respuestaIncorrectas": [
-      "Un árbol",
-      "Un espejo",
-      "Una cueva"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 107. ¿Qué soy?",
-    "respuesta": "Respuesta 107",
-    "respuestaIncorrectas": [
-      "Un río",
-      "Una cueva",
-      "Un volcán"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 108. ¿Qué soy?",
-    "respuesta": "Respuesta 108",
-    "respuestaIncorrectas": [
-      "Una sombra",
-      "Un espejo",
-      "Una nube"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 109. ¿Qué soy?",
-    "respuesta": "Respuesta 109",
-    "respuestaIncorrectas": [
-      "Un volcán",
-      "Un pez",
-      "Un árbol"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 110. ¿Qué soy?",
-    "respuesta": "Respuesta 110",
-    "respuestaIncorrectas": [
-      "Un edificio",
-      "Un volcán",
-      "Una ventana"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 111. ¿Qué soy?",
-    "respuesta": "Respuesta 111",
-    "respuestaIncorrectas": [
-      "El aire",
-      "Una lámpara",
-      "Una cueva"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 112. ¿Qué soy?",
-    "respuesta": "Respuesta 112",
-    "respuestaIncorrectas": [
-      "Un volcán",
-      "Un carro",
-      "Una cueva"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 113. ¿Qué soy?",
-    "respuesta": "Respuesta 113",
-    "respuestaIncorrectas": [
-      "Una estrella",
-      "Un espejo",
-      "Una lámpara"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 114. ¿Qué soy?",
-    "respuesta": "Respuesta 114",
-    "respuestaIncorrectas": [
-      "Una sombra",
-      "Una nube",
-      "Un árbol"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 115. ¿Qué soy?",
-    "respuesta": "Respuesta 115",
-    "respuestaIncorrectas": [
-      "Un árbol",
-      "Un río",
-      "Un volcán"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 116. ¿Qué soy?",
-    "respuesta": "Respuesta 116",
-    "respuestaIncorrectas": [
-      "Un volcán",
-      "El aire",
-      "Una piedra"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 117. ¿Qué soy?",
-    "respuesta": "Respuesta 117",
-    "respuestaIncorrectas": [
-      "Una estrella",
-      "Un globo",
-      "Un edificio"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 118. ¿Qué soy?",
-    "respuesta": "Respuesta 118",
-    "respuestaIncorrectas": [
-      "Una alfombra",
-      "Un río",
-      "Una nube"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 119. ¿Qué soy?",
-    "respuesta": "Respuesta 119",
-    "respuestaIncorrectas": [
-      "Una taza",
-      "Un espejo",
-      "Un globo"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 120. ¿Qué soy?",
-    "respuesta": "Respuesta 120",
-    "respuestaIncorrectas": [
-      "Una nube",
-      "Una alfombra",
-      "Un pez"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 121. ¿Qué soy?",
-    "respuesta": "Respuesta 121",
-    "respuestaIncorrectas": [
-      "Una estrella",
-      "Una lámpara",
-      "Un pez"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 122. ¿Qué soy?",
-    "respuesta": "Respuesta 122",
-    "respuestaIncorrectas": [
-      "Una estrella",
-      "Un volcán",
-      "Una piedra"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 123. ¿Qué soy?",
-    "respuesta": "Respuesta 123",
-    "respuestaIncorrectas": [
-      "Una nube",
-      "Un carro",
-      "Una taza"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 124. ¿Qué soy?",
-    "respuesta": "Respuesta 124",
-    "respuestaIncorrectas": [
-      "Un globo",
-      "El aire",
-      "Un avión"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 125. ¿Qué soy?",
-    "respuesta": "Respuesta 125",
-    "respuestaIncorrectas": [
-      "Una ventana",
-      "Una piedra",
-      "Un pez"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 126. ¿Qué soy?",
-    "respuesta": "Respuesta 126",
-    "respuestaIncorrectas": [
-      "Un río",
-      "Una cueva",
-      "Una taza"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 127. ¿Qué soy?",
-    "respuesta": "Respuesta 127",
-    "respuestaIncorrectas": [
-      "Una piedra",
-      "El aire",
-      "Una alfombra"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 128. ¿Qué soy?",
-    "respuesta": "Respuesta 128",
-    "respuestaIncorrectas": [
-      "Una nube",
-      "Una montaña",
-      "Un espejo"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 129. ¿Qué soy?",
-    "respuesta": "Respuesta 129",
-    "respuestaIncorrectas": [
-      "Una taza",
-      "Una cueva",
-      "Un faro"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 130. ¿Qué soy?",
-    "respuesta": "Respuesta 130",
-    "respuestaIncorrectas": [
-      "Una piedra",
-      "Una lámpara",
-      "Una alfombra"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 131. ¿Qué soy?",
-    "respuesta": "Respuesta 131",
-    "respuestaIncorrectas": [
-      "Una lámpara",
-      "Un río",
-      "Una estrella"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 132. ¿Qué soy?",
-    "respuesta": "Respuesta 132",
-    "respuestaIncorrectas": [
-      "Una alfombra",
-      "Una taza",
-      "Una estrella"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 133. ¿Qué soy?",
-    "respuesta": "Respuesta 133",
-    "respuestaIncorrectas": [
-      "Una piedra",
-      "Un árbol",
-      "Un faro"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 134. ¿Qué soy?",
-    "respuesta": "Respuesta 134",
-    "respuestaIncorrectas": [
-      "Un avión",
-      "Un pez",
-      "Una montaña"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 135. ¿Qué soy?",
-    "respuesta": "Respuesta 135",
-    "respuestaIncorrectas": [
-      "Un carro",
-      "Un pez",
-      "Una estrella"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 136. ¿Qué soy?",
-    "respuesta": "Respuesta 136",
-    "respuestaIncorrectas": [
-      "Un río",
-      "Un volcán",
-      "Un faro"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 137. ¿Qué soy?",
-    "respuesta": "Respuesta 137",
-    "respuestaIncorrectas": [
-      "Una cueva",
-      "Un volcán",
-      "Una piedra"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 138. ¿Qué soy?",
-    "respuesta": "Respuesta 138",
-    "respuestaIncorrectas": [
-      "Una nube",
-      "Un árbol",
-      "Un globo"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 139. ¿Qué soy?",
-    "respuesta": "Respuesta 139",
-    "respuestaIncorrectas": [
-      "Un edificio",
-      "Una sombra",
-      "Una lámpara"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 140. ¿Qué soy?",
-    "respuesta": "Respuesta 140",
-    "respuestaIncorrectas": [
-      "Un edificio",
-      "Un espejo",
-      "Una alfombra"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 141. ¿Qué soy?",
-    "respuesta": "Respuesta 141",
-    "respuestaIncorrectas": [
-      "Un volcán",
-      "Una nube",
-      "El aire"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 142. ¿Qué soy?",
-    "respuesta": "Respuesta 142",
-    "respuestaIncorrectas": [
-      "Una estrella",
-      "Una lámpara",
-      "Una taza"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 143. ¿Qué soy?",
-    "respuesta": "Respuesta 143",
-    "respuestaIncorrectas": [
-      "Un avión",
-      "Un árbol",
-      "Una nube"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 144. ¿Qué soy?",
-    "respuesta": "Respuesta 144",
-    "respuestaIncorrectas": [
-      "Una montaña",
-      "Una alfombra",
-      "Un volcán"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 145. ¿Qué soy?",
-    "respuesta": "Respuesta 145",
-    "respuestaIncorrectas": [
-      "Una ventana",
-      "Una alfombra",
-      "Un volcán"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 146. ¿Qué soy?",
-    "respuesta": "Respuesta 146",
-    "respuestaIncorrectas": [
-      "Un carro",
-      "Una piedra",
-      "Un espejo"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 147. ¿Qué soy?",
-    "respuesta": "Respuesta 147",
-    "respuestaIncorrectas": [
-      "Una lámpara",
-      "Una cueva",
-      "Un carro"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 148. ¿Qué soy?",
-    "respuesta": "Respuesta 148",
-    "respuestaIncorrectas": [
-      "Un río",
-      "El aire",
-      "Una nube"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 149. ¿Qué soy?",
-    "respuesta": "Respuesta 149",
-    "respuestaIncorrectas": [
-      "Una ventana",
-      "Un faro",
-      "Una sombra"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 150. ¿Qué soy?",
-    "respuesta": "Respuesta 150",
-    "respuestaIncorrectas": [
-      "Un avión",
-      "Una alfombra",
-      "Una lámpara"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 151. ¿Qué soy?",
-    "respuesta": "Respuesta 151",
-    "respuestaIncorrectas": [
-      "Una alfombra",
-      "Un río",
-      "Un pez"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 152. ¿Qué soy?",
-    "respuesta": "Respuesta 152",
-    "respuestaIncorrectas": [
-      "Una piedra",
-      "Un árbol",
-      "Un avión"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 153. ¿Qué soy?",
-    "respuesta": "Respuesta 153",
-    "respuestaIncorrectas": [
-      "Una estrella",
-      "Una piedra",
-      "Un árbol"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 154. ¿Qué soy?",
-    "respuesta": "Respuesta 154",
-    "respuestaIncorrectas": [
-      "Un volcán",
-      "Una montaña",
-      "Un árbol"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 155. ¿Qué soy?",
-    "respuesta": "Respuesta 155",
-    "respuestaIncorrectas": [
-      "Una montaña",
-      "Una lámpara",
-      "Una taza"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 156. ¿Qué soy?",
-    "respuesta": "Respuesta 156",
-    "respuestaIncorrectas": [
-      "Una ventana",
-      "Un río",
-      "Una montaña"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 157. ¿Qué soy?",
-    "respuesta": "Respuesta 157",
-    "respuestaIncorrectas": [
-      "Un espejo",
-      "Una montaña",
-      "Una estrella"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 158. ¿Qué soy?",
-    "respuesta": "Respuesta 158",
-    "respuestaIncorrectas": [
-      "Una taza",
-      "Un edificio",
-      "Una lámpara"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 159. ¿Qué soy?",
-    "respuesta": "Respuesta 159",
-    "respuestaIncorrectas": [
-      "Un carro",
-      "Un edificio",
-      "Una ventana"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 160. ¿Qué soy?",
-    "respuesta": "Respuesta 160",
-    "respuestaIncorrectas": [
-      "Un avión",
-      "Un volcán",
-      "Una lámpara"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 161. ¿Qué soy?",
-    "respuesta": "Respuesta 161",
-    "respuestaIncorrectas": [
-      "Una cueva",
-      "Un volcán",
-      "Una lámpara"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 162. ¿Qué soy?",
-    "respuesta": "Respuesta 162",
-    "respuestaIncorrectas": [
-      "Un árbol",
-      "Una alfombra",
-      "Una lámpara"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 163. ¿Qué soy?",
-    "respuesta": "Respuesta 163",
-    "respuestaIncorrectas": [
-      "Un carro",
-      "Un faro",
-      "Una taza"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 164. ¿Qué soy?",
-    "respuesta": "Respuesta 164",
-    "respuestaIncorrectas": [
-      "Un pez",
-      "Un faro",
-      "Una estrella"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 165. ¿Qué soy?",
-    "respuesta": "Respuesta 165",
-    "respuestaIncorrectas": [
-      "Una piedra",
-      "Una lámpara",
-      "Un carro"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 166. ¿Qué soy?",
-    "respuesta": "Respuesta 166",
-    "respuestaIncorrectas": [
-      "Un árbol",
-      "Un edificio",
-      "Una ventana"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 167. ¿Qué soy?",
-    "respuesta": "Respuesta 167",
-    "respuestaIncorrectas": [
-      "Un espejo",
-      "Una lámpara",
-      "Un volcán"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 168. ¿Qué soy?",
-    "respuesta": "Respuesta 168",
-    "respuestaIncorrectas": [
-      "Una nube",
-      "Un espejo",
-      "Una lámpara"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 169. ¿Qué soy?",
-    "respuesta": "Respuesta 169",
-    "respuestaIncorrectas": [
-      "Una lámpara",
-      "Un espejo",
-      "Una piedra"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 170. ¿Qué soy?",
-    "respuesta": "Respuesta 170",
-    "respuestaIncorrectas": [
-      "Una ventana",
-      "Una estrella",
-      "Una piedra"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 171. ¿Qué soy?",
-    "respuesta": "Respuesta 171",
-    "respuestaIncorrectas": [
-      "El aire",
-      "Un pez",
-      "Una montaña"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 172. ¿Qué soy?",
-    "respuesta": "Respuesta 172",
-    "respuestaIncorrectas": [
-      "Una nube",
-      "Una ventana",
-      "Un espejo"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 173. ¿Qué soy?",
-    "respuesta": "Respuesta 173",
-    "respuestaIncorrectas": [
-      "Una sombra",
-      "Una lámpara",
-      "Una ventana"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 174. ¿Qué soy?",
-    "respuesta": "Respuesta 174",
-    "respuestaIncorrectas": [
-      "Un pez",
-      "Un espejo",
-      "Una sombra"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 175. ¿Qué soy?",
-    "respuesta": "Respuesta 175",
-    "respuestaIncorrectas": [
-      "Un río",
-      "Una lámpara",
-      "Una taza"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 176. ¿Qué soy?",
-    "respuesta": "Respuesta 176",
-    "respuestaIncorrectas": [
-      "Un espejo",
-      "Una taza",
-      "Una nube"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 177. ¿Qué soy?",
-    "respuesta": "Respuesta 177",
-    "respuestaIncorrectas": [
-      "Una estrella",
-      "Una cueva",
-      "Un carro"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 178. ¿Qué soy?",
-    "respuesta": "Respuesta 178",
-    "respuestaIncorrectas": [
-      "Un río",
-      "Una piedra",
-      "Una lámpara"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 179. ¿Qué soy?",
-    "respuesta": "Respuesta 179",
-    "respuestaIncorrectas": [
-      "Una taza",
-      "Un volcán",
-      "Una cueva"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 180. ¿Qué soy?",
-    "respuesta": "Respuesta 180",
-    "respuestaIncorrectas": [
-      "Un faro",
-      "Una nube",
-      "Un río"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 181. ¿Qué soy?",
-    "respuesta": "Respuesta 181",
-    "respuestaIncorrectas": [
-      "Una lámpara",
-      "Un río",
-      "Un espejo"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 182. ¿Qué soy?",
-    "respuesta": "Respuesta 182",
-    "respuestaIncorrectas": [
-      "Una nube",
-      "Una ventana",
-      "Un árbol"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 183. ¿Qué soy?",
-    "respuesta": "Respuesta 183",
-    "respuestaIncorrectas": [
-      "Un volcán",
-      "Un edificio",
-      "Una nube"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 184. ¿Qué soy?",
-    "respuesta": "Respuesta 184",
-    "respuestaIncorrectas": [
-      "Un espejo",
-      "Un volcán",
-      "Una cueva"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 185. ¿Qué soy?",
-    "respuesta": "Respuesta 185",
-    "respuestaIncorrectas": [
-      "Una lámpara",
-      "Una sombra",
-      "Una cueva"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 186. ¿Qué soy?",
-    "respuesta": "Respuesta 186",
-    "respuestaIncorrectas": [
-      "Una cueva",
-      "Una ventana",
-      "El aire"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 187. ¿Qué soy?",
-    "respuesta": "Respuesta 187",
-    "respuestaIncorrectas": [
-      "Una lámpara",
-      "Un carro",
-      "Un espejo"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 188. ¿Qué soy?",
-    "respuesta": "Respuesta 188",
-    "respuestaIncorrectas": [
-      "Una nube",
-      "Un faro",
-      "Un volcán"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 189. ¿Qué soy?",
-    "respuesta": "Respuesta 189",
-    "respuestaIncorrectas": [
-      "Un faro",
-      "Una montaña",
-      "Una lámpara"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 190. ¿Qué soy?",
-    "respuesta": "Respuesta 190",
-    "respuestaIncorrectas": [
-      "Un globo",
-      "Una lámpara",
-      "Una taza"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 191. ¿Qué soy?",
-    "respuesta": "Respuesta 191",
-    "respuestaIncorrectas": [
-      "Una ventana",
-      "Un globo",
-      "Un río"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 192. ¿Qué soy?",
-    "respuesta": "Respuesta 192",
-    "respuestaIncorrectas": [
-      "Un faro",
-      "Una nube",
-      "Una alfombra"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 193. ¿Qué soy?",
-    "respuesta": "Respuesta 193",
-    "respuestaIncorrectas": [
-      "Un avión",
-      "Una alfombra",
-      "Una ventana"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 194. ¿Qué soy?",
-    "respuesta": "Respuesta 194",
-    "respuestaIncorrectas": [
-      "Una lámpara",
-      "Un río",
-      "Un volcán"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 195. ¿Qué soy?",
-    "respuesta": "Respuesta 195",
-    "respuestaIncorrectas": [
-      "Una alfombra",
-      "Una estrella",
-      "Un faro"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 196. ¿Qué soy?",
-    "respuesta": "Respuesta 196",
-    "respuestaIncorrectas": [
-      "Una alfombra",
-      "Una lámpara",
-      "Una taza"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 197. ¿Qué soy?",
-    "respuesta": "Respuesta 197",
-    "respuestaIncorrectas": [
-      "Un volcán",
-      "Una sombra",
-      "Una ventana"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 198. ¿Qué soy?",
-    "respuesta": "Respuesta 198",
-    "respuestaIncorrectas": [
-      "Un faro",
-      "Una nube",
-      "Una montaña"
-    ]
-  },
-  {
-    "acertijo": "Este es un acertijo imaginario número 199. ¿Qué soy?",
-    "respuesta": "Respuesta 199",
-    "respuestaIncorrectas": [
-      "Un pez",
-      "Una nube",
-      "Una lámpara"
+      "La fama",
+      "La muerte",
+      "La voz interior"
     ]
   }
 ]
