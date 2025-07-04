@@ -510,7 +510,8 @@
       "Un pájaro",
       "Un fuego artificial",
       "Un poema"
-    ]
+    ],
+    "pista": "A veces se dice que ilumina la oscuridad."
   },
   {
     "acertijo": "Soy una firma sin nombre, una obra sin autor. ¿Qué soy?",
@@ -519,7 +520,8 @@
       "Un cuadro antiguo",
       "Un tatuaje",
       "Un rumor"
-    ]
+    ],
+    "pista": "A veces se dice que es el grito de la ciudad."
   },
   {
     "acertijo": "Camino por cables sin pies, y hablo sin lengua. ¿Qué soy?",
@@ -528,7 +530,8 @@
       "Un fax",
       "Una carta",
       "Un holograma"
-    ]
+    ],
+    "pista": "A veces se dice que es la voz del futuro."
   },
   {
     "acertijo": "Muero cada noche y renazco sin llanto. ¿Qué soy?",
@@ -537,7 +540,8 @@
       "Una flor",
       "Un sueño",
       "La luna"
-    ]
+    ],
+    "pista": "A veces se dice que es un ciclo eterno."
   },
   {
     "acertijo": "Me construyes de promesas, pero caigo con hechos. ¿Qué soy?",
@@ -546,7 +550,8 @@
       "Una mentira",
       "Una torre de cartas",
       "Una hipótesis"
-    ]
+    ],
+    "pista": "A veces se dice que es un castillo en el aire."
   },
   {
     "acertijo": "Visto al mundo de blanco, pero nadie me ve llegar. ¿Qué soy?",
@@ -555,7 +560,8 @@
       "La nieve",
       "Una nube",
       "El rocío"
-    ]
+    ], 
+    "pista": "A veces se dice que es un velo que cubre la tierra."
   },
   {
     "acertijo": "Me escribes y no me lees. ¿Qué soy?",
@@ -564,7 +570,8 @@
       "Un diario",
       "Un contrato",
       "Una señal"
-    ]
+    ],
+    "pista": "A veces se dice que es la llave de tu vida digital."
   },
   {
     "acertijo": "Me llevas en el bolsillo, pero peso toneladas. ¿Qué soy?",
@@ -573,7 +580,8 @@
       "Una llave",
       "Un celular",
       "Una nota"
-    ]
+    ],
+    "pista": "A veces se dice que es un peso en la mente."
   },
   {
     "acertijo": "Me encuentras cuando te pierdes. ¿Qué soy?",
@@ -582,7 +590,8 @@
       "El GPS",
       "Un mapa",
       "La brújula"
-    ]
+    ],
+    "pista": "A veces se dice que es la voz interior que te guía."
   },
   {
     "acertijo": "Puedo hacer llorar sin tocar. ¿Qué soy?",
@@ -591,7 +600,8 @@
       "Una cebolla",
       "Una carta",
       "Una película"
-    ]
+    ],
+    "pista": "A veces se dice que la música es el lenguaje del alma."
   },
   {
     "acertijo": "Cuento tu historia sin conocerte. ¿Qué soy?",
@@ -600,7 +610,8 @@
       "Un libro",
       "Una cámara",
       "Un cuadro"
-    ]
+    ],
+    "pista": "A veces se dice que son el camino de tu vida."
   },
   {
     "acertijo": "Nací para cerrar, pero me odian cuando lo hago. ¿Qué soy?",
@@ -609,7 +620,8 @@
       "Un candado",
       "Una reja",
       "Una puerta de tren"
-    ]
+    ],
+    "pista": "A veces se dice que es la puerta al conocimiento."
   },
   {
     "acertijo": "Brillo sin oro, y todos me desean. ¿Qué soy?",
@@ -618,7 +630,8 @@
       "Una estrella fugaz",
       "Una moneda",
       "Una lámpara"
-    ]
+    ],
+    "pista": "A veces se dice que es un tren que pasa una sola vez."
   },
   {
     "acertijo": "Puedes escucharme pero no verme, y cuando hablo te asustas. ¿Qué soy?",
@@ -627,7 +640,8 @@
       "Una tormenta",
       "Un rugido",
       "Un disparo"
-    ]
+    ],
+    "pista": "A menudo acompaña a un relámpago."
   },
   {
     "acertijo": "Aparezco cuando dudas, y desaparezco con fe. ¿Qué soy?",
@@ -636,7 +650,8 @@
       "La sospecha",
       "La lógica",
       "La ignorancia"
-    ]
+    ],
+    "pista": "A veces se dice que es el enemigo del éxito."
   },
   {
     "acertijo": "Cuido de ti pero no me ves, solo me extrañas cuando no estoy. ¿Qué soy?",
@@ -645,7 +660,8 @@
       "El sol",
       "La electricidad",
       "El gas"
-    ]
+    ],
+    "pista": "Es esencial para la comunicación moderna."
   },
   {
     "acertijo": "Vuelo sin cuerpo, canto sin boca. ¿Qué soy?",
@@ -654,7 +670,8 @@
       "Una gaviota",
       "El viento",
       "Un tambor"
-    ]
+    ], 
+    "pista": "A veces se usa para llamar la atención."
   },
   {
     "acertijo": "Cambia la historia sin escribirla. ¿Qué soy?",
@@ -663,7 +680,8 @@
       "Un mensaje",
       "Un sueño",
       "Una conversación"
-    ]
+    ],
+    "pista": "A veces se dice que es el destino."
   },
   {
     "acertijo": "Soy invisible, pero todos creen conocerme. ¿Qué soy?",
@@ -672,6 +690,14 @@
       "La fama",
       "La muerte",
       "La voz interior"
-    ]
-  }
+    ],
+    "pista": "A veces se dice que es ciega."
+  },
+  {
+  "acertijo": "Vuelo sin alas, lloro sin ojos. ¿Qué soy?",
+  "respuesta": "Una nube",
+  "respuestaIncorrectas": ["Una estrella", "Un edificio", "Una sombra"],
+  "pista": "Se forma en el cielo y puede traer lluvia."
+}
+
 ]
