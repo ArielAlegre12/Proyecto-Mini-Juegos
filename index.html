@@ -9,41 +9,15 @@
 
 <body>
   <h1>Mini juegos</h1>
+  <nav>
+    <!-- Aquí puedes agregar enlaces de navegación en el futuro -->
+  </nav>
+  
   <p>En este sitio encontrarás unos pequeños mini-juegos que iremos subiendo. Aún no sé si también agregaremos otras cosas.</p>
 
   <div class="accordion">
 
-    <div class="accordion-item" id="juegoAdivinanza">
-      <button class="accordion-header">🎯 El Número del Día</button>
-      <div class="accordion-content">
-        <p>Adiviná el número entre 1 y 10.</p>
-        <input type="number" id="userGuess" min="1" max="10" placeholder="Tu número" />
-        <br />
-        <button id="playButton">Probar suerte</button>
-        <button id="resetButton" style="display:none;">Jugar de nuevo</button>
-        <p id="result"></p>
-        <video id="winVideo" width="320" height="180" controls style="display:none; margin-top: 20px;">
-          <source src="/videos/file_download..webm" type="video/webm" />
-          Tu navegador no soporta el video.
-        </video>
-        <video id="failVideo" width="320" height="180" muted controls style="display:none;">
-          <source src="/videos/gambare.mp4" type="video/mp4" />
-          Tu navegador no soporta el video.
-        </video>
-      </div>
-    </div>
-
-    <div class="accordion-item" id="juegoSuma">
-      <button class="accordion-header">➕ Juego de Sumas</button>
-      <div class="accordion-content">
-        <p>Resolvé la suma:</p>
-        <p id="sumaPregunta"></p>
-        <input type="number" id="respuestaSuma" placeholder="Tu respuesta" />
-        <br />
-        <button id="botonSumar">Comprobar</button>
-        <button id="botonResetSuma" style="display:none;">Jugar de nuevo</button>
-        <p id="resultadoSuma"></p>
-      </div>
+  
     </div>
 
     <div class="accordion-item" id="juegoTrivia">

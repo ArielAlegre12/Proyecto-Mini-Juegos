@@ -83,68 +83,7 @@ input {
   }
 }
 
-/* Contenedor para suma (puede usarse o ignorarse si usás acordeón) */
-.container-suma {
-  background: white;
-  padding: 20px;
-  max-width: 400px;
-  margin: 30px auto;
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
-  border-radius: 10px;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.container-suma input {
-  padding: 8px;
-  margin-top: 10px;
-  width: 80px;
-  text-align: center;
-  font-size: 1rem;
-}
-
-.container-suma button {
-  padding: 10px 20px;
-  background-color: #2196F3; /* Botones de suma en azul */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 15px;
-  min-width: 120px;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
-}
-
-.container-suma button:hover {
-  background-color: #1976D2;
-}
-
-.container-suma p {
-  font-size: 1.2rem;
-  margin: 10px 0 0 0;
-}
-
-@media (max-width: 480px) {
-  .container-suma {
-    max-width: 90vw;
-    margin: 20px auto;
-    padding: 15px;
-  }
-
-  .container-suma input {
-    width: 80px;
-    font-size: 1.5rem;
-  }
-
-  .container-suma button {
-    width: 80%;
-    font-size: 1.5rem;
-    margin-top: 20px;
-  }
-}
 
 /* --- Estilos acordeón --- */
 
@@ -216,27 +155,9 @@ input {
   transition: background-color 0.3s ease;
 }
 
-.accordion-content button:hover {
-  background-color: #45a049;
-}
 
-/* Botones específicos que deben ser azules */
-#playButton { /* Botón "Probar suerte" del Número del Día */
-  background-color: #2196F3; /* Color azul */
-}
 
-#playButton:hover {
-  background-color: #1976D2; /* Un azul un poco más oscuro al pasar el ratón */
-}
 
-/* Botones azules para juego suma */
-#botonSumar, #botonResetSuma {
-  background-color: #2196F3; /* Color azul */
-}
-
-#botonSumar:hover, #botonResetSuma:hover {
-  background-color: #1976D2; /* Azul más oscuro al pasar el ratón */
-}
 
 @media (max-width: 480px) {
   .accordion {
