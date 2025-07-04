@@ -5,7 +5,7 @@
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]]; // Intercambiar elementos
+        [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
 }
@@ -31,136 +31,192 @@ document.addEventListener('DOMContentLoaded', () => {
             // Alterna la clase 'active' para el acordeón actual
             content.classList.toggle('active');
 
-            // Si el acordeón de trivia se abre, carga las preguntas
+            // Comportamientos específicos por juego
             if (currentItem.id === 'juegoTrivia' && content.classList.contains('active')) {
                 loadTriviaQuestions();
             }
-            // Si el acordeón de sumas se abre, genera una nueva suma
             if (currentItem.id === 'juegoSuma' && content.classList.contains('active')) {
                 generarNuevaSuma();
             }
-            // Si el acordeón de adivinanza se abre, inicializa el juego
             if (currentItem.id === 'juegoAdivinanza' && content.classList.contains('active')) {
                 initializeGame();
+            }
+            if (currentItem.id === 'juegoAcertijos' && content.classList.contains('active')) {
+                cargarAcertijos();
             }
         });
     });
 });
 
 
-
-
-
-// --- Lógica del Juego de Trivia ---
-let triviaQuestions = []; // Almacenará las preguntas cargadas
-let currentTriviaQuestionIndex = 0; // Índice de la pregunta actual
-let triviaFeedbackParagraph; // Para mostrar feedback al usuario
+// === JUEGO DE TRIVIA ===
+let triviaQuestions = [];
+let currentTriviaQuestionIndex = 0;
+let triviaFeedbackParagraph;
 
 async function loadTriviaQuestions() {
     try {
-        const response = await fetch('/data/preguntas_trivia_es.json'); // Asegúrate de que la ruta sea correcta
-        if (!response.ok) { // Añadido para mejor manejo de errores HTTP
-            throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
+        const response = await fetch('/data/preguntas_trivia_es.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const data = await response.json();
-        triviaQuestions = data;
-
-        shuffleArray(triviaQuestions); // Mezcla las preguntas al cargarlas
-
-        console.log('Preguntas de trivia cargadas y mezcladas:', triviaQuestions);
-
-        if (triviaQuestions.length > 0) {
-            currentTriviaQuestionIndex = 0; // Asegúrate de reiniciar el índice para una nueva sesión de trivia
-            displayTriviaQuestion();
-        }
-
+        triviaQuestions = await response.json();
+        shuffleArray(triviaQuestions);
+        currentTriviaQuestionIndex = 0;
+        displayTriviaQuestion();
     } catch (error) {
-        console.error('Error al cargar las preguntas de trivia:', error);
-        document.getElementById('trivia').innerHTML = `<p>Error al cargar las preguntas: ${error.message}. Por favor, intenta de nuevo más tarde.</p>`;
+        console.error('Error al cargar trivia:', error);
+        document.getElementById('trivia').innerHTML = `<p>Error: ${error.message}</p>`;
     }
 }
 
 function displayTriviaQuestion() {
     const triviaDiv = document.getElementById('trivia');
-    triviaDiv.innerHTML = ''; // Limpia el contenido anterior
+    triviaDiv.innerHTML = '';
 
     if (currentTriviaQuestionIndex < triviaQuestions.length) {
-        const questionData = triviaQuestions[currentTriviaQuestionIndex];
-        
+        const q = triviaQuestions[currentTriviaQuestionIndex];
         const questionElement = document.createElement('h3');
-        questionElement.textContent = questionData.question;
+        questionElement.textContent = q.question;
         triviaDiv.appendChild(questionElement);
 
-        const allAnswers = [...questionData.incorrect_answers, questionData.correct_answer];
-        shuffleArray(allAnswers); // Mezcla también las opciones de respuesta
+        const opciones = [...q.incorrect_answers, q.correct_answer];
+        shuffleArray(opciones);
 
-        allAnswers.forEach(answer => {
-            const button = document.createElement('button');
-            button.textContent = answer;
-            button.classList.add('trivia-answer-button'); // Añade una clase para identificar los botones de respuesta
-            // Pasa el botón como primer argumento a checkTriviaAnswer
-            button.onclick = () => checkTriviaAnswer(button, answer, questionData.correct_answer);
-            triviaDiv.appendChild(button);
+        opciones.forEach(answer => {
+            const btn = document.createElement('button');
+            btn.textContent = answer;
+            btn.classList.add('trivia-answer-button');
+            btn.onclick = () => checkTriviaAnswer(btn, answer, q.correct_answer);
+            triviaDiv.appendChild(btn);
         });
 
-        // Párrafo para feedback (Correcto/Incorrecto)
         triviaFeedbackParagraph = document.createElement('p');
-        triviaFeedbackParagraph.id = 'triviaFeedback';
         triviaDiv.appendChild(triviaFeedbackParagraph);
 
-        // Crear y añadir el botón "Siguiente pregunta"
-        const nextQuestionButton = document.createElement('button');
-        nextQuestionButton.id = 'nextQuestionButton';
-        nextQuestionButton.textContent = 'Siguiente pregunta';
-        nextQuestionButton.style.display = 'none'; // Oculto inicialmente
-        nextQuestionButton.onclick = moveToNextTriviaQuestion; // Asignar el evento aquí
-        triviaDiv.appendChild(nextQuestionButton);
-
+        const nextBtn = document.createElement('button');
+        nextBtn.id = 'nextQuestionButton';
+        nextBtn.textContent = 'Siguiente pregunta';
+        nextBtn.style.display = 'none';
+        nextBtn.onclick = moveToNextTriviaQuestion;
+        triviaDiv.appendChild(nextBtn);
     } else {
-        // Todas las preguntas han sido respondidas
-        triviaDiv.innerHTML = '<p>¡Has respondido todas las preguntas!</p><button id="restartTriviaButton">Volver a Jugar</button>';
+        triviaDiv.innerHTML = '<p>¡Has respondido todas las preguntas!</p><button id="restartTriviaButton">Volver a jugar</button>';
         document.getElementById('restartTriviaButton').onclick = () => {
             currentTriviaQuestionIndex = 0;
-            shuffleArray(triviaQuestions); // Vuelve a mezclar para una nueva partida
+            shuffleArray(triviaQuestions);
             displayTriviaQuestion();
         };
     }
 }
 
-// Ahora checkTriviaAnswer recibe el botón que fue clickeado
-function checkTriviaAnswer(selectedButtonElement, selectedAnswer, correctAnswer) {
-    const buttons = document.querySelectorAll('#trivia .trivia-answer-button'); // Selecciona solo los botones de respuesta
-    
-    // Deshabilita todos los botones de respuesta para evitar múltiples clics
-    buttons.forEach(button => {
-        button.disabled = true;
-    });
+function checkTriviaAnswer(selectedButton, selectedAnswer, correctAnswer) {
+    const buttons = document.querySelectorAll('#trivia .trivia-answer-button');
+    buttons.forEach(btn => btn.disabled = true);
 
-    // Muestra feedback al usuario
     if (selectedAnswer === correctAnswer) {
         triviaFeedbackParagraph.textContent = '¡Correcto!';
         triviaFeedbackParagraph.style.color = 'green';
-        selectedButtonElement.style.backgroundColor = '#4CAF50'; // Asegura que el botón correcto esté verde
+        selectedButton.style.backgroundColor = 'green';
     } else {
-        triviaFeedbackParagraph.textContent = `Incorrecto. La respuesta correcta era: "${correctAnswer}".`;
+        triviaFeedbackParagraph.textContent = `Incorrecto. La respuesta correcta era: "${correctAnswer}"`;
         triviaFeedbackParagraph.style.color = 'red';
-        selectedButtonElement.style.backgroundColor = '#f44336'; // Color rojo para la respuesta incorrecta seleccionada
-        
-        // También resaltar la respuesta correcta en verde
-        buttons.forEach(button => {
-            if (button.textContent === correctAnswer) {
-                button.style.backgroundColor = '#4CAF50';
+        selectedButton.style.backgroundColor = 'red';
+
+        // Resalta el botón correcto
+        buttons.forEach(btn => {
+            if (btn.textContent === correctAnswer) {
+                btn.style.backgroundColor = 'green';
             }
         });
     }
 
-    const nextButton = document.getElementById('nextQuestionButton');
-    if (nextButton) {
-        nextButton.style.display = 'block'; // Muestra el botón de siguiente pregunta
-    }
+    document.getElementById('nextQuestionButton').style.display = 'block';
 }
 
 function moveToNextTriviaQuestion() {
     currentTriviaQuestionIndex++;
     displayTriviaQuestion();
+}
+
+
+// === JUEGO DE ACERTIJOS ===
+let acertijos = [];
+let indiceAcertijo = 0;
+
+async function cargarAcertijos() {
+    try {
+        const res = await fetch('/data/acertijos.json');
+        acertijos = await res.json();
+        indiceAcertijo = 0;
+        mostrarAcertijo();
+    } catch (err) {
+        console.error("Error al cargar acertijos:", err);
+        document.getElementById('acertijos').innerHTML = `<p>Error al cargar los acertijos: ${err.message}</p>`;
+    }
+}
+
+function mostrarAcertijo() {
+    const contenedor = document.getElementById('acertijos');
+    contenedor.innerHTML = '';
+
+    if (indiceAcertijo >= acertijos.length) {
+        contenedor.innerHTML = '<p>🎉 ¡Terminaste todos los acertijos!</p>';
+        return;
+    }
+
+    const acertijo = acertijos[indiceAcertijo];
+    const opciones = [...acertijo.respuestaIncorrectas, acertijo.respuesta];
+    shuffleArray(opciones);
+
+    const preguntaDiv = document.createElement('div');
+    preguntaDiv.classList.add('pregunta');
+
+    const h3 = document.createElement('h3');
+    h3.textContent = acertijo.acertijo;
+    preguntaDiv.appendChild(h3);
+
+    opciones.forEach(op => {
+        const btn = document.createElement('button');
+        btn.textContent = op;
+        btn.onclick = () => verificarAcertijo(btn, acertijo.respuesta);
+        preguntaDiv.appendChild(btn);
+    });
+
+    contenedor.appendChild(preguntaDiv);
+
+    const siguienteBtn = document.createElement('button');
+    siguienteBtn.textContent = 'Siguiente';
+    siguienteBtn.onclick = siguienteAcertijo;
+    contenedor.appendChild(siguienteBtn);
+}
+
+function verificarAcertijo(boton, correcta) {
+    const botones = document.querySelectorAll('#acertijos .pregunta button');
+    botones.forEach(b => b.disabled = true);
+
+    const normalizar = (str) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    const user = normalizar(boton.innerText);
+    const ok = normalizar(correcta);
+
+    const mensaje = document.createElement('p');
+    mensaje.style.marginTop = '15px';
+    mensaje.style.fontWeight = 'bold';
+
+    if (user === ok) {
+        boton.style.background = 'green';
+        mensaje.textContent = '✅ Correcto';
+        mensaje.style.color = 'green';
+    } else {
+        boton.style.background = 'red';
+        mensaje.textContent = `❌ Incorrecto. La respuesta correcta era: ${correcta}`;
+        mensaje.style.color = 'red';
+    }
+
+    document.querySelector('#acertijos .pregunta').appendChild(mensaje);
+}
+
+function siguienteAcertijo() {
+    indiceAcertijo++;
+    mostrarAcertijo();
 }
