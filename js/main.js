@@ -256,17 +256,46 @@ function siguienteAcertijo() {
 }
 //botón para alternar el modo oscuro
 const toggleBtn = document.getElementById('toggleDarkMode');
-toggleBtn.onclick = function() {
-  document.body.classList.toggle('dark-mode');
-  if (document.body.classList.contains('dark-mode')) {
-    toggleBtn.textContent = '🌙';
-  } else {
-    toggleBtn.textContent = '☀️';
-  }
-};
-// Al cargar la página, ajusta el texto según el modo inicial
-if (document.body.classList.contains('dark-mode')) {
-  toggleBtn.textContent = '🌙';
-} else {
-  toggleBtn.textContent = '☀️';
+
+// --- Función para aplicar el modo y actualizar el botón ---
+function applyMode(isDarkMode) {
+    if (isDarkMode) {
+        document.body.classList.add('dark-mode');
+        toggleBtn.textContent = '🌙';
+    } else {
+        document.body.classList.remove('dark-mode');
+        toggleBtn.textContent = '☀️';
+    }
 }
+
+// --- Al cargar la página: Cargar la preferencia de LocalStorage ---
+document.addEventListener('DOMContentLoaded', function() {
+    const savedMode = localStorage.getItem('themeMode'); // 'dark' o 'light' o null si no hay nada
+    
+    // Si hay un modo guardado, aplicarlo. Si no, usar el modo por defecto (claro)
+    if (savedMode === 'dark') {
+        applyMode(true);
+    } else {
+        applyMode(false); // Por defecto o si 'savedMode' es 'light'
+    }
+});
+
+
+// --- Al hacer clic en el botón: Cambiar modo y guardar preferencia ---
+toggleBtn.onclick = function() {
+    // Alternar la clase 'dark-mode'
+    document.body.classList.toggle('dark-mode');
+    
+    // Verificar si ahora está en modo oscuro
+    const isCurrentlyDarkMode = document.body.classList.contains('dark-mode');
+    
+    // Aplicar el modo visualmente y actualizar el texto del botón
+    applyMode(isCurrentlyDarkMode);
+    
+    // Guardar la preferencia en LocalStorage
+    if (isCurrentlyDarkMode) {
+        localStorage.setItem('themeMode', 'dark');
+    } else {
+        localStorage.setItem('themeMode', 'light');
+    }
+};
