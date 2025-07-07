@@ -255,7 +255,7 @@ function siguienteAcertijo() {
     mostrarAcertijo();
 }
 //botón para alternar el modo oscuro
-const toggleBtn = document.getElementById('toggleDarkMode');
+const toggleBtn = document.getElementById('themeToggle');
 
 // --- Función para aplicar el modo y actualizar el botón ---
 function applyMode(isDarkMode) {
@@ -299,3 +299,31 @@ toggleBtn.onclick = function() {
         localStorage.setItem('themeMode', 'light');
     }
 };
+
+// --- Lógica del Menú Hamburguesa ---
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const mainNav = document.getElementById('mainNav');
+
+hamburgerBtn.addEventListener('click', () => {
+    mainNav.classList.toggle('open');
+    hamburgerBtn.classList.toggle('open'); // Para animar el icono a una 'X'
+});
+
+// Opcional: Cerrar el menú si se hace clic fuera de él
+document.addEventListener('click', (event) => {
+    // Si el clic no fue en el botón de hamburguesa y no fue dentro del menú
+    if (!hamburgerBtn.contains(event.target) && !mainNav.contains(event.target)) {
+        mainNav.classList.remove('open');
+        hamburgerBtn.classList.remove('open');
+    }
+});
+
+// Opcional: Cerrar el menú si se hace clic en un enlace (para navegación interna)
+mainNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+        mainNav.classList.remove('open');
+        hamburgerBtn.classList.remove('open');
+    });
+});
+
+

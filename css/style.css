@@ -92,8 +92,6 @@ input {
   }
 }
 
-
-
 /* --- Estilos acordeón --- */
 
 .accordion {
@@ -164,10 +162,6 @@ input {
   font-size: 1rem;
   transition: background-color 0.3s ease;
 }
-
-
-
-
 
 @media (max-width: 480px) {
   .accordion {
@@ -265,4 +259,263 @@ body.dark-mode button {
 body.dark-mode button.btn-pista {
   background-color: #b71c1c !important;
   border-color: #880808;
+}
+#toggleDarkMode {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background-color: #4CAF50; /* Verde por defecto */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  #toggleDarkMode {
+    position: fixed;
+    top: 0px;
+    left: 10px;
+    width: 40px;
+    font-size: 1.2rem;
+    padding: 4px;
+  }
+}
+
+/* --- Estilos Generales del Header (para todas las pantallas) --- */
+.main-header {
+    display: flex; /* Usamos Flexbox para alinear elementos */
+    justify-content: space-between; /* Distribuye el h1 y el botón de hamburguesa */
+    align-items: center; /* Alinea verticalmente */
+    padding: 15px 20px;
+    background-color: #f8f8f8;
+    position: relative; /* Permite que el menú hamburguesa se posicione correctamente */
+    border-bottom: 1px solid #eee;
+    color: #333; /* Color de texto predeterminado */
+}
+
+.main-header h1 {
+    margin: 0; /* Elimina márgenes por defecto del h1 */
+    font-size: 1.8em;
+}
+
+/* --- Estilos para el botón de modo oscuro/claro (dentro del nav) --- */
+#toggleDarkMode {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 1em;
+    white-space: nowrap; /* Evita que el texto se rompa */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Estilos para el botón de modo oscuro en modo oscuro */
+body.dark-mode #toggleDarkMode {
+    background-color: #333;
+    color: #f0f0f0;
+    border-color: #555;
+}
+
+/* --- Estilos para el Menú Hamburguesa (aparece solo en móviles) --- */
+.hamburger-icon {
+  display: block;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  width: auto;
+  height: auto;
+  z-index: 1001;
+}
+
+.hamburger-icon .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #333; /* Color de las barras */
+  margin: 5px 0;
+  transition: all 0.3s ease; /* Transición para la animación de la X */
+}
+
+/* Estilos de las barras en modo oscuro */
+body.dark-mode .hamburger-icon .bar {
+  background-color: #f0f0f0;
+}
+
+/* Animación de la X cuando el menú está abierto */
+.hamburger-icon.open .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger-icon.open .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-icon.open .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* --- Estilos de la Navegación (para móviles, inicialmente oculta a la izquierda) --- */
+.main-nav {
+  position: fixed; /* Posiciona el menú en relación con la ventana */
+  top: 0;
+  left: -100%; /* **Moverlo fuera de la vista a la izquierda** */
+  width: 70%; /* **Ancho del menú (no ocupa toda la pantalla)** */
+  max-width: 300px; /* Ancho máximo para pantallas un poco más grandes */
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.2); /* Sombra para que destaque */
+  transition: left 0.3s ease; /* **Animación de deslizamiento hacia la derecha** */
+  z-index: 1000;
+  padding-top: 80px; /* Espacio para no chocar con el header */
+  /* Cambié display flex por block para evitar problema de visibilidad */
+  display: block; /* Antes era flex */
+  flex-direction: column; /* No hace efecto en block pero lo dejo */
+  justify-content: flex-start; /* No hace efecto en block pero lo dejo */
+  overflow-y: auto; /* Permite scroll si el contenido es largo */
+}
+
+.main-nav.open {
+  left: 0; /* **Desliza el menú a la vista desde la izquierda** */
+}
+
+.main-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%; /* Ocupa todo el ancho del menú lateral */
+}
+
+.main-nav li {
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.main-nav li:last-child {
+  border-bottom: none; /* No hay borde en el último ítem */
+}
+
+.main-nav a, .main-nav button {
+  display: block; /* Para que ocupen todo el ancho y se vean como bloques */
+  color: #333;
+  text-decoration: none;
+  font-size: 1.1em;
+  padding: 0; /* Quita el padding que tenía el li */
+  background: none; /* Para el botón */
+  border: none; /* Para el botón */
+  text-align: left; /* Alinea el texto a la izquierda */
+  width: 100%; /* Asegura que el botón ocupa todo el ancho del li */
+  cursor: pointer;
+}
+
+.main-nav a:hover, .main-nav button:hover {
+  background-color: #f0f0f0;
+}
+
+/* Estilos de la navegación en modo oscuro */
+body.dark-mode .main-header {
+  background-color: #222;
+  border-bottom-color: #444;
+  color: #f0f0f0;
+}
+
+body.dark-mode .main-nav {
+  background-color: #333;
+  box-shadow: 2px 0 5px rgba(255,255,255,0.1);
+}
+
+body.dark-mode .main-nav li {
+  border-bottom-color: #555;
+}
+
+body.dark-mode .main-nav a, body.dark-mode .main-nav button {
+  color: #f0f0f0;
+}
+
+body.dark-mode .main-nav a:hover, body.dark-mode .main-nav button:hover {
+  background-color: #444;
+}
+
+/* --- Media Queries (para pantallas grandes) --- */
+@media (min-width: 768px) { /* A partir de 768px (tablets y desktops) */
+  .hamburger-icon {
+    display: none; /* Oculta el icono de hamburguesa */
+  }
+
+  .main-nav {
+    position: static; /* Vuelve a su posición normal en el flujo */
+    left: auto; /* Deshace el left para posicionamiento fijo */
+    width: auto;
+    max-width: none;
+    height: auto;
+    background: none; /* Sin fondo en desktop */
+    box-shadow: none;
+    padding-top: 0;
+    display: block; /* Vuelve a ser un bloque normal */
+  }
+
+  .main-nav ul {
+    display: flex; /* Alinea los ítems de navegación horizontalmente */
+    justify-content: flex-end; /* Alinea los ítems a la derecha */
+    gap: 20px; /* Espacio entre los ítems */
+  }
+
+  .main-nav li {
+    padding: 0;
+    border-bottom: none; /* Sin bordes */
+  }
+
+  .main-nav a, .main-nav button {
+    padding: 5px 0; /* Padding para los enlaces */
+  }
+
+  .main-header h1 {
+    flex-grow: 1; /* Permite que el h1 ocupe el espacio restante en pantallas grandes */
+  }
+}
+
+@media (max-width: 768px) {
+  .hamburger-icon {
+    display: block;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 1100;
+  }
+}
+
+.main-nav button#toggleDarkMode {
+  background: none;
+  color: inherit;
+  border: none;
+  font: inherit;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Estilos para el botón de hamburguesa cuando el menú está abierto 
+.nav-open .hamburger-icon {
+  display: none !important;
+}
+*/
+
+.theme-icon {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Opcional: ocultar el icono por defecto fuera del menú */
+.theme-icon {
+  display: block; /* porque ya está dentro del nav que se oculta/abre */
+}
+
+body.dark-mode {
+  background-color: #121212;
+  color: white;
 }
