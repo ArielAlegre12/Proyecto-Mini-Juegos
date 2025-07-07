@@ -1,3 +1,120 @@
+/* --- Contenido de global.css --- */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: white;
+}
+
+.container {
+  background: white;
+  padding: 20px;
+  max-width: 400px;
+  margin: auto;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#trivia, #acertijos {
+  height: auto;      /* se adapta al contenido */
+  min-height: 0;     /* evita mínimo alto innecesario */
+  margin-bottom: 0;  /* sin margenes abajo extras */
+  padding-bottom: 0; /* sin padding abajo extra */
+}
+
+
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+  min-width: 120px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+input {
+  padding: 8px;
+  margin-top: 10px;
+  width: 60px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* Flex contenedor para botones (usado en juegos) */
+.botones-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+/* Texto para pistas */
+.pista-text {
+  font-style: italic;
+  color: #555;
+  margin-top: 8px;
+}
+
+/* Feedback positivo y negativo */
+.correct {
+  background-color: #4caf50 !important;
+  color: white;
+  border-color: #388e3c !important;
+}
+
+.incorrect {
+  background-color: #f44336 !important;
+  color: white;
+  border-color: #d32f2f !important;
+}
+
+/* Botones de respuesta genéricos para juegos */
+button.answer-button {
+  background-color: #f0f0f0;
+  border: 2px solid #444;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+button.answer-button:hover {
+  background-color: #ddd;
+}
+
+button.btn-pista {
+  background-color: #ff9800 !important;
+  color: #fff !important;
+  border: 2px solid #e65100;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(255, 152, 0, 0.2);
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+button.btn-pista:hover {
+  background-color: #ffa726 !important;
+  border-color: #ff9800;
+  color: #222 !important;
+}
+
+/* --- Contenido de style.css --- */
 /* --- RESET Y BASE --- */
 *,
 *::before,
@@ -37,7 +154,7 @@ a {
   flex-grow: 1;
 }
 
-/* --- MENÚ HAMBURGUESA (solo móvil) --- */
+/* --- MENÚ HAMBURGUESA (solo móvil, se sobrescribe en responsive.css) --- */
 .hamburger-icon {
   display: block;
   width: 30px;
@@ -47,19 +164,21 @@ a {
   justify-content: space-between;
   background: none;
   border: none;
-  padding: 0;
-  z-index: 1100;
+  padding: 0; /* Reset padding to match other styles */
 }
 
 .hamburger-icon .bar {
-  height: 4px;
+  display: block;
+  width: 100%;
+  height: 3px;
   background-color: #333;
-  border-radius: 2px;
-  transition: 0.3s;
+  margin: 5px 0;
+  transition: all 0.3s ease;
 }
 
+/* Animación del ícono de hamburguesa */
 .hamburger-icon.open .bar:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
+  transform: translateY(8px) rotate(45deg);
 }
 
 .hamburger-icon.open .bar:nth-child(2) {
@@ -67,27 +186,26 @@ a {
 }
 
 .hamburger-icon.open .bar:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
+  transform: translateY(-8px) rotate(-45deg);
 }
 
-/* --- NAVEGACIÓN PRINCIPAL --- */
+/* Menú principal (sidebar para móvil, se sobrescribe en responsive.css) */
 .main-nav {
   position: fixed;
-  top: 60px;
-  left: -100%;
+  top: 60px; /* Altura del header */
+  left: -100%; /* Oculto */
   width: 70%;
   max-width: 300px;
-  height: calc(100% - 60px);
+  height: calc(100% - 60px); /* Altura restante de la pantalla */
   background-color: #fff;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.2);
-  overflow-y: auto;
-  padding-top: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
   transition: left 0.3s ease;
-  z-index: 1050;
+  z-index: 1000;
+  overflow-y: auto;
 }
 
 .main-nav.open {
-  left: 0;
+  left: 0; /* Visible */
 }
 
 .main-nav ul {
@@ -97,8 +215,8 @@ a {
 }
 
 .main-nav li {
-  border-bottom: 1px solid #eee;
   padding: 15px 20px;
+  border-bottom: 1px solid #eee;
 }
 
 .main-nav li:last-child {
@@ -108,14 +226,15 @@ a {
 .main-nav a,
 .main-nav button {
   display: block;
-  width: 100%;
+  color: #333;
+  text-decoration: none;
+  font-size: 1.1em;
+  padding: 0;
   background: none;
   border: none;
   text-align: left;
-  font-size: 1.1rem;
-  color: #333;
+  width: 100%;
   cursor: pointer;
-  padding: 0;
 }
 
 .main-nav a:hover,
@@ -123,38 +242,64 @@ a {
   background-color: #f0f0f0;
 }
 
-/* --- SUBMENÚ JUEGOS --- */
-.submenu {
-  max-height: 0;
-  overflow: hidden;
-  padding-left: 20px;
-  display: flex;
+/* Submenú de juegos (para móvil) */
+#submenuJuegos {
+  display: none; /* Controlado por JS para mostrar/ocultar */
   flex-direction: column;
   gap: 8px;
-  transition: max-height 0.3s ease;
+  list-style: none;
+  padding-left: 20px; /* Indentación para subelementos */
 }
 
-.submenu.show {
-  max-height: 300px; /* ajustar según contenido */
+#submenuJuegos.show {
+  display: flex;
 }
 
-#toggleJuegos.active {
-  font-weight: bold;
-  background-color: #ddd;
+#submenuJuegos li {
+  padding: 8px 0; /* Padding para elementos del submenú */
+  border-bottom: none;
 }
 
-/* --- ESTILOS DEL ACORDEÓN --- */
+/* --- Contenido de acertijos.css --- */
+/* Solo si tienes estilos únicos para acertijos que difieren del resto */
+
+body:not(.dark-mode) #acertijos button.answer-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+body:not(.dark-mode) #acertijos button.answer-button:hover {
+  background-color: #218838;
+}
+
+body:not(.dark-mode) #acertijos button.correct {
+  background-color: #28a745;
+  color: white;
+}
+
+body:not(.dark-mode) #acertijos button.incorrect {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* --- Contenido de acordeon.css --- */
 .accordion {
   max-width: 420px;
   margin: 30px auto;
   font-family: Arial, sans-serif;
 }
 
-.accordion-item {
+.accordion-item,
+.accordion-content {
   background: white;
+}
+
+.accordion-item {
   border-radius: 10px;
   margin-bottom: 15px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }
 
@@ -186,7 +331,7 @@ a {
 }
 
 .accordion-content.active {
-  max-height: 1000px; /* suficiente para contenido */
+  max-height: none;
   opacity: 1;
   padding: 20px;
   overflow: visible;
@@ -217,49 +362,88 @@ a {
   background-color: #45a049;
 }
 
-/* --- BOTONES GENERALES --- */
-button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 15px;
-  min-width: 120px;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
-}
+/* --- Contenido de menJue.css --- */
+/* juegos.css */
 
-button:hover {
-  background-color: #45a049;
-}
-
-button.btn-pista {
-  background-color: #ff9800 !important;
-  color: #fff !important;
-  border: 2px solid #e65100;
-  font-weight: bold;
-  box-shadow: 0 2px 8px rgba(255,152,0,0.2);
-  letter-spacing: 1px;
+/* Contenedor de preguntas */
+.pregunta h3 {
   margin-bottom: 10px;
 }
 
-button.btn-pista:hover {
-  background-color: #ffa726 !important;
-  border-color: #ff9800;
-  color: #222 !important;
+/* Botones de respuesta */
+.answer-button {
+  display: block;
+  margin: 6px 0;
+  width: 100%;
+  max-width: 350px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  text-align: left;
+  transition: background-color 0.3s ease;
 }
 
-input {
-  padding: 8px;
-  margin-top: 10px;
-  width: 60px;
-  text-align: center;
+.answer-button:hover:not(:disabled) {
+  background-color: #ddd;
+}
+
+.answer-button.correct {
+  background-color: #4caf50;
+  color: white;
+  border-color: #4caf50;
+}
+
+.answer-button.incorrect {
+  background-color: #f44336;
+  color: white;
+  border-color: #f44336;
+}
+
+/* Contenedor para botones pista y siguiente */
+.botones-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* Botón mostrar pista y siguiente */
+.btn-pista {
+  background-color: #007BFF;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn-pista:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.btn-pista:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+/* Texto de la pista */
+.pista-text {
+  margin-top: 12px;
+  font-style: italic;
+  color: #555;
+}
+
+/* Feedback debajo de la pregunta */
+#trivia p,
+#acertijos p {
+  margin-top: 15px;
+  font-weight: bold;
   font-size: 1rem;
 }
 
-/* --- ESTILOS PARA EL JUEGO DE TRIVIA --- */
+/* --- Contenido de trivia1.css --- */
 #trivia button {
   background-color: #4CAF50;
   margin: 5px;
@@ -276,26 +460,173 @@ input {
   background-color: #45a049;
 }
 
+#trivia h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Botón siguiente con estilo azul */
 #nextQuestionButton {
   background-color: #2196F3;
+  color: white;
 }
 
 #nextQuestionButton:hover {
   background-color: #1976D2;
 }
 
-#trivia h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
+/* Estilos para botones en trivia cuando son correctos o incorrectos (si quieres diferenciar) */
+#trivia button.correct {
+  background-color: #4caf50 !important;
+  color: white;
 }
 
-/* --- ESTILOS GENERALES DEL FOOTER --- */
-footer a {
+#trivia button.incorrect {
+  background-color: #f44336 !important;
+  color: white;
+}
+
+/* --- Contenido de header-nav.css --- */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #f8f8f8;
+  position: relative;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+.main-header h1 {
+  margin: 0;
+  font-size: 1.8em;
+}
+
+.hamburger-icon {
+  display: block;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  width: auto;
+  height: auto;
+  z-index: 1001;
+}
+
+.hamburger-icon .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
+
+body.dark-mode .hamburger-icon .bar {
+  background-color: #f0f0f0;
+}
+
+.hamburger-icon.open .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger-icon.open .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-icon.open .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.main-nav {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 70%;
+  max-width: 300px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease;
+  z-index: 1000;
+  padding-top: 80px;
+  display: block;
+  overflow-y: auto;
+}
+
+.main-nav.open {
+  left: 0;
+}
+
+.main-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.main-nav li {
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.main-nav li:last-child {
+  border-bottom: none;
+}
+
+.main-nav a,
+.main-nav button {
+  display: block;
+  color: #333;
   text-decoration: none;
-  color: inherit;
+  font-size: 1.1em;
+  padding: 0;
+  background: none;
+  border: none;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
 }
 
-/* --- MODO OSCURO --- */
+.main-nav a:hover,
+.main-nav button:hover {
+  background-color: #f0f0f0;
+}
+
+#toggleDarkMode {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+  font-size: 1em;
+  white-space: nowrap;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body.dark-mode #toggleDarkMode {
+  background-color: #333;
+  color: #f0f0f0;
+  border-color: #555;
+}
+
+.main-nav button#toggleDarkMode {
+  background: none;
+  color: inherit;
+  border: none;
+  font: inherit;
+  padding: 0;
+  cursor: pointer;
+}
+
 body.dark-mode {
   background-color: #181818;
   color: #f5f5f5;
@@ -321,31 +652,6 @@ body.dark-mode button {
 body.dark-mode button.btn-pista {
   background-color: #b71c1c !important;
   border-color: #880808;
-}
-
-body.dark-mode .main-header {
-  background-color: #222;
-  border-bottom-color: #444;
-  color: #f0f0f0;
-}
-
-body.dark-mode .main-nav {
-  background-color: #333;
-  box-shadow: 2px 0 5px rgba(255,255,255,0.1);
-}
-
-body.dark-mode .main-nav li {
-  border-bottom-color: #555;
-}
-
-body.dark-mode .main-nav a,
-body.dark-mode .main-nav button {
-  color: #f0f0f0;
-}
-
-body.dark-mode .main-nav a:hover,
-body.dark-mode .main-nav button:hover {
-  background-color: #444;
 }
 
 body.dark-mode button.answer-button {
@@ -374,41 +680,174 @@ body.dark-mode .pista-text {
   color: #bbb;
 }
 
-/* --- RESPONSIVE --- */
-@media (max-width: 767px) {
-  /* Mostrar hamburguesa en móvil */
-  .hamburger-icon {
-    display: flex;
+.theme-icon {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: block;
+}
+
+/* --- Contenido de menuHamburguesa.css --- */
+/* menu.css */
+
+/* Header y navegación (Ya cubierto por header-nav.css y style.css, pero se mantienen para posibles overrides) */
+.main-header {
+  /* display: flex; */ /* Ya en header-nav.css */
+  /* align-items: center; */ /* Ya en header-nav.css */
+  /* padding: 15px 20px; */ /* Ya en header-nav.css */
+  background-color: #333; /* Override si se carga después de header-nav.css */
+  color: white; /* Override si se carga después de header-nav.css */
+  /* position: relative; */ /* Ya en header-nav.css */
+}
+
+.main-header h1 {
+  /* font-size: 1.8rem; */ /* Ya en header-nav.css */
+  flex-grow: 1;
+}
+
+.main-nav {
+  /* position: fixed; */ /* Ya en header-nav.css */
+  /* top: 60px; */ /* Ya en header-nav.css */
+  /* left: 0; */ /* Ya en header-nav.css (pero luego a -100%) */
+  width: 250px; /* Ancho específico para el menú hamburguesa */
+  /* height: calc(100% - 60px); */ /* Ya en header-nav.css */
+  background-color: #222; /* Fondo del menú hamburguesa */
+  /* overflow-y: auto; */ /* Ya en header-nav.css */
+  transform: translateX(-260px); /* Oculto por defecto */
+  /* transition: transform 0.3s ease; */ /* Ya en header-nav.css */
+  /* z-index: 1000; */ /* Ya en header-nav.css */
+}
+
+.main-nav.open {
+  transform: translateX(0);
+}
+
+.main-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.main-nav li {
+  border-bottom: 1px solid #444;
+}
+
+.main-nav a {
+  display: block;
+  padding: 12px 20px;
+  color: white;
+}
+
+/* Botón hamburguesa */
+.hamburger-icon {
+  width: 30px;
+  height: 24px;
+  /* display: flex; */ /* Ya en header-nav.css */
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.hamburger-icon .bar {
+  height: 4px;
+  background-color: white;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* Icono animado a X */
+.hamburger-icon.open .bar:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger-icon.open .bar:nth-child(2) {
+  opacity: 0;
+}
+.hamburger-icon.open .bar:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* --- Contenido de modNight.css --- */
+/* modo-oscuro.css */
+
+body.dark-mode {
+  background-color: #121212;
+  color: #eee;
+}
+
+body.dark-mode .main-header {
+  background-color: #222;
+  color: #fff; /* Asegurate que sea blanco */
+}
+
+body.dark-mode .main-nav a,
+body.dark-mode .main-nav button {
+  color: #fff; /* Cambiar a blanco para que resalte */
+}
+
+body.dark-mode .main-nav {
+  background-color: #1a1a1a;
+}
+
+body.dark-mode .accordion-header {
+  background-color: #333;
+  color: #eee;
+}
+
+body.dark-mode .accordion-content {
+  background-color: #222;
+  color: #ddd;
+}
+
+body.dark-mode .answer-button {
+  background-color: #444;
+  color: #eee;
+  border-color: #666;
+}
+
+body.dark-mode .answer-button:hover:not(:disabled) {
+  background-color: #555;
+}
+
+body.dark-mode .btn-pista {
+  background-color: #0056b3;
+  color: white;
+}
+
+body.dark-mode .btn-pista:hover:not(:disabled) {
+  background-color: #003f7f;
+}
+
+/* --- Contenido de responsive.css --- */
+/* RESPONSIVE MEJORADO */
+
+/* Hacer que todos los elementos calculen ancho y alto incluyendo padding y borde */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+    /* Evitar scroll horizontal */
   }
 
-  /* Menú lateral oculto y deslizable en móvil */
-  .main-nav {
-    position: fixed;
-    top: 60px;
-    left: -100%;
-    width: 70%;
-    max-width: 300px;
-    height: calc(100% - 60px);
-    padding-top: 20px;
-    background-color: #fff;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
-    transition: left 0.3s ease;
-    overflow-y: auto;
-    z-index: 1050;
-  }
-
-  .main-nav.open {
-    left: 0;
-  }
-
-  /* Ajustes container full width */
   .container {
-    width: 100vw;
+    width: 100%;
+    max-width: 100%;
     min-height: 100vh;
     margin: 0;
     border-radius: 0;
     box-shadow: none;
-    padding: 20px;
+    padding: 15px;
 
     display: flex;
     flex-direction: column;
@@ -416,85 +855,210 @@ body.dark-mode .pista-text {
     align-items: center;
   }
 
-  /* Inputs y botones más grandes */
   input {
-    width: 80px;
-    font-size: 1.5rem;
+    width: 100%;
+    max-width: 120px;
+    font-size: 1.2rem;
   }
 
   button {
-    width: 80%;
-    min-width: unset;
-    font-size: 1.5rem;
-    margin-top: 20px;
+    width: 100%;
+    max-width: 300px;
+    font-size: 1.3rem;
+    margin-top: 15px;
   }
 
-  button + button {
+  button+button {
     margin-left: 0;
-    margin-top: 20px;
+    margin-top: 15px;
+  }
+
+  .accordion {
+    width: 100%;
+    max-width: 100%;
+    margin: 20px 0;
+  }
+
+  .accordion-content input {
+    width: 100%;
+    max-width: 120px;
+    font-size: 1.2rem;
+  }
+
+  .accordion-content button {
+    width: 100%;
+    max-width: 300px;
+    font-size: 1.3rem;
+    margin-top: 15px;
+  }
+
+  #toggleDarkMode {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    padding: 6px;
+    z-index: 1100;
   }
 }
 
-@media (min-width: 768px) {
-  /* Ocultar hamburguesa en escritorio */
-  .hamburger-icon {
-    display: none;
+/* Para tablets y pantallas medias */
+@media (min-width: 481px) and (max-width: 767px) {
+  .container {
+    width: 90%;
+    max-width: 600px;
+    padding: 20px;
   }
 
-  /* Menú horizontal visible */
+  input {
+    max-width: 100px;
+    font-size: 1.1rem;
+  }
+
+  button {
+    max-width: 250px;
+    font-size: 1.1rem;
+  }
+
+  .accordion {
+    max-width: 600px;
+    margin: 25px auto;
+  }
+}
+
+/* Menú hamburguesa para móviles, evitando overflow (combinado con el de arriba para max-width: 768px) */
+@media (max-width: 768px) {
   .main-nav {
-    position: static;
-    width: auto;
-    height: auto;
-    background: none;
-    box-shadow: none;
-    transform: none !important;
+    width: 80%;
+    max-width: 280px;
+    padding-top: 70px;
+  }
+}
+
+/* --- MODIFICACIONES PARA ESCRITORIO --- */
+/* Aquí se aplican los cambios para que el menú hamburguesa funcione en escritorio */
+/* y el contenido principal tenga un ancho adecuado */
+@media (min-width: 768px) {
+  /* Contenedores de contenido más anchos y centrados para escritorio */
+  .container {
+    max-width: 900px; /* Ancho deseado para escritorio */
+    margin: 30px auto; /* Centrado */
+    padding: 20px; /* Mantener padding */
   }
 
+  .accordion {
+    max-width: 950px; /* Ancho deseado para escritorio */
+    margin: 30px auto; /* Centrado */
+  }
+
+  /* Mostrar el icono de hamburguesa en escritorio */
+  .hamburger-icon {
+    display: block; /* O 'flex' si tu icono es un flex container */
+    z-index: 1001; /* Asegura que esté por encima del menú */
+  }
+
+  /* Hacer que la navegación principal se comporte como un sidebar en escritorio */
+  .main-nav {
+    position: fixed; /* Mantiene la posición fija como en móvil */
+    top: 60px; /* Ajusta este valor si tu header tiene otra altura, para que no lo cubra */
+    left: -100%; /* Oculto por defecto */
+    width: 70%;
+    max-width: 300px; /* Ancho máximo del sidebar */
+    height: calc(100% - 60px); /* Ocupa el resto de la altura, ajusta según 'top' */
+    background-color: #fff; /* Fondo del sidebar (ajusta si quieres otro color) */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Sombra del sidebar */
+    transform: translateX(0); /* Estado inicial: oculto (se usará con open class) */
+    transition: left 0.3s ease; /* Transición para el deslizamiento */
+    z-index: 1000; /* Asegura que esté por encima del contenido */
+    overflow-y: auto; /* Permite scroll si el contenido es largo */
+    padding-top: 20px; /* Espacio superior dentro del menú */
+    display: block; /* Asegura que sea un bloque para el sidebar */
+  }
+
+  /* Clase 'open' para el menú lateral */
+  .main-nav.open {
+    left: 0; /* Desliza el menú a la vista */
+  }
+
+  /* Ajustar los elementos de la lista dentro del menú para que sean verticales */
   .main-nav ul {
-    display: flex;
-    justify-content: flex-end;
-    gap: 20px;
+    display: block; /* Vuelve a ser un bloque vertical */
+    list-style: none;
     padding: 0;
+    margin: 0;
   }
 
   .main-nav li {
-    border: none;
-    padding: 0;
+    padding: 15px 20px; /* Restaura padding vertical */
+    border-bottom: 1px solid #eee; /* Restaura separadores */
   }
 
+  .main-nav li:last-child {
+    border-bottom: none; /* Último ítem sin borde */
+  }
+
+  /* Ajustar enlaces y botones dentro del menú */
   .main-nav a,
   .main-nav button {
-    color: #333;
-    padding: 10px 15px;
-    width: auto;
-    font-size: 1rem;
-    text-align: center;
+    display: block; /* Asegura que ocupen todo el ancho */
+    text-align: left; /* Alinea a la izquierda */
+    padding: 0; /* Elimina padding horizontal extra */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    color: #333; /* Color de texto normal para el menú */
+    background: none;
+    border: none;
+    cursor: pointer;
   }
 
-  /* Submenú juegos horizontal */
+  .main-nav a:hover,
+  .main-nav button:hover {
+    background-color: #f0f0f0; /* Color de fondo al pasar el ratón */
+    color: #333; /* Mantener color de texto o ajustar */
+  }
+
+  /* Ajustar submenú de juegos (#submenuJuegos) para el comportamiento de sidebar */
   #submenuJuegos {
-    display: flex !important;
-    flex-direction: row;
-    gap: 15px;
-    position: static !important;
+    display: none !important; /* Oculto por defecto, se mostrará con JavaScript */
+    flex-direction: column;
+    position: static !important; /* No flotante */
     height: auto !important;
     background: none !important;
     box-shadow: none !important;
-    max-height: none !important;
-    padding-left: 0;
+    max-height: 0 !important; /* Controlado por JS para expandir/colapsar */
+    overflow: hidden !important;
+    padding-left: 20px; /* Indentación para submenú */
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out; /* Transición para expandir/colapsar */
+  }
+
+  #submenuJuegos.show {
+    max-height: 300px !important; /* Altura para mostrar el submenú (ajusta si es necesario) */
+    opacity: 1 !important;
+    display: flex !important; /* Muestra como flex column */
   }
 
   #submenuJuegos li {
     list-style: none;
+    border: none; /* Elimina bordes extra en submenú */
+    padding: 8px 0; /* Ajusta padding para submenú */
   }
 
   #submenuJuegos li a {
-    padding: 5px 10px;
+    padding: 0; /* Sin padding extra en enlaces de submenú */
   }
 
-  /* No bordes en links de menú */
-  .main-nav li {
-    border: none;
+  /* Ajustar el margen superior del body para el header fijo */
+  body {
+    margin-top: 80px; /* Asegura que el contenido no quede bajo el header */
+  }
+
+  /* Si tienes un #toggleDarkMode flotante en el header, asegúrate que no haya conflictos */
+  #toggleDarkMode {
+    position: absolute; /* O 'static' si lo quieres en el flujo normal del header */
+    top: 50%; /* Centra verticalmente */
+    right: 20px; /* Posición a la derecha */
+    transform: translateY(-50%);
+    /* Asegúrate de que no se superponga con el icono de hamburguesa si ambos están visibles */
   }
 }
