@@ -238,3 +238,31 @@ button.btn-pista:hover {
 footer a {
   text-decoration: none;
 }
+
+/* --- Estilos para el modo oscuro --- */
+body.dark-mode { 
+  background-color: #181818;
+  color: #f5f5f5;
+}
+
+body.dark-mode .accordion-item,
+body.dark-mode .accordion-content,
+body.dark-mode .container {
+  background: #232323;
+  color: #f5f5f5;
+}
+
+body.dark-mode .accordion-header {
+  background-color: #333;
+  color: #fff;
+}
+
+body.dark-mode button {
+  background-color: #444;
+  color: #fff;
+}
+
+body.dark-mode button.btn-pista {
+  background-color: #b71c1c !important;
+  border-color: #880808;
+}
