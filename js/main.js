@@ -139,8 +139,6 @@ function moveToNextTriviaQuestion() {
     displayTriviaQuestion();
 }
 
-// === JUEGO DE ACERTIJOS ===
-
 let acertijos = [];
 let indiceAcertijo = 0;
 
@@ -158,7 +156,7 @@ async function cargarAcertijos() {
     try {
         const res = await fetch('/data/acertijos.json');
         acertijos = await res.json();
-        shuffleArray(acertijos); // <<--- ACÁ MEZCLAMOS
+        shuffleArray(acertijos); // Mezcla el orden de los acertijos
         indiceAcertijo = 0;
         mostrarAcertijo();
     } catch (err) {
@@ -178,15 +176,37 @@ function mostrarAcertijo() {
     }
 
     const acertijo = acertijos[indiceAcertijo];
-    const opciones = shuffleArray([...acertijo.respuestaIncorrectas, acertijo.respuesta]); // Mezclar opciones
+    const opciones = shuffleArray([...acertijo.respuestaIncorrectas, acertijo.respuesta]);
 
     const preguntaDiv = document.createElement('div');
     preguntaDiv.classList.add('pregunta');
 
+    // Texto del acertijo
     const h3 = document.createElement('h3');
     h3.textContent = acertijo.acertijo;
     preguntaDiv.appendChild(h3);
 
+    // Botón de mostrar pista (solo si existe)
+    if (acertijo.pista && acertijo.pista.trim() !== '') {
+        const botonPista = document.createElement('button');
+        botonPista.textContent = 'Mostrar pista';
+        botonPista.classList.add('btn-pista');
+        botonPista.style.marginBottom = '10px';
+
+        botonPista.onclick = () => {
+            botonPista.disabled = true;
+            const pista = document.createElement('p');
+            pista.textContent = `💡 Pista: ${acertijo.pista}`;
+            pista.style.fontStyle = 'italic';
+            pista.style.color = '#555';
+            pista.style.marginTop = '8px';
+            preguntaDiv.appendChild(pista);
+        };
+
+        preguntaDiv.appendChild(botonPista);
+    }
+
+    // Botones de respuesta
     opciones.forEach(op => {
         const btn = document.createElement('button');
         btn.textContent = op;

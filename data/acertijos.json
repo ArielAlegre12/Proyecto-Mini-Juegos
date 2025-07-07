@@ -6,7 +6,8 @@
       "Un pez",
       "Un globo",
       "Un árbol"
-    ]
+    ],
+    "pista": "Se encuentra en la tierra o en objetos y crece al quitar material."
   },
   {
     "acertijo": "Me puedes ver en el agua, pero nunca me mojo. ¿Qué soy?",
@@ -15,7 +16,8 @@
       "Un edificio",
       "Un faro",
       "Una nube"
-    ]
+    ],
+    "pista": "Aparece en superficies lisas y muestra tu imagen."
   },
   {
     "acertijo": "Tengo ciudades, pero no casas; montañas, pero no árboles; y agua, pero no peces. ¿Qué soy?",
@@ -24,7 +26,8 @@
       "Un volcán",
       "Una piedra",
       "Un globo"
-    ]
+    ],
+    "pista": "Se usa para orientarse y encontrar lugares."
   },
   {
     "acertijo": "No tengo boca y grito, no tengo orejas y escucho. ¿Qué soy?",
@@ -33,7 +36,8 @@
       "Un árbol",
       "Un río",
       "Una nube"
-    ]
+    ],
+    "pista": "Se escucha en las montañas o cuevas cuando gritas."
   },
   {
     "acertijo": "Si me nombras, desaparezco. ¿Qué soy?",
@@ -42,7 +46,8 @@
       "Un avión",
       "Un pez",
       "El aire"
-    ]
+    ],
+    "pista": "Es lo opuesto al ruido."
   },
   {
     "acertijo": "Vuelo sin alas, lloro sin ojos. ¿Qué soy?",
@@ -51,7 +56,8 @@
       "Una estrella",
       "Un edificio",
       "Una sombra"
-    ]
+    ],
+    "pista": "Se forma en el cielo y puede traer lluvia."
   },
   {
     "acertijo": "Cuanto más seco, más mojado queda. ¿Qué soy?",
@@ -60,7 +66,8 @@
       "Un pez",
       "Un edificio",
       "Un volcán"
-    ]
+    ],
+    "pista": "Se usa después de bañarse."
   },
   {
     "acertijo": "Lleno de agujeros pero aún retengo agua. ¿Qué soy?",
@@ -69,7 +76,8 @@
       "Una lámpara",
       "Una cueva",
       "El aire"
-    ]
+    ],
+    "pista": "Se usa para limpiar y absorbe líquidos."
   },
   {
     "acertijo": "Camina sin pies y entra en casa sin llave. ¿Qué es?",
@@ -78,7 +86,8 @@
       "Un faro",
       "Una sombra",
       "Una montaña"
-    ]
+    ],
+    "pista": "Se siente en la cara y mueve las hojas de los árboles."
   },
   {
     "acertijo": "Tiene cuello pero no cabeza. ¿Qué es?",
@@ -87,7 +96,8 @@
       "Una montaña",
       "Un carro",
       "Una nube"
-    ]
+    ],
+    "pista": "Se usa para guardar líquidos y tiene tapa."
   },
   {
     "acertijo": "No se puede ver, pero puede romperse si se menciona. ¿Qué es?",
@@ -96,7 +106,8 @@
       "Un espejo",
       "Un faro",
       "Un árbol"
-    ]
+    ],
+    "pista": "Se guarda y no se debe contar."
   },
   {
     "acertijo": "Tiene agujas pero no pincha. ¿Qué es?",
@@ -105,7 +116,8 @@
       "Una nube",
       "Un pez",
       "Un árbol"
-    ]
+    ],
+    "pista": "Sirve para ver la hora."
   },
   {
     "acertijo": "Tiene manos pero no puede aplaudir. ¿Qué es?",
@@ -114,7 +126,8 @@
       "Una piedra",
       "Una montaña",
       "Un árbol"
-    ]
+    ],
+    "pista": "Sus manos giran y marcan el tiempo."
   },
   {
     "acertijo": "Es tuyo, pero otras personas lo usan más que tú. ¿Qué es?",
@@ -123,7 +136,8 @@
       "Un volcán",
       "Una taza",
       "Un árbol"
-    ]
+    ],
+    "pista": "Te lo dan al nacer y todos te llaman así."
   },
   {
     "acertijo": "Tiene hojas pero no es un árbol. ¿Qué es?",
@@ -132,7 +146,8 @@
       "Una ventana",
       "Una nube",
       "Una sombra"
-    ]
+    ],
+    "pista": "Se lee y puede tener muchas páginas."
   },
   {
     "acertijo": "Va hacia arriba y nunca baja. ¿Qué es?",
@@ -141,7 +156,8 @@
       "Una ventana",
       "Un volcán",
       "Una montaña"
-    ]
+    ],
+    "pista": "Aumenta cada año en las personas."
   },
   {
     "acertijo": "Cuantos más tienes, menos ves. ¿Qué son?",
@@ -150,7 +166,8 @@
       "Un pez",
       "Una lámpara",
       "Un carro"
-    ]
+    ],
+    "pista": "Pueden estar en una tela o en una pared."
   },
   {
     "acertijo": "Tiene patas pero no camina. ¿Qué es?",
@@ -159,7 +176,8 @@
       "Una montaña",
       "Un espejo",
       "Una nube"
-    ]
+    ],
+    "pista": "Se usa para sentarse."
   },
   {
     "acertijo": "Tiene dientes pero no muerde. ¿Qué es?",
@@ -168,7 +186,8 @@
       "Un volcán",
       "Una cueva",
       "Un faro"
-    ]
+    ],
+    "pista": "Se usa para peinar el cabello."
   },
   {
     "acertijo": "Corre todo el día pero nunca sale de su sitio. ¿Qué es?",
@@ -177,7 +196,8 @@
       "Un faro",
       "Un carro",
       "Una piedra"
-    ]
+    ],
+    "pista": "Marca el paso del tiempo sin moverse."
   },
   {
     "acertijo": "Tiene un ojo pero no puede ver. ¿Qué es?",
@@ -186,7 +206,8 @@
       "Una taza",
       "El aire",
       "Un faro"
-    ]
+    ],
+    "pista": "Se usa para coser y pasa el hilo por su ojo."
   },
   {
     "acertijo": "Puede llenarse, vaciarse y romperse, pero no tiene forma física. ¿Qué es?",
@@ -195,7 +216,8 @@
       "Un volcán",
       "Un río",
       "Una ventana"
-    ]
+    ],
+    "pista": "Late en el pecho y siente emociones."
   },
   {
     "acertijo": "Tiene cabeza y cola, pero no cuerpo. ¿Qué es?",
@@ -204,7 +226,8 @@
       "Un edificio",
       "Una cueva",
       "Una lámpara"
-    ]
+    ],
+    "pista": "Se usa para pagar y tiene dos caras."
   },
   {
     "acertijo": "Cuanto más rápido corres, más atrás queda. ¿Qué es?",
@@ -213,7 +236,8 @@
       "Un árbol",
       "Una cueva",
       "Una nube"
-    ]
+    ],
+    "pista": "Te sigue cuando hay luz."
   },
   {
     "acertijo": "Si lo tienes, quieres compartirlo. Si lo compartes, ya no lo tienes. ¿Qué es?",
@@ -222,7 +246,8 @@
       "Un carro",
       "Un faro",
       "Un volcán"
-    ]
+    ],
+    "pista": "Se guarda y se pierde si se cuenta."
   },
   {
     "acertijo": "No es un ser vivo, pero crece. No tiene pulmones, pero necesita aire. ¿Qué es?",
@@ -231,7 +256,8 @@
       "Un árbol",
       "Un río",
       "Un globo"
-    ]
+    ],
+    "pista": "Puede quemar y necesita oxígeno."
   },
   {
     "acertijo": "Cuanto más sacas, más grande se vuelve. ¿Qué es?",
@@ -240,7 +266,8 @@
       "Un árbol",
       "Un espejo",
       "Un pez"
-    ]
+    ],
+    "pista": "Se hace en la tierra y crece al excavar."
   },
   {
     "acertijo": "Mientras más le agregas, menos pesa. ¿Qué es?",
@@ -249,7 +276,8 @@
       "Un espejo",
       "Un río",
       "Un edificio"
-    ]
+    ],
+    "pista": "Flota y se infla con gas."
   },
   {
     "acertijo": "No puedes verme, pero estoy contigo desde que naces hasta que mueres. ¿Qué soy?",
@@ -258,7 +286,8 @@
       "El aire",
       "Un río",
       "Un faro"
-    ]
+    ],
+    "pista": "Pasa para todos y nunca se detiene."
   },
   {
     "acertijo": "Tiene una sola dirección pero millones lo siguen. ¿Qué es?",
@@ -267,7 +296,8 @@
       "Una estrella",
       "Un edificio",
       "Un volcán"
-    ]
+    ],
+    "pista": "Se recorre para llegar a un destino."
   },
   {
     "acertijo": "Nunca duerme pero siempre está en cama. ¿Qué es?",
@@ -276,7 +306,8 @@
       "Una sombra",
       "Un carro",
       "Una lámpara"
-    ]
+    ],
+    "pista": "Fluye entre dos orillas."
   },
   {
     "acertijo": "Cuanto más me lavas, más sucia se pone el agua. ¿Qué soy?",
@@ -285,7 +316,8 @@
       "Una montaña",
       "Un faro",
       "Un carro"
-    ]
+    ],
+    "pista": "Se ensucia y se limpia en la lavadora."
   },
   {
     "acertijo": "Tiene una raíz pero no es planta. ¿Qué es?",
@@ -294,7 +326,8 @@
       "Una taza",
       "Una nube",
       "Un árbol"
-    ]
+    ],
+    "pista": "Está en la boca y sirve para masticar."
   },
   {
     "acertijo": "Cae sin mojar. ¿Qué es?",
@@ -303,7 +336,8 @@
       "Un espejo",
       "Un árbol",
       "Un pez"
-    ]
+    ],
+    "pista": "Llega cada día y oscurece todo."
   },
   {
     "acertijo": "Te da luz pero te ciega si lo miras. ¿Qué es?",
@@ -312,7 +346,8 @@
       "Un volcán",
       "Una lámpara",
       "Un pez"
-    ]
+    ],
+    "pista": "Brilla en el cielo durante el día."
   },
   {
     "acertijo": "Puede ser fuerte sin músculo, hablar sin boca y correr sin piernas. ¿Qué es?",
@@ -321,7 +356,8 @@
       "Una ventana",
       "Un volcán",
       "Un pez"
-    ]
+    ],
+    "pista": "Se siente en el aire y mueve las cosas."
   },
   {
     "acertijo": "Mientras más vive, menos tiempo tiene. ¿Qué es?",
@@ -330,7 +366,8 @@
       "Un edificio",
       "Una piedra",
       "Un carro"
-    ]
+    ],
+    "pista": "Se consume mientras da luz."
   },
   {
     "acertijo": "Cuanto más me miras, menos ves. ¿Qué soy?",
@@ -339,7 +376,8 @@
       "Una lámpara",
       "Una taza",
       "El aire"
-    ]
+    ],
+    "pista": "No hay luz y no puedes ver nada."
   },
   {
     "acertijo": "Te persigo, pero desaparezco si te das la vuelta. ¿Qué soy?",
@@ -348,7 +386,8 @@
       "Un edificio",
       "Un árbol",
       "Una lámpara"
-    ]
+    ],
+    "pista": "Solo aparece cuando hay luz detrás de ti."
   },
   {
     "acertijo": "Tiene orejas pero no puede oír. ¿Qué es?",
@@ -357,7 +396,8 @@
       "Un árbol",
       "Un espejo",
       "El aire"
-    ]
+    ],
+    "pista": "Se usa para tomar café o té."
   },
   {
     "acertijo": "Este es un acertijo imaginario número 40. ¿Qué soy?",
@@ -366,7 +406,8 @@
       "El aire",
       "Un pez",
       "Un árbol"
-    ]
+    ],
+    "pista": "La respuesta es el número del acertijo."
   },
   {
     "acertijo": "Este es un acertijo imaginario número 41. ¿Qué soy?",
@@ -375,7 +416,8 @@
       "Un faro",
       "Un pez",
       "Una sombra"
-    ]
+    ],
+    "pista": "La respuesta es el número del acertijo."
   },
   {
     "acertijo": "Este es un acertijo imaginario número 42. ¿Qué soy?",
@@ -384,7 +426,8 @@
       "Un árbol",
       "Una lámpara",
       "Un pez"
-    ]
+    ],
+    "pista": "La respuesta es el número del acertijo."
   },
   {
     "acertijo": "Este es un acertijo imaginario número 43. ¿Qué soy?",
@@ -393,16 +436,18 @@
       "Una montaña",
       "Un faro",
       "Una lámpara"
-    ]
+    ],
+    "pista": "La respuesta es el número del acertijo."
   },
-   {
+  {
     "acertijo": "Me construyen cuando hay calma, me destruyen cuando hay guerra. ¿Qué soy?",
     "respuesta": "Un puente",
     "respuestaIncorrectas": [
       "Un muro",
       "Una plaza",
       "Una torre"
-    ]
+    ],
+    "pista": "Sirve para cruzar ríos o valles."
   },
   {
     "acertijo": "No tengo alma, pero canto. Me abres y me dejas hablar. ¿Qué soy?",
@@ -411,7 +456,8 @@
       "Una radio",
       "Un micrófono",
       "Una pintura"
-    ]
+    ],
+    "pista": "Se lee y tiene versos."
   },
   {
     "acertijo": "Soy invisible pero dejo rastro, cruzo océanos sin moverme. ¿Qué soy?",
@@ -420,7 +466,8 @@
       "Una idea",
       "Una carta",
       "Un suspiro"
-    ]
+    ],
+    "pista": "Viaja por el aire y transmite información."
   },
   {
     "acertijo": "Habito en las paredes pero no tengo cuerpo. ¿Qué soy?",
@@ -429,7 +476,8 @@
       "Una sombra",
       "El eco",
       "Un grillo"
-    ]
+    ],
+    "pista": "Hace funcionar los aparatos eléctricos."
   },
   {
     "acertijo": "Mi cara brilla sin maquillaje, cambio de forma y no me puedes tocar. ¿Qué soy?",
@@ -438,7 +486,8 @@
       "Un espejo",
       "Un diamante",
       "Una luciérnaga"
-    ]
+    ],
+    "pista": "Solo la ves reflejada en la superficie."
   },
   {
     "acertijo": "Mis dedos te tocan sin piel, mi ritmo te mueve sin corazón. ¿Qué soy?",
@@ -447,7 +496,8 @@
       "El viento",
       "El mar",
       "La poesía"
-    ]
+    ],
+    "pista": "Se escucha y puede alegrar o entristecer."
   },
   {
     "acertijo": "Me llevas sin peso, me hablas sin voz. ¿Qué soy?",
@@ -456,7 +506,8 @@
       "Una nube",
       "Un recuerdo",
       "Un deseo"
-    ]
+    ],
+    "pista": "Está en tu mente y nadie más lo ve."
   },
   {
     "acertijo": "Duermo durante siglos hasta que me despiertan con fuego. ¿Qué soy?",
@@ -465,7 +516,8 @@
       "Una bomba",
       "Una estrella",
       "Un oso polar"
-    ]
+    ],
+    "pista": "Puede hacer erupción después de mucho tiempo."
   },
   {
     "acertijo": "No tengo motor pero te llevo lejos. ¿Qué soy?",
@@ -474,7 +526,8 @@
       "Un tren",
       "Un avión de papel",
       "Un mapa"
-    ]
+    ],
+    "pista": "Te transporta con la imaginación."
   },
   {
     "acertijo": "Nací del miedo y muero con la verdad. ¿Qué soy?",
@@ -483,7 +536,8 @@
       "El silencio",
       "Un secreto",
       "Un disfraz"
-    ]
+    ],
+    "pista": "Se dice para ocultar la realidad."
   },
   {
     "acertijo": "Soy parte del día, pero nunca salgo de noche. ¿Qué soy?",
@@ -492,7 +546,8 @@
       "El sol",
       "El viento",
       "Una nube"
-    ]
+    ],
+    "pista": "Solo aparece cuando el sol está en lo alto."
   },
   {
     "acertijo": "Pido permiso sin hablar, entro sin golpear. ¿Qué soy?",
@@ -501,7 +556,8 @@
       "El sonido",
       "El eco",
       "Una carta"
-    ]
+    ],
+    "pista": "Ilumina la habitación al amanecer."
   },
   {
     "acertijo": "Vivo en una jaula y canto, pero si me liberas, muero. ¿Qué soy?",
@@ -560,7 +616,7 @@
       "La nieve",
       "Una nube",
       "El rocío"
-    ], 
+    ],
     "pista": "A veces se dice que es un velo que cubre la tierra."
   },
   {
@@ -670,7 +726,7 @@
       "Una gaviota",
       "El viento",
       "Un tambor"
-    ], 
+    ],
     "pista": "A veces se usa para llamar la atención."
   },
   {
@@ -694,10 +750,9 @@
     "pista": "A veces se dice que es ciega."
   },
   {
-  "acertijo": "Vuelo sin alas, lloro sin ojos. ¿Qué soy?",
-  "respuesta": "Una nube",
-  "respuestaIncorrectas": ["Una estrella", "Un edificio", "Una sombra"],
-  "pista": "Se forma en el cielo y puede traer lluvia."
-}
-
+    "acertijo": "Vuelo sin alas, lloro sin ojos. ¿Qué soy?",
+    "respuesta": "Una nube",
+    "respuestaIncorrectas": ["Una estrella", "Un edificio", "Una sombra"],
+    "pista": "Se forma en el cielo y puede traer lluvia."
+  }
 ]

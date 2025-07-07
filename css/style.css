@@ -30,6 +30,10 @@ button {
   font-size: 1rem;
   transition: background-color 0.3s ease;
 }
+button.btn-pista {
+  background-color: #ff9800 !important;
+  color: #fff !important;
+}
 
 button:hover {
   background-color: #45a049; /* Verde más oscuro al pasar el ratón */
@@ -207,4 +211,20 @@ input {
 #trivia h3 {
   font-size: 18px;
   margin-bottom: 10px;
+}
+
+button.btn-pista {
+  background-color: #ff9800 !important;
+  color: #fff !important;
+  border: 2px solid #e65100;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(255, 152, 0, 0.2);
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+button.btn-pista:hover {
+  background-color: #ffa726 !important;
+  border-color: #ff9800;
+  color: #222 !important;
 }

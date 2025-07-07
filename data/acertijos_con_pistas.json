@@ -1,0 +1,62 @@
+[
+  {
+    "acertijo": "¿Qué cosa es, que cuanto más le quitas, más grande se hace?",
+    "respuesta": "Un agujero",
+    "respuestaIncorrectas": [
+      "Un pez",
+      "Un globo",
+      "Un árbol"
+    ],
+    "pista": "Se agranda con cada parte que le quitas."
+  },
+  {
+    "acertijo": "Me puedes ver en el agua, pero nunca me mojo. ¿Qué soy?",
+    "respuesta": "Un reflejo",
+    "respuestaIncorrectas": [
+      "Un edificio",
+      "Un faro",
+      "Una nube"
+    ],
+    "pista": "Lo ves en el agua, pero no puedes tocarlo."
+  },
+  {
+    "acertijo": "Tengo ciudades, pero no casas; montañas, pero no árboles; y agua, pero no peces. ¿Qué soy?",
+    "respuesta": "Un mapa",
+    "respuestaIncorrectas": [
+      "Un volcán",
+      "Una piedra",
+      "Un globo"
+    ],
+    "pista": "Tiene todo tipo de paisajes, pero ninguno real."
+  },
+  {
+    "acertijo": "No tengo boca y grito, no tengo orejas y escucho. ¿Qué soy?",
+    "respuesta": "Un eco",
+    "respuestaIncorrectas": [
+      "Un árbol",
+      "Un río",
+      "Una nube"
+    ],
+    "pista": "Repite lo que escuchas sin tener voz."
+  },
+  {
+    "acertijo": "Si me nombras, desaparezco. ¿Qué soy?",
+    "respuesta": "El silencio",
+    "respuestaIncorrectas": [
+      "Un avión",
+      "Un pez",
+      "El aire"
+    ],
+    "pista": "Desaparece si haces cualquier sonido."
+  },
+  {
+    "acertijo": "Vuelo sin alas, lloro sin ojos. ¿Qué soy?",
+    "respuesta": "Una nube",
+    "respuestaIncorrectas": [
+      "Una estrella",
+      "Un edificio",
+      "Una sombra"
+    ],
+    "pista": "Se forma en el cielo y puede traer lluvia."
+  }
+]
