@@ -8,12 +8,15 @@
 }
 
 @media (max-width: 480px) {
-  html, body {
+
+  html,
+  body {
     margin: 0;
     padding: 0;
     width: 100%;
     min-height: 100%;
-    overflow-x: hidden; /* Evitar scroll horizontal */
+    overflow-x: hidden;
+    /* Evitar scroll horizontal */
   }
 
   .container {
@@ -44,7 +47,7 @@
     margin-top: 15px;
   }
 
-  button + button {
+  button+button {
     margin-left: 0;
     margin-top: 15px;
   }
@@ -126,4 +129,85 @@
   .main-nav {
     width: 300px;
   }
+}
+
+
+@media (min-width: 768px) {
+
+  /* Ocultar hamburguesa en escritorio */
+  .hamburger-icon {
+    display: none;
+  }
+
+  /* Mostrar menú principal en línea, sin fondo ni sombras */
+  .main-nav {
+    position: static;
+    width: auto;
+    height: auto;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .main-nav ul {
+    display: flex;
+    gap: 25px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .main-nav li {
+    border: none;
+    padding: 0;
+  }
+
+  /* Links y botones del menú con espacio cómodo y colores neutros */
+  .main-nav a,
+  .main-nav button {
+    color: #333;
+    padding: 10px 15px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  /* Hover para enlaces y botones */
+  .main-nav a:hover,
+  .main-nav button:hover {
+    color: #4CAF50;
+  }
+
+/* Submenú vertical con separaciones */
+#submenuJuegos {
+  display: block !important;
+  flex-direction: column !important;
+  gap: 10px;
+  background: transparent !important;
+  box-shadow: none !important;
+  position: static !important;
+  height: auto !important;
+  padding-left: 20px;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+#submenuJuegos li {
+  list-style: none;
+}
+
+#submenuJuegos li a {
+  display: block;
+  padding: 10px 20px;
+  font-weight: 500;
+}
 }
