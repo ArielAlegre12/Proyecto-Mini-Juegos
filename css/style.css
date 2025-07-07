@@ -1,13 +1,14 @@
 body {
+  margin: 0;
+  padding: 0;
   font-family: Arial, sans-serif;
   text-align: center;
-  margin: 50px 10px 0;
-  background-color:  white;
+  background-color: white;
 }
 
 .accordion-item,
 .accordion-content {
-  background:white;
+  background: white;
 }
 
 .container {
@@ -15,7 +16,7 @@ body {
   padding: 20px;
   max-width: 400px;
   margin: auto;
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 
   display: flex;
@@ -25,7 +26,8 @@ body {
 
 button {
   padding: 10px 20px;
-  background-color: #4CAF50; /* Verde por defecto para la mayoría de los botones */
+  background-color: #4CAF50;
+  /* Verde por defecto para la mayoría de los botones */
   color: white;
   border: none;
   border-radius: 5px;
@@ -35,13 +37,15 @@ button {
   font-size: 1rem;
   transition: background-color 0.3s ease;
 }
+
 button.btn-pista {
   background-color: #ff9800 !important;
   color: #fff !important;
 }
 
 button:hover {
-  background-color: #45a049; /* Verde más oscuro al pasar el ratón */
+  background-color: #45a049;
+  /* Verde más oscuro al pasar el ratón */
 }
 
 input {
@@ -53,7 +57,9 @@ input {
 }
 
 @media (max-width: 480px) {
-  html, body {
+
+  html,
+  body {
     margin: 0;
     padding: 0;
     width: 100%;
@@ -86,7 +92,7 @@ input {
     margin-top: 20px;
   }
 
-  button + button {
+  button+button {
     margin-left: 0;
     margin-top: 20px;
   }
@@ -104,12 +110,13 @@ input {
   background: white;
   border-radius: 10px;
   margin-bottom: 15px;
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }
 
 .accordion-header {
-  background-color: #4CAF50; /* Encabezados de acordeón en verde */
+  background-color: #4CAF50;
+  /* Encabezados de acordeón en verde */
   color: white;
   padding: 15px 20px;
   width: 100%;
@@ -124,7 +131,8 @@ input {
 }
 
 .accordion-header:hover {
-  background-color: #45a049; /* Verde oscuro al pasar el ratón */
+  background-color: #45a049;
+  /* Verde oscuro al pasar el ratón */
 }
 
 .accordion-content {
@@ -136,10 +144,12 @@ input {
 }
 
 .accordion-content.active {
-  max-height: none;   /* Permite que crezca según el contenido */
+  max-height: none;
+  /* Permite que crezca según el contenido */
   opacity: 1;
   padding: 20px;
-  overflow: visible;  /* Muestra todo el contenido */
+  overflow: visible;
+  /* Muestra todo el contenido */
 }
 
 .accordion-content input {
@@ -152,7 +162,8 @@ input {
 
 .accordion-content button {
   padding: 10px 20px;
-  background-color: #4CAF50; /* Verde por defecto para los botones dentro de acordeones */
+  background-color: #4CAF50;
+  /* Verde por defecto para los botones dentro de acordeones */
   color: white;
   border: none;
   border-radius: 5px;
@@ -183,8 +194,10 @@ input {
 
 /* --- Estilos para el juego de trivia --- */
 
-#trivia button { /* Botones de respuesta de trivia (serán verdes) */
-  background-color: #4CAF50; /* ¡Color verde para las opciones de respuesta! */
+#trivia button {
+  /* Botones de respuesta de trivia (serán verdes) */
+  background-color: #4CAF50;
+  /* ¡Color verde para las opciones de respuesta! */
   margin: 5px;
   padding: 8px 12px;
   font-size: 16px;
@@ -196,16 +209,19 @@ input {
 }
 
 #trivia button:hover {
-  background-color: #45a049; /* Verde más oscuro al pasar el ratón */
+  background-color: #45a049;
+  /* Verde más oscuro al pasar el ratón */
 }
 
 /* ¡Solo el botón "Siguiente pregunta" será azul! */
 #nextQuestionButton {
-  background-color: #2196F3; /* Color azul */
+  background-color: #2196F3;
+  /* Color azul */
 }
 
 #nextQuestionButton:hover {
-  background-color: #1976D2; /* Azul más oscuro al pasar el ratón */
+  background-color: #1976D2;
+  /* Azul más oscuro al pasar el ratón */
 }
 
 #trivia h3 {
@@ -234,7 +250,7 @@ footer a {
 }
 
 /* --- Estilos para el modo oscuro --- */
-body.dark-mode { 
+body.dark-mode {
   background-color: #181818;
   color: #f5f5f5;
 }
@@ -260,11 +276,13 @@ body.dark-mode button.btn-pista {
   background-color: #b71c1c !important;
   border-color: #880808;
 }
+
 #toggleDarkMode {
   position: fixed;
   top: 10px;
   left: 10px;
-  background-color: #4CAF50; /* Verde por defecto */
+  background-color: #4CAF50;
+  /* Verde por defecto */
   color: white;
   border: none;
   border-radius: 5px;
@@ -285,39 +303,46 @@ body.dark-mode button.btn-pista {
 
 /* --- Estilos Generales del Header (para todas las pantallas) --- */
 .main-header {
-    display: flex; /* Usamos Flexbox para alinear elementos */
-    justify-content: space-between; /* Distribuye el h1 y el botón de hamburguesa */
-    align-items: center; /* Alinea verticalmente */
-    padding: 15px 20px;
-    background-color: #f8f8f8;
-    position: relative; /* Permite que el menú hamburguesa se posicione correctamente */
-    border-bottom: 1px solid #eee;
-    color: #333; /* Color de texto predeterminado */
+  display: flex;
+  /* Usamos Flexbox para alinear elementos */
+  justify-content: space-between;
+  /* Distribuye el h1 y el botón de hamburguesa */
+  align-items: center;
+  /* Alinea verticalmente */
+  padding: 15px 20px;
+  background-color: #f8f8f8;
+  position: relative;
+  /* Permite que el menú hamburguesa se posicione correctamente */
+  border-bottom: 1px solid #eee;
+  color: #333;
+  /* Color de texto predeterminado */
 }
 
 .main-header h1 {
-    margin: 0; /* Elimina márgenes por defecto del h1 */
-    font-size: 1.8em;
+  margin: 0;
+  /* Elimina márgenes por defecto del h1 */
+  font-size: 1.8em;
 }
 
 /* --- Estilos para el botón de modo oscuro/claro (dentro del nav) --- */
 #toggleDarkMode {
-    background-color: #f0f0f0;
-    color: #333;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 8px 12px;
-    cursor: pointer;
-    font-size: 1em;
-    white-space: nowrap; /* Evita que el texto se rompa */
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 1em;
+  white-space: nowrap;
+  /* Evita que el texto se rompa */
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 /* Estilos para el botón de modo oscuro en modo oscuro */
 body.dark-mode #toggleDarkMode {
-    background-color: #333;
-    color: #f0f0f0;
-    border-color: #555;
+  background-color: #333;
+  color: #f0f0f0;
+  border-color: #555;
 }
 
 /* --- Estilos para el Menú Hamburguesa (aparece solo en móviles) --- */
@@ -336,9 +361,11 @@ body.dark-mode #toggleDarkMode {
   display: block;
   width: 25px;
   height: 3px;
-  background-color: #333; /* Color de las barras */
+  background-color: #333;
+  /* Color de las barras */
   margin: 5px 0;
-  transition: all 0.3s ease; /* Transición para la animación de la X */
+  transition: all 0.3s ease;
+  /* Transición para la animación de la X */
 }
 
 /* Estilos de las barras en modo oscuro */
@@ -359,35 +386,49 @@ body.dark-mode .hamburger-icon .bar {
   transform: translateY(-8px) rotate(-45deg);
 }
 
+
 /* --- Estilos de la Navegación (para móviles, inicialmente oculta a la izquierda) --- */
 .main-nav {
-  position: fixed; /* Posiciona el menú en relación con la ventana */
+  position: fixed;
+  /* Posiciona el menú en relación con la ventana */
   top: 0;
-  left: -100%; /* **Moverlo fuera de la vista a la izquierda** */
-  width: 70%; /* **Ancho del menú (no ocupa toda la pantalla)** */
-  max-width: 300px; /* Ancho máximo para pantallas un poco más grandes */
+  left: -100%;
+  /* **Moverlo fuera de la vista a la izquierda** */
+  width: 70%;
+  /* **Ancho del menú (no ocupa toda la pantalla)** */
+  max-width: 300px;
+  /* Ancho máximo para pantallas un poco más grandes */
   height: 100%;
   background-color: #fff;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.2); /* Sombra para que destaque */
-  transition: left 0.3s ease; /* **Animación de deslizamiento hacia la derecha** */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  /* Sombra para que destaque */
+  transition: left 0.3s ease;
+  /* **Animación de deslizamiento hacia la derecha** */
   z-index: 1000;
-  padding-top: 80px; /* Espacio para no chocar con el header */
+  padding-top: 80px;
+  /* Espacio para no chocar con el header */
   /* Cambié display flex por block para evitar problema de visibilidad */
-  display: block; /* Antes era flex */
-  flex-direction: column; /* No hace efecto en block pero lo dejo */
-  justify-content: flex-start; /* No hace efecto en block pero lo dejo */
-  overflow-y: auto; /* Permite scroll si el contenido es largo */
+  display: block;
+  /* Antes era flex */
+  flex-direction: column;
+  /* No hace efecto en block pero lo dejo */
+  justify-content: flex-start;
+  /* No hace efecto en block pero lo dejo */
+  overflow-y: auto;
+  /* Permite scroll si el contenido es largo */
 }
 
 .main-nav.open {
-  left: 0; /* **Desliza el menú a la vista desde la izquierda** */
+  left: 0;
+  /* **Desliza el menú a la vista desde la izquierda** */
 }
 
 .main-nav ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  width: 100%; /* Ocupa todo el ancho del menú lateral */
+  width: 100%;
+  /* Ocupa todo el ancho del menú lateral */
 }
 
 .main-nav li {
@@ -396,23 +437,32 @@ body.dark-mode .hamburger-icon .bar {
 }
 
 .main-nav li:last-child {
-  border-bottom: none; /* No hay borde en el último ítem */
+  border-bottom: none;
+  /* No hay borde en el último ítem */
 }
 
-.main-nav a, .main-nav button {
-  display: block; /* Para que ocupen todo el ancho y se vean como bloques */
+.main-nav a,
+.main-nav button {
+  display: block;
+  /* Para que ocupen todo el ancho y se vean como bloques */
   color: #333;
   text-decoration: none;
   font-size: 1.1em;
-  padding: 0; /* Quita el padding que tenía el li */
-  background: none; /* Para el botón */
-  border: none; /* Para el botón */
-  text-align: left; /* Alinea el texto a la izquierda */
-  width: 100%; /* Asegura que el botón ocupa todo el ancho del li */
+  padding: 0;
+  /* Quita el padding que tenía el li */
+  background: none;
+  /* Para el botón */
+  border: none;
+  /* Para el botón */
+  text-align: left;
+  /* Alinea el texto a la izquierda */
+  width: 100%;
+  /* Asegura que el botón ocupa todo el ancho del li */
   cursor: pointer;
 }
 
-.main-nav a:hover, .main-nav button:hover {
+.main-nav a:hover,
+.main-nav button:hover {
   background-color: #f0f0f0;
 }
 
@@ -425,56 +475,72 @@ body.dark-mode .main-header {
 
 body.dark-mode .main-nav {
   background-color: #333;
-  box-shadow: 2px 0 5px rgba(255,255,255,0.1);
+  box-shadow: 2px 0 5px rgba(255, 255, 255, 0.1);
 }
 
 body.dark-mode .main-nav li {
   border-bottom-color: #555;
 }
 
-body.dark-mode .main-nav a, body.dark-mode .main-nav button {
+body.dark-mode .main-nav a,
+body.dark-mode .main-nav button {
   color: #f0f0f0;
 }
 
-body.dark-mode .main-nav a:hover, body.dark-mode .main-nav button:hover {
+body.dark-mode .main-nav a:hover,
+body.dark-mode .main-nav button:hover {
   background-color: #444;
 }
 
 /* --- Media Queries (para pantallas grandes) --- */
-@media (min-width: 768px) { /* A partir de 768px (tablets y desktops) */
+@media (min-width: 768px) {
+
+  /* A partir de 768px (tablets y desktops) */
   .hamburger-icon {
-    display: none; /* Oculta el icono de hamburguesa */
+    display: none;
+    /* Oculta el icono de hamburguesa */
   }
 
   .main-nav {
-    position: static; /* Vuelve a su posición normal en el flujo */
-    left: auto; /* Deshace el left para posicionamiento fijo */
+    position: static;
+    /* Vuelve a su posición normal en el flujo */
+    left: auto;
+    /* Deshace el left para posicionamiento fijo */
     width: auto;
     max-width: none;
     height: auto;
-    background: none; /* Sin fondo en desktop */
+    background: none;
+    /* Sin fondo en desktop */
     box-shadow: none;
     padding-top: 0;
-    display: block; /* Vuelve a ser un bloque normal */
+    display: block;
+    /* Vuelve a ser un bloque normal */
   }
 
   .main-nav ul {
-    display: flex; /* Alinea los ítems de navegación horizontalmente */
-    justify-content: flex-end; /* Alinea los ítems a la derecha */
-    gap: 20px; /* Espacio entre los ítems */
+    display: flex;
+    /* Alinea los ítems de navegación horizontalmente */
+    justify-content: flex-end;
+    /* Alinea los ítems a la derecha */
+    gap: 20px;
+    /* Espacio entre los ítems */
   }
 
   .main-nav li {
     padding: 0;
-    border-bottom: none; /* Sin bordes */
+    border-bottom: none;
+    /* Sin bordes */
   }
 
-  .main-nav a, .main-nav button {
-    padding: 5px 0; /* Padding para los enlaces */
+  .main-nav a,
+  .main-nav button {
+    padding: 5px 0;
+    /* Padding para los enlaces */
   }
 
   .main-header h1 {
-    flex-grow: 1; /* Permite que el h1 ocupe el espacio restante en pantallas grandes */
+    flex-grow: 1;
+    /* Permite que el h1 ocupe el espacio restante en pantallas grandes */
   }
 }
 
@@ -512,10 +578,25 @@ body.dark-mode .main-nav a:hover, body.dark-mode .main-nav button:hover {
 
 /* Opcional: ocultar el icono por defecto fuera del menú */
 .theme-icon {
-  display: block; /* porque ya está dentro del nav que se oculta/abre */
+  display: block;
+  /* porque ya está dentro del nav que se oculta/abre */
 }
 
 body.dark-mode {
   background-color: #121212;
   color: white;
+}
+
+@media (max-width: 767px) {
+  .main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 90%;
+    z-index: 1000;
+  }
+
+  body {
+    padding-top: 70px; /* ajustá esto según la altura de tu header */
+  }
 }
