@@ -139,15 +139,26 @@ function moveToNextTriviaQuestion() {
     displayTriviaQuestion();
 }
 
-
 // === JUEGO DE ACERTIJOS ===
+
 let acertijos = [];
 let indiceAcertijo = 0;
 
+// Mezcla un array aleatoriamente (algoritmo Fisher-Yates)
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+// Carga los acertijos desde JSON y mezcla el orden
 async function cargarAcertijos() {
     try {
         const res = await fetch('/data/acertijos.json');
         acertijos = await res.json();
+        shuffleArray(acertijos); // <<--- ACÁ MEZCLAMOS
         indiceAcertijo = 0;
         mostrarAcertijo();
     } catch (err) {
@@ -156,6 +167,7 @@ async function cargarAcertijos() {
     }
 }
 
+// Muestra el acertijo actual
 function mostrarAcertijo() {
     const contenedor = document.getElementById('acertijos');
     contenedor.innerHTML = '';
@@ -166,8 +178,7 @@ function mostrarAcertijo() {
     }
 
     const acertijo = acertijos[indiceAcertijo];
-    const opciones = [...acertijo.respuestaIncorrectas, acertijo.respuesta];
-    shuffleArray(opciones);
+    const opciones = shuffleArray([...acertijo.respuestaIncorrectas, acertijo.respuesta]); // Mezclar opciones
 
     const preguntaDiv = document.createElement('div');
     preguntaDiv.classList.add('pregunta');
@@ -191,6 +202,7 @@ function mostrarAcertijo() {
     contenedor.appendChild(siguienteBtn);
 }
 
+// Verifica la respuesta elegida
 function verificarAcertijo(boton, correcta) {
     const botones = document.querySelectorAll('#acertijos .pregunta button');
     botones.forEach(b => b.disabled = true);
@@ -216,6 +228,7 @@ function verificarAcertijo(boton, correcta) {
     document.querySelector('#acertijos .pregunta').appendChild(mensaje);
 }
 
+// Avanza al siguiente acertijo
 function siguienteAcertijo() {
     indiceAcertijo++;
     mostrarAcertijo();
