@@ -124,14 +124,20 @@ input {
   background-color: #45a049; /* Verde oscuro al pasar el ratón */
 }
 
-.accordion-content.active {
-  max-height: 90vh; /* Usa el 90% de la altura de la ventana */
-  opacity: 1;
-  padding: 20px;
-  overflow-y: auto; /* Permite scroll vertical si es necesario */
+.accordion-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0 20px;
+  transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
 }
 
-
+.accordion-content.active {
+  max-height: none;   /* Permite que crezca según el contenido */
+  opacity: 1;
+  padding: 20px;
+  overflow: visible;  /* Muestra todo el contenido */
+}
 
 .accordion-content input {
   padding: 8px;
