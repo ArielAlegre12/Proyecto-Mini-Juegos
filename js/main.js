@@ -259,14 +259,14 @@ const toggleBtn = document.getElementById('toggleDarkMode');
 toggleBtn.onclick = function() {
   document.body.classList.toggle('dark-mode');
   if (document.body.classList.contains('dark-mode')) {
-    toggleBtn.textContent = '☀️ Volver a modo claro';
+    toggleBtn.textContent = '🌙';
   } else {
-    toggleBtn.textContent = '🌙 Modo oscuro';
+    toggleBtn.textContent = '☀️';
   }
 };
 // Al cargar la página, ajusta el texto según el modo inicial
 if (document.body.classList.contains('dark-mode')) {
-  toggleBtn.textContent = '☀️ Volver a modo claro';
+  toggleBtn.textContent = '🌙';
 } else {
-  toggleBtn.textContent = '🌙 Modo oscuro';
+  toggleBtn.textContent = '☀️';
 }
