@@ -492,57 +492,62 @@ body.dark-mode .main-nav button:hover {
   background-color: #444;
 }
 
-/* --- Media Queries (para pantallas grandes) --- */
 @media (min-width: 768px) {
-
-  /* A partir de 768px (tablets y desktops) */
+  /* Mostrar el botón hamburguesa también en escritorio */
   .hamburger-icon {
-    display: none;
-    /* Oculta el icono de hamburguesa */
+    display: block; /* Cambiar de none a block */
+    position: fixed; /* Para que quede fijo en la pantalla */
+    top: auto;
+    right: 15px;
+    left: auto;
+    z-index: 1100;
+    background: transparent;
+    cursor: pointer;
   }
 
   .main-nav {
-    position: static;
-    /* Vuelve a su posición normal en el flujo */
-    left: auto;
-    /* Deshace el left para posicionamiento fijo */
-    width: auto;
-    max-width: none;
-    height: auto;
-    background: none;
-    /* Sin fondo en desktop */
-    box-shadow: none;
-    padding-top: 0;
-    display: block;
-    /* Vuelve a ser un bloque normal */
+    position: fixed;
+    top: 0;
+    left: -300px; /* Oculto inicialmente */
+    width: 300px;
+    height: 100vh;
+    background-color: #fff;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+    transition: left 0.3s ease;
+    z-index: 1050;
+    padding-top: 80px; /* espacio para el header */
+    overflow-y: auto;
+  }
+
+  .main-nav.open {
+    left: 0; /* visible cuando tiene la clase .open */
   }
 
   .main-nav ul {
-    display: flex;
-    /* Alinea los ítems de navegación horizontalmente */
-    justify-content: flex-end;
-    /* Alinea los ítems a la derecha */
-    gap: 20px;
-    /* Espacio entre los ítems */
+    display: block; /* Ahora vertical */
+    padding: 0;
+    margin: 0;
   }
 
   .main-nav li {
-    padding: 0;
-    border-bottom: none;
-    /* Sin bordes */
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
   }
 
   .main-nav a,
   .main-nav button {
-    padding: 5px 0;
-    /* Padding para los enlaces */
+    color: #333;
+    font-size: 1.1em;
+    text-align: left;
+    width: 100%;
+    padding: 0;
   }
 
   .main-header h1 {
     flex-grow: 1;
-    /* Permite que el h1 ocupe el espacio restante en pantallas grandes */
   }
 }
+
 
 @media (max-width: 768px) {
   .hamburger-icon {
@@ -620,3 +625,102 @@ body.dark-mode {
 #toggleJuegos.active {
   font-weight: bold;
 }
+
+
+/* Botones de respuesta para cualquier juego */
+button.answer-button {
+  background-color: #f0f0f0;
+  border: 2px solid #444;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+button.answer-button:hover {
+  background-color: #ddd;
+}
+
+/* Feedback positivo y negativo */
+.correct {
+  background-color: #4caf50 !important;
+  color: white;
+  border-color: #388e3c !important;
+}
+
+.incorrect {
+  background-color: #f44336 !important;
+  color: white;
+  border-color: #d32f2f !important;
+}
+
+/* Texto para pistas */
+.pista-text {
+  font-style: italic;
+  color: #555;
+  margin-top: 8px;
+}
+
+/* Modo oscuro */
+body.dark-mode button.answer-button {
+  background-color: #333;
+  border-color: #bbb;
+  color: #eee;
+}
+
+body.dark-mode button.answer-button:hover {
+  background-color: #555;
+}
+
+body.dark-mode .correct {
+  background-color: #66bb6a !important;
+  border-color: #4caf50 !important;
+  color: #111;
+}
+
+body.dark-mode .incorrect {
+  background-color: #ef5350 !important;
+  border-color: #e53935 !important;
+  color: #111;
+}
+
+body.dark-mode .pista-text {
+  color: #bbb;
+}
+
+
+/* Contenedor flex para botones */
+.botones-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap; /* que en pantallas chicas puedan apilarse */
+}
+
+/* Botones de acertijos en modo claro */
+body:not(.dark-mode) #acertijos button.answer-button {
+  background-color: #28a745; /* Verde */
+  color: white;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+body:not(.dark-mode) #acertijos button.answer-button:hover {
+  background-color: #218838; /* Verde oscuro al pasar mouse */
+}
+
+/* Opcional: estilos para botones cuando son correctos o incorrectos */
+body:not(.dark-mode) #acertijos button.correct {
+  background-color: #28a745;
+  color: white;
+}
+
+body:not(.dark-mode) #acertijos button.incorrect {
+  background-color: #dc3545; /* Rojo */
+  color: white;
+}
+
+

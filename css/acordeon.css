@@ -1,0 +1,76 @@
+.accordion {
+  max-width: 420px;
+  margin: 30px auto;
+  font-family: Arial, sans-serif;
+}
+
+.accordion-item,
+.accordion-content {
+  background: white;
+}
+
+.accordion-item {
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.accordion-header {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 20px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  font-size: 1.2rem;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease;
+  user-select: none;
+  border-radius: 10px 10px 0 0;
+}
+
+.accordion-header:hover {
+  background-color: #45a049;
+}
+
+.accordion-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0 20px;
+  transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+}
+
+.accordion-content.active {
+  max-height: none;
+  opacity: 1;
+  padding: 20px;
+  overflow: visible;
+}
+
+.accordion-content input {
+  padding: 8px;
+  margin-top: 10px;
+  width: 80px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.accordion-content button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+  min-width: 120px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.accordion-content button:hover {
+  background-color: #45a049;
+}

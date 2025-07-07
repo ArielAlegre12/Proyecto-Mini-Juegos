@@ -5,36 +5,43 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mini Juegos - </title>
-  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/menJue.css">
+  <link rel="stylesheet" href="css/acordeon.css">
+  <link rel="stylesheet" href="css/modNight.css">
+  <link rel="stylesheet" href="css/menuHamburguesa.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/header-nav.css">
+
   <link rel="shortcut icon" href="/iconPag.png" type="image/x-icon">
 </head>
 
 
 <body>
-<header id="inicio" class="main-header">
-  <h1>Mini juegos🥱</h1>
+  <header id="inicio" class="main-header">
+    <h1>Mini juegos🥱</h1>
 
-  <button id="hamburgerBtn" class="hamburger-icon">
-    <span class="bar"></span>
-    <span class="bar"></span>
-    <span class="bar"></span>
-  </button>
+    <button id="hamburgerBtn" class="hamburger-icon">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
 
-  <nav id="mainNav" class="main-nav">
-    <ul>
-      <li><a href="#inicio">Inicio</a></li>
-      <li>
-        <button id="toggleJuegos" class="theme-icon">Juegos ▾</button>
-        <ul id="submenuJuegos" class="submenu">
-          <li><a href="#juegoTrivia" class="juego-link" data-juego="juegoTrivia">Juego de Trivia</a></li>
-          <li><a href="#juegoAcertijos" class="juego-link" data-juego="juegoAcertijos">Juego de Acertijo</a></li>
-        </ul>
-      </li>
-      <li><a href="#contacto">Contacto</a></li>
-      <li><button id="themeToggle" class="theme-icon">🌓</button></li>
-    </ul>
-  </nav>
-</header>
+    <nav id="mainNav" class="main-nav">
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li>
+          <button id="toggleJuegos" class="theme-icon">Juegos ▾</button>
+          <ul id="submenuJuegos" class="submenu">
+            <li><a href="#juegoTrivia" class="juego-link" data-juego="juegoTrivia">Juego de Trivia</a></li>
+            <li><a href="#juegoAcertijos" class="juego-link" data-juego="juegoAcertijos">Juego de Acertijo</a></li>
+          </ul>
+        </li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><button id="themeToggle" class="theme-icon">🌓</button></li>
+      </ul>
+    </nav>
+  </header>
 
 
 
@@ -44,25 +51,23 @@
 
   <div id="juegos">
     <div class="accordion-item" id="juegoTrivia">
-      <button class="accordion-header"> Juego de Trivia</button>
+      <button class="accordion-header">Juego de Trivia</button>
       <div class="accordion-content">
-        <div id="trivia">
+        <div id="trivia" class="container">
           <p>Cargando pregunta...</p>
         </div>
       </div>
     </div>
 
     <div class="accordion-item" id="juegoAcertijos">
-      <button class="accordion-header"> Juego de Acertijo</button>
+      <button class="accordion-header">Juego de Acertijo</button>
       <div class="accordion-content">
-        <div id="acertijos">
+        <div id="acertijos" class="container">
           <p>Cargando acertijo...</p>
         </div>
-
-      </div> <!-- Cierra #acertijos -->
-    </div> <!-- Cierra .accordion-content -->
-  </div> <!-- Cierra .accordion-item -->
-  </div><!-- Cierra #juegos -->
+      </div>
+    </div>
+  </div>
 
   <footer id="contacto">
     <p>Desarrollado por <a href="https://instagram.com/alegreariel666" target="_blank">Ariel</a> 🤫</p>

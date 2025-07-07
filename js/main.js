@@ -71,54 +71,74 @@ async function loadTriviaQuestions() {
 }
 
 function displayTriviaQuestion() {
-    const triviaDiv = document.getElementById('trivia');
-    triviaDiv.innerHTML = '';
+    const contenedor = document.getElementById('trivia');
+    contenedor.innerHTML = '';
 
     if (currentTriviaQuestionIndex < triviaQuestions.length) {
-        const q = triviaQuestions[currentTriviaQuestionIndex];
-        const questionElement = document.createElement('h3');
-        questionElement.textContent = q.question;
-        triviaDiv.appendChild(questionElement);
+        const pregunta = triviaQuestions[currentTriviaQuestionIndex];
 
-        // Mostrar botón de pista si existe
-        if (q.pista && q.pista.trim() !== '') {
+        // Contenedor pregunta con clase 'pregunta'
+        const preguntaDiv = document.createElement('div');
+        preguntaDiv.classList.add('pregunta');
+
+        // Texto de la pregunta
+        const h3 = document.createElement('h3');
+        h3.textContent = pregunta.question;
+        preguntaDiv.appendChild(h3);
+
+        // Opciones de respuesta (botones)
+        const opciones = shuffleArray([...pregunta.incorrect_answers, pregunta.correct_answer]);
+        opciones.forEach(opcion => {
+            const btn = document.createElement('button');
+            btn.textContent = opcion;
+            btn.classList.add('answer-button');
+            btn.onclick = () => checkTriviaAnswer(btn, opcion, pregunta.correct_answer);
+            preguntaDiv.appendChild(btn);
+        });
+
+        contenedor.appendChild(preguntaDiv);
+
+        // Contenedor para botones pista y siguiente
+        const botonesDiv = document.createElement('div');
+        botonesDiv.style.display = 'flex';
+        botonesDiv.style.justifyContent = 'center';
+        botonesDiv.style.gap = '10px';
+        botonesDiv.style.marginTop = '15px';
+
+        // Botón mostrar pista (si tiene pista)
+        if (pregunta.pista && pregunta.pista.trim() !== '') {
             const botonPista = document.createElement('button');
             botonPista.textContent = 'Mostrar pista';
-            botonPista.style.marginBottom = '10px';
+            botonPista.classList.add('btn-pista');
             botonPista.onclick = () => {
                 botonPista.disabled = true;
                 const pista = document.createElement('p');
-                pista.textContent = `💡 Pista: ${q.pista}`;
-                pista.style.fontStyle = 'italic';
-                pista.style.color = '#555';
-                pista.style.marginTop = '8px';
-                triviaDiv.appendChild(pista);
+                pista.textContent = `💡 Pista: ${pregunta.pista}`;
+                pista.classList.add('pista-text');
+                contenedor.appendChild(pista);
             };
-            triviaDiv.appendChild(botonPista);
+            botonesDiv.appendChild(botonPista);
         }
 
-        const opciones = [...q.incorrect_answers, q.correct_answer];
-        shuffleArray(opciones);
+        // Botón siguiente (siempre visible)
+        const siguienteBtn = document.createElement('button');
+        siguienteBtn.textContent = 'Siguiente';
+        siguienteBtn.classList.add('btn-pista');
+        siguienteBtn.onclick = moveToNextTriviaQuestion;
+        botonesDiv.appendChild(siguienteBtn);
 
-        opciones.forEach(answer => {
-            const btn = document.createElement('button');
-            btn.textContent = answer;
-            btn.classList.add('trivia-answer-button');
-            btn.onclick = () => checkTriviaAnswer(btn, answer, q.correct_answer);
-            triviaDiv.appendChild(btn);
-        });
+        contenedor.appendChild(botonesDiv);
 
+        // Párrafo para feedback debajo de la pregunta
         triviaFeedbackParagraph = document.createElement('p');
-        triviaDiv.appendChild(triviaFeedbackParagraph);
+        contenedor.appendChild(triviaFeedbackParagraph);
 
-        const nextBtn = document.createElement('button');
-        nextBtn.id = 'nextQuestionButton';
-        nextBtn.textContent = 'Siguiente pregunta';
-        nextBtn.style.display = 'none';
-        nextBtn.onclick = moveToNextTriviaQuestion;
-        triviaDiv.appendChild(nextBtn);
     } else {
-        triviaDiv.innerHTML = '<p>¡Has respondido todas las preguntas!</p><button id="restartTriviaButton">Volver a jugar</button>';
+        // Final del juego
+        contenedor.innerHTML = `
+            <p>¡Has respondido todas las preguntas!</p>
+            <button id="restartTriviaButton" class="btn-pista">Volver a jugar</button>
+        `;
         document.getElementById('restartTriviaButton').onclick = () => {
             currentTriviaQuestionIndex = 0;
             shuffleArray(triviaQuestions);
@@ -127,35 +147,35 @@ function displayTriviaQuestion() {
     }
 }
 
-
 function checkTriviaAnswer(selectedButton, selectedAnswer, correctAnswer) {
-    const buttons = document.querySelectorAll('#trivia .trivia-answer-button');
-    buttons.forEach(btn => btn.disabled = true);
+  const botones = document.querySelectorAll('#trivia .answer-button');
+  botones.forEach(b => b.disabled = true);
 
-    if (selectedAnswer === correctAnswer) {
-        triviaFeedbackParagraph.textContent = '¡Correcto!';
-        triviaFeedbackParagraph.style.color = 'green';
-        selectedButton.style.backgroundColor = 'green';
-    } else {
-        triviaFeedbackParagraph.textContent = `Incorrecto. La respuesta correcta era: "${correctAnswer}"`;
-        triviaFeedbackParagraph.style.color = 'red';
-        selectedButton.style.backgroundColor = 'red';
+  const normalizar = str => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
-        // Resalta el botón correcto
-        buttons.forEach(btn => {
-            if (btn.textContent === correctAnswer) {
-                btn.style.backgroundColor = 'green';
-            }
-        });
-    }
+  if (normalizar(selectedAnswer) === normalizar(correctAnswer)) {
+    triviaFeedbackParagraph.textContent = '✅ ¡Correcto!';
+    triviaFeedbackParagraph.style.color = 'green';
+    selectedButton.classList.add('correct');
+  } else {
+    triviaFeedbackParagraph.textContent = `❌ Incorrecto. La respuesta correcta era: "${correctAnswer}"`;
+    triviaFeedbackParagraph.style.color = 'red';
+    selectedButton.classList.add('incorrect');
 
-    document.getElementById('nextQuestionButton').style.display = 'block';
+    botones.forEach(btn => {
+      if (normalizar(btn.textContent) === normalizar(correctAnswer)) {
+        btn.classList.add('correct');
+      }
+    });
+  }
 }
+
 
 function moveToNextTriviaQuestion() {
-    currentTriviaQuestionIndex++;
-    displayTriviaQuestion();
+  currentTriviaQuestionIndex++;
+  displayTriviaQuestion();
 }
+
 
 // === JUEGO DE acertijos ===
 
@@ -206,42 +226,50 @@ function mostrarAcertijo() {
     h3.textContent = acertijo.acertijo;
     preguntaDiv.appendChild(h3);
 
-    // Botón de mostrar pista (solo si existe)
-    if (acertijo.pista && acertijo.pista.trim() !== '') {
-        const botonPista = document.createElement('button');
-        botonPista.textContent = 'Mostrar pista';
-        botonPista.classList.add('btn-pista');
-        botonPista.style.marginBottom = '10px';
-
-        botonPista.onclick = () => {
-            botonPista.disabled = true;
-            const pista = document.createElement('p');
-            pista.textContent = `💡 Pista: ${acertijo.pista}`;
-            pista.style.fontStyle = 'italic';
-            pista.style.color = '#555';
-            pista.style.marginTop = '8px';
-            preguntaDiv.appendChild(pista);
-        };
-
-        preguntaDiv.appendChild(botonPista);
-    }
-
-    // Botones de respuesta
+    // Opciones de respuesta
     opciones.forEach(op => {
         const btn = document.createElement('button');
         btn.textContent = op;
+        btn.classList.add('answer-button');
         btn.onclick = () => verificarAcertijo(btn, acertijo.respuesta);
         preguntaDiv.appendChild(btn);
     });
 
     contenedor.appendChild(preguntaDiv);
+    // Contenedor para botones pista y siguiente
+    const botonesDiv = document.createElement('div');
+    botonesDiv.classList.add('botones-container');
+    botonesDiv.style.display = 'flex';
+    botonesDiv.style.justifyContent = 'center';
+    botonesDiv.style.gap = '10px';
+    botonesDiv.style.marginTop = '15px';
 
+
+    // Botón mostrar pista si existe
+    if (acertijo.pista && acertijo.pista.trim() !== '') {
+        const botonPista = document.createElement('button');
+        botonPista.textContent = 'Mostrar pista';
+        botonPista.classList.add('btn-pista');
+        botonPista.onclick = () => {
+            botonPista.disabled = true;
+            const pista = document.createElement('p');
+            pista.textContent = `💡 Pista: ${acertijo.pista}`;
+            pista.classList.add('pista-text');
+            contenedor.appendChild(pista);
+        };
+        botonesDiv.appendChild(botonPista);
+    }
+
+    // Botón siguiente
     const siguienteBtn = document.createElement('button');
     siguienteBtn.textContent = 'Siguiente';
     siguienteBtn.classList.add('btn-pista');
     siguienteBtn.onclick = siguienteAcertijo;
-    contenedor.appendChild(siguienteBtn);
+    botonesDiv.appendChild(siguienteBtn);
+
+    contenedor.appendChild(botonesDiv);
 }
+
 
 // Verifica la respuesta elegida
 function verificarAcertijo(boton, correcta) {
@@ -274,6 +302,8 @@ function siguienteAcertijo() {
     indiceAcertijo++;
     mostrarAcertijo();
 }
+
+
 //botón para alternar el modo oscuro
 const toggleBtn = document.getElementById('themeToggle');
 
@@ -289,9 +319,9 @@ function applyMode(isDarkMode) {
 }
 
 // --- Al cargar la página: Cargar la preferencia de LocalStorage ---
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const savedMode = localStorage.getItem('themeMode'); // 'dark' o 'light' o null si no hay nada
-    
+
     // Si hay un modo guardado, aplicarlo. Si no, usar el modo por defecto (claro)
     if (savedMode === 'dark') {
         applyMode(true);
@@ -302,16 +332,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // --- Al hacer clic en el botón: Cambiar modo y guardar preferencia ---
-toggleBtn.onclick = function() {
+toggleBtn.onclick = function () {
     // Alternar la clase 'dark-mode'
     document.body.classList.toggle('dark-mode');
-    
+
     // Verificar si ahora está en modo oscuro
     const isCurrentlyDarkMode = document.body.classList.contains('dark-mode');
-    
+
     // Aplicar el modo visualmente y actualizar el texto del botón
     applyMode(isCurrentlyDarkMode);
-    
+
     // Guardar la preferencia en LocalStorage
     if (isCurrentlyDarkMode) {
         localStorage.setItem('themeMode', 'dark');
