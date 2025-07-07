@@ -600,3 +600,23 @@ body.dark-mode {
     padding-top: 70px; /* ajustá esto según la altura de tu header */
   }
 }
+
+/* --- Estilos del Submenú de Juegos --- */
+.submenu {
+  max-height: 0;
+  overflow: hidden;
+  padding-left: 20px;
+  flex-direction: column;
+  gap: 8px;
+  display: flex;
+  flex-wrap: nowrap;
+  transition: max-height 0.3s ease;
+}
+
+.submenu.show {
+  max-height: 300px; /* suficiente para que se vea */
+}
+
+#toggleJuegos.active {
+  font-weight: bold;
+}

@@ -326,4 +326,47 @@ mainNav.querySelectorAll('a').forEach(link => {
     });
 });
 
+// --- Lógica del Submenú de Juegos ---
+document.getElementById('toggleJuegos').addEventListener('click', function () {
+    this.classList.toggle('active');
+    const submenu = document.getElementById('submenuJuegos');
+    submenu.classList.toggle('show');  // <- Esto es lo que falta para mostrar/ocultar el submenú
+});
 
+document.querySelectorAll('.juego-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const juegoId = link.dataset.juego;
+        const section = document.getElementById(juegoId);
+
+        const mainNav = document.getElementById('mainNav');
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+
+        // Cierra el menú hamburguesa si está abierto
+        mainNav?.classList.remove('open');
+        hamburgerBtn?.classList.remove('open');
+
+        // Cierra submenú
+        document.getElementById('toggleJuegos').classList.remove('active');
+
+        // Desplaza suavemente
+        section.scrollIntoView({ behavior: 'smooth' });
+
+        // Abre el acordeón después del scroll
+        setTimeout(() => {
+            // Cierra todos los demás
+            document.querySelectorAll('.accordion-content.active').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Abre el acordeón correspondiente
+            const content = section.querySelector('.accordion-content');
+            content?.classList.add('active');
+
+            // Ejecuta la lógica del juego si aplica
+            if (juegoId === 'juegoTrivia') loadTriviaQuestions();
+            if (juegoId === 'juegoAcertijos') cargarAcertijos();
+        }, 400);
+    });
+});

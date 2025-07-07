@@ -11,8 +11,8 @@
 
 
 <body>
-<header class="main-header">
-  <h1 id="inicio">Mini juegos🥱</h1>
+<header id="inicio" class="main-header">
+  <h1>Mini juegos🥱</h1>
 
   <button id="hamburgerBtn" class="hamburger-icon">
     <span class="bar"></span>
@@ -23,46 +23,48 @@
   <nav id="mainNav" class="main-nav">
     <ul>
       <li><a href="#inicio">Inicio</a></li>
-      <li><a href="#juegoAcertijos">Juegos</a></li>
-      <li><a href="#">Contacto</a></li>
-      <!-- Icono de cambio de tema pue -->
+      <li>
+        <button id="toggleJuegos" class="theme-icon">Juegos ▾</button>
+        <ul id="submenuJuegos" class="submenu">
+          <li><a href="#juegoTrivia" class="juego-link" data-juego="juegoTrivia">Juego de Trivia</a></li>
+          <li><a href="#juegoAcertijos" class="juego-link" data-juego="juegoAcertijos">Juego de Acertijo</a></li>
+        </ul>
+      </li>
+      <li><a href="#contacto">Contacto</a></li>
       <li><button id="themeToggle" class="theme-icon">🌓</button></li>
     </ul>
   </nav>
 </header>
 
 
+
   <p>En este sitio encontrarás unos pequeños mini-juegos (chotos). Aún no sé si también se agregara otras
     cosas 😝.
   </p>
 
-  <div class="
-  ">
-
-
-  </div>
-
-  <div class="accordion-item" id="juegoTrivia">
-    <button class="accordion-header"> Juego de Trivia</button>
-    <div class="accordion-content">
-      <div id="trivia">
-        <p>Cargando pregunta...</p>
+  <div id="juegos">
+    <div class="accordion-item" id="juegoTrivia">
+      <button class="accordion-header"> Juego de Trivia</button>
+      <div class="accordion-content">
+        <div id="trivia">
+          <p>Cargando pregunta...</p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="accordion-item" id="juegoAcertijos">
-    <button class="accordion-header"> Juego de Acertijo</button>
-    <div class="accordion-content">
-      <div id="acertijos">
-        <p>Cargando acertijo...</p>
-      </div>
+    <div class="accordion-item" id="juegoAcertijos">
+      <button class="accordion-header"> Juego de Acertijo</button>
+      <div class="accordion-content">
+        <div id="acertijos">
+          <p>Cargando acertijo...</p>
+        </div>
 
-    </div> <!-- Cierra #acertijos -->
-  </div> <!-- Cierra .accordion-content -->
+      </div> <!-- Cierra #acertijos -->
+    </div> <!-- Cierra .accordion-content -->
   </div> <!-- Cierra .accordion-item -->
+  </div><!-- Cierra #juegos -->
 
-  <footer>
+  <footer id="contacto">
     <p>Desarrollado por <a href="https://instagram.com/alegreariel666" target="_blank">Ariel</a> 🤫</p>
   </footer>
   <script src="/js/main.js"></script>
