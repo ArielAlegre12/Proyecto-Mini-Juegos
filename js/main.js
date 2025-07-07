@@ -218,6 +218,7 @@ function mostrarAcertijo() {
 
     const siguienteBtn = document.createElement('button');
     siguienteBtn.textContent = 'Siguiente';
+    siguienteBtn.classList.add('btn-pista');
     siguienteBtn.onclick = siguienteAcertijo;
     contenedor.appendChild(siguienteBtn);
 }
