@@ -80,6 +80,23 @@ function displayTriviaQuestion() {
         questionElement.textContent = q.question;
         triviaDiv.appendChild(questionElement);
 
+        // Mostrar botón de pista si existe
+        if (q.pista && q.pista.trim() !== '') {
+            const botonPista = document.createElement('button');
+            botonPista.textContent = 'Mostrar pista';
+            botonPista.style.marginBottom = '10px';
+            botonPista.onclick = () => {
+                botonPista.disabled = true;
+                const pista = document.createElement('p');
+                pista.textContent = `💡 Pista: ${q.pista}`;
+                pista.style.fontStyle = 'italic';
+                pista.style.color = '#555';
+                pista.style.marginTop = '8px';
+                triviaDiv.appendChild(pista);
+            };
+            triviaDiv.appendChild(botonPista);
+        }
+
         const opciones = [...q.incorrect_answers, q.correct_answer];
         shuffleArray(opciones);
 
@@ -110,6 +127,7 @@ function displayTriviaQuestion() {
     }
 }
 
+
 function checkTriviaAnswer(selectedButton, selectedAnswer, correctAnswer) {
     const buttons = document.querySelectorAll('#trivia .trivia-answer-button');
     buttons.forEach(btn => btn.disabled = true);
@@ -138,6 +156,8 @@ function moveToNextTriviaQuestion() {
     currentTriviaQuestionIndex++;
     displayTriviaQuestion();
 }
+
+// === JUEGO DE acertijos ===
 
 let acertijos = [];
 let indiceAcertijo = 0;
