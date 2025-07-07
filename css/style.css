@@ -2,7 +2,12 @@ body {
   font-family: Arial, sans-serif;
   text-align: center;
   margin: 50px 10px 0;
-  background-color: #f9f9f9;
+  background-color:  #e3f2fd;
+}
+
+.accordion-item,
+.accordion-content {
+  background: #e3f2fd;
 }
 
 .container {
