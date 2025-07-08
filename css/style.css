@@ -648,16 +648,33 @@ body.dark-mode .pista-text {
   /* left: 0; */ /* Ya en header-nav.css (pero luego a -100%) */
   width: 250px; /* Ancho específico para el menú hamburguesa */
   /* height: calc(100% - 60px); */ /* Ya en header-nav.css */
-  background-color: #222; /* Fondo del menú hamburguesa */
+  background-color: hsl(0, 100%, 100%); /* Fondo del menú hamburguesa */
   /* overflow-y: auto; */ /* Ya en header-nav.css */
   transform: translateX(-260px); /* Oculto por defecto */
   /* transition: transform 0.3s ease; */ /* Ya en header-nav.css */
   /* z-index: 1000; */ /* Ya en header-nav.css */
 }
 
+.main-nav .menu-link {
+  display: block;
+  width: 100%;
+  padding: 15px 20px;
+  font-size: 1.1em;
+  text-align: left;
+  border: none;
+  background: none;
+  color: #333;
+  cursor: pointer;
+}
+
+body.dark-mode .main-nav .menu-link {
+  color: #fff;
+}
+
 .main-nav.open {
   transform: translateX(0);
 }
+
 
 .main-nav ul {
   list-style: none;
@@ -672,7 +689,7 @@ body.dark-mode .pista-text {
 .main-nav a {
   display: block;
   padding: 12px 20px;
-  color: white;
+  color: black;
 }
 
 /* Botón hamburguesa */
