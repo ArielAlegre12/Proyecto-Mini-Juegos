@@ -1,5 +1,4 @@
-/* --- Contenido de global.css --- */
-body {
+body{
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
@@ -123,14 +122,6 @@ button.btn-pista:hover {
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: white;
-  color: #333;
-  text-align: center;
-}
 
 a {
   text-decoration: none;
@@ -146,6 +137,13 @@ a {
   background-color: #f8f8f8;
   border-bottom: 1px solid #eee;
   position: relative;
+  /* CAMBIOS CLAVE AQUI */
+  position: fixed; /* Esto lo fija en la pantalla */
+  top: 0;          /* Lo pega a la parte superior */
+  left: 0;         /* Lo pega a la parte izquierda */
+  width: 100%;     /* Asegura que ocupe todo el ancho */
+  z-index: 1000;   /* Asegura que esté por encima de otros contenidos */
+  /* FIN DE CAMBIOS CLAVE */
   color: #333;
 }
 
@@ -156,33 +154,31 @@ a {
 }
 
 /* --- MENÚ HAMBURGUESA (solo móvil, se sobrescribe en responsive.css) --- */
+
 .hamburger-icon {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 24px;
-  height: 20px;
-  padding: 0;
-  margin: 0;
+  position: relative;
+  right: -100px; /* Ajusta según el diseño */
+  top: 50%; /* para centrar verticalmente */
+  transform: translateY(-50%);
   background: none;
   border: none;
   cursor: pointer;
+  padding: 0;
   z-index: 1001;
 }
+
 .hamburger-icon .bar {
-  height: 3px;
-  width: 100%;
-  margin: 3px 0;
+  display: block;
+  width: 25px;
   background-color: #333;
-  transition: 0.3s;
-  border-radius: 2px;
+  margin: 5px 0;
+  transition: all 0.3s ease;
 }
+
 body.dark-mode .hamburger-icon .bar {
-  background-color: #eee;
+  background-color: #f0f0f0;
 }
 
-
-/* Animación del ícono de hamburguesa */
 .hamburger-icon.open .bar:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
 }
@@ -194,6 +190,7 @@ body.dark-mode .hamburger-icon .bar {
 .hamburger-icon.open .bar:nth-child(3) {
   transform: translateY(-8px) rotate(-45deg);
 }
+
 
 /* Menú principal (sidebar para móvil, se sobrescribe en responsive.css) */
 .main-nav {
@@ -492,58 +489,6 @@ body:not(.dark-mode) #acertijos button.incorrect {
   color: white;
 }
 
-/* --- Contenido de header-nav.css --- */
-.main-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 20px;
-  background-color: #f8f8f8;
-  position: relative;
-  border-bottom: 1px solid #eee;
-  color: #333;
-}
-
-.main-header h1 {
-  margin: 0;
-  font-size: 1.8em;
-}
-
-.hamburger-icon {
-  display: block;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 10px;
-  width: auto;
-  height: auto;
-  z-index: 1001;
-}
-
-.hamburger-icon .bar {
-  display: block;
-  width: 25px;
-  height: 3px;
-  background-color: #333;
-  margin: 5px 0;
-  transition: all 0.3s ease;
-}
-
-body.dark-mode .hamburger-icon .bar {
-  background-color: #f0f0f0;
-}
-
-.hamburger-icon.open .bar:nth-child(1) {
-  transform: translateY(8px) rotate(45deg);
-}
-
-.hamburger-icon.open .bar:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger-icon.open .bar:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg);
-}
 
 .main-nav {
   position: fixed;
@@ -694,23 +639,8 @@ body.dark-mode .pista-text {
   display: block;
 }
 
-/* --- Contenido de menuHamburguesa.css --- */
-/* menu.css */
 
-/* Header y navegación (Ya cubierto por header-nav.css y style.css, pero se mantienen para posibles overrides) */
-.main-header {
-  /* display: flex; */ /* Ya en header-nav.css */
-  /* align-items: center; */ /* Ya en header-nav.css */
-  /* padding: 15px 20px; */ /* Ya en header-nav.css */
-  background-color: #333; /* Override si se carga después de header-nav.css */
-  color: white; /* Override si se carga después de header-nav.css */
-  /* position: relative; */ /* Ya en header-nav.css */
-}
 
-.main-header h1 {
-  /* font-size: 1.8rem; */ /* Ya en header-nav.css */
-  flex-grow: 1;
-}
 
 .main-nav {
   /* position: fixed; */ /* Ya en header-nav.css */
@@ -757,7 +687,7 @@ body.dark-mode .pista-text {
 
 .hamburger-icon .bar {
   height: 4px;
-  background-color: white;
+  background-color: black;
   border-radius: 2px;
   transition: 0.3s;
 }
