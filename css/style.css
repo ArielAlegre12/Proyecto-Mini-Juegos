@@ -1015,3 +1015,69 @@ body.dark-mode .btn-pista:hover:not(:disabled) {
     /* Asegúrate de que no se superponga con el icono de hamburguesa si ambos están visibles */
   }
 }
+
+/* ---estilo posible formulario --- */
+.menu-login {
+  position: relative;
+}
+
+.login-panel {
+  display: none;
+  position: absolute;
+  right: 0;
+  background: var(--color-fondo, #fff);
+  border: 1px solid #ccc;
+  padding: 1rem;
+  z-index: 100;
+  width: 220px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.login-panel input,
+.login-panel button {
+  display: block;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.mensaje-login {
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+/* Submenú de login (igual al de juegos) */
+#submenuLogin {
+  display: none !important;
+  flex-direction: column;
+  position: static !important;
+  height: auto !important;
+  background: none !important;
+  box-shadow: none !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  padding-left: 20px;
+  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+#submenuLogin.show {
+  max-height: 500px !important;
+  opacity: 1 !important;
+  display: flex !important;
+}
+
+#submenuLogin li {
+  list-style: none;
+  border: none;
+  padding: 8px 0;
+}
+
+.inline-form input,
+.inline-form button {
+  display: block;
+  margin: 5px 0;
+  width: 100%;
+}
+
+.mensaje-login {
+  font-size: 14px;
+  color: green;
+}

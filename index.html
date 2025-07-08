@@ -34,6 +34,30 @@
           </ul>
         </li>
         <li><a href="#contacto">Contacto</a></li>
+        <li>
+          <button id="toggleLogin" class="menu-link">Entrar ▾</button>
+          <ul id="submenuLogin" class="submenu">
+            <li>
+              <form id="formLoginInline" class="inline-form">
+                <input type="text" id="loginNombreInline" placeholder="Usuario" required />
+                <input type="password" id="loginClaveInline" placeholder="Contraseña" required />
+                <button type="submit">Iniciar sesión</button>
+              </form>
+            </li>
+            <li>
+              <form id="formRegistroInline" class="inline-form">
+                <input type="text" id="registroNombreInline" placeholder="Nuevo usuario" required />
+                <input type="password" id="registroClaveInline" placeholder="Contraseña" required />
+                <button type="submit">Registrarse</button>
+              </form>
+            </li>
+            <li>
+              <div id="mensajeLoginInline" class="mensaje-login"></div>
+            </li>
+          </ul>
+        </li>
+
+
         <li><button id="themeToggle" class="theme-icon">🌓</button></li>
       </ul>
 
@@ -65,12 +89,13 @@
       </div>
     </div>
   </div>
+  
 
   <footer id="contacto">
     <p>Desarrollado por <a href="https://instagram.com/alegreariel666" target="_blank">Ariel</a> 🤫</p>
   </footer>
   <script type="module" src="js/main.js"></script>
-
+  <script src="/js/authInline.js"></script>
 
 
 

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ranking - Registro e Inicio de Sesión</title>
+<link rel="stylesheet" href="/css/ranking.css" />
+</head>
+<body>
+
+<div class="container">
+
+  <h2>Registro</h2>
+  <form id="formRegistroRanking">
+    <input type="text" id="regNombreRanking" placeholder="Nombre de usuario" required />
+    <input type="password" id="regClaveRanking" placeholder="Contraseña" required />
+    <button type="submit">Registrar</button>
+  </form>
+  <div id="mensajeRegistro" style="color: green; margin-top: 10px;"></div>
+
+
+  <hr />
+
+  <h2>Inicio de Sesión</h2>
+  <form id="formLoginRanking">
+    <input type="text" id="logNombreRanking" placeholder="Nombre de usuario" required />
+    <input type="password" id="logClaveRanking" placeholder="Contraseña" required />
+    <button type="submit">Ingresar</button>
+  </form>
+  <div id="mensajeLogin" style="color: green; margin-top: 10px;"></div>
+
+
+  <hr />
+
+  <div id="bienvenidaRanking" style="display:none;">
+    <h3>Bienvenido, <span id="usuarioActualRanking"></span></h3>
+    <button id="btnCerrarSesionRanking">Cerrar sesión</button>
+  </div>
+
+</div>
+
+<script src="/js/rankingUsuarios.js"></script>
+<script src="/js/rankingMain.js"></script>
+
+</body>
+</html>

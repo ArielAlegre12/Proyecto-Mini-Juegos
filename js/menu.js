@@ -29,6 +29,20 @@ export function setupMenu() {
     const submenu = document.getElementById('submenuJuegos');
     submenu.classList.toggle('show');
   });
+   
+  // Toggle submenú login 
+  const toggleLoginBtn = document.getElementById("toggleLogin");
+  const submenuLogin = document.getElementById("submenuLogin");
+  if (toggleLoginBtn && submenuLogin) {
+    toggleLoginBtn.addEventListener("click", () => {
+      submenuLogin.classList.toggle("show");
+    });
+    document.getElementById("toggleLogin").addEventListener("click", () => {
+  const submenu = document.getElementById("submenuLogin");
+  submenu.classList.toggle("show");
+});
+
+  }
 
   // Click en juego - cierra menú y submenú, hace scroll y abre acordeón
   document.querySelectorAll('.juego-link').forEach(link => {
