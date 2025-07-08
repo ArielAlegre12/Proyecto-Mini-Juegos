@@ -133,7 +133,7 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
+  padding: 0px 20px;
   background-color: #f8f8f8;
   border-bottom: 1px solid #eee;
   position: relative;
@@ -157,8 +157,8 @@ a {
 
 .hamburger-icon {
   position: relative;
-  right: -100px; /* Ajusta según el diseño */
-  top: 50%; /* para centrar verticalmente */
+  right: -100px; /* DEJAR ASI, sólo dios sabe como funcionó*/
+  top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;
