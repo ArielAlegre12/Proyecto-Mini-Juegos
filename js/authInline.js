@@ -1,3 +1,6 @@
+// URL base del backend (cambiá esta IP cuando necesites)
+const API_URL = "http://192.168.100.234:3000";
+
 // Elementos
 const toggleLoginBtn = document.getElementById("toggleLogin");
 const submenuLogin = document.getElementById("submenuLogin");
@@ -31,7 +34,7 @@ formLogin.addEventListener("submit", async e => {
   const clave = document.getElementById("loginClaveInline").value.trim();
 
   try {
-    const res = await fetch("http://localhost:3000/login", {
+    const res = await fetch(`${API_URL}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: nombre, password: clave }),
@@ -62,7 +65,7 @@ formRegistro.addEventListener("submit", async e => {
   const clave = document.getElementById("registroClaveInline").value.trim();
 
   try {
-    const res = await fetch("http://localhost:3000/register", {
+    const res = await fetch(`${API_URL}/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: nombre, password: clave }),
