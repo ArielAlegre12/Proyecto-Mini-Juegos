@@ -1,39 +1,471 @@
 <!DOCTYPE html>
-<html lang="es-ES">
-
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini Juegos - 404 DRA TEAM</title>
+  <meta charset="UTF-8" />
+  <title>Juego Metalero con guitarra</title>
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
+      font-family: 'Arial Black', Arial, sans-serif;
+      user-select: none;
+      position: relative;
+    }
+    #infoText {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-family: sans-serif;
+      font-size: 16px;
+      user-select: none;
+      z-index: 10;
+    }
+    #score {
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-family: monospace, sans-serif;
+      font-size: 18px;
+      user-select: none;
+      z-index: 10;
+    }
+    canvas {
+      background: #222;
+      border: 2px solid #555;
+      display: block;
+    }
+    #pauseMenu {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.85);
+      color: white;
+      padding: 20px 40px;
+      font-size: 2rem;
+      text-align: center;
+      border-radius: 10px;
+      display: none;
+      z-index: 20;
+      user-select: none;
+    }
+    #pauseMenu button {
+      margin-top: 20px;
+      font-size: 1rem;
+      padding: 10px 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background: #55a;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+    #pauseMenu button:hover {
+      background: #77c;
+    }
+  </style>
 </head>
-
 <body>
-    <header>
-        <nav>
-            <a href="">INICIO</a>
-            <a href="">CATEGORIAS</a>
-            <a href="">REDES</a>
-        </nav>
-    </header>
+  <div id="infoText">Presioná <b>P</b> para pausar</div>
+  <div id="score">Puntaje: 0</div>
+  <canvas id="game" width="500" height="400"></canvas>
+  <div id="pauseMenu">
+    <div id="pauseText">PAUSA</div>
+    <button id="resumeBtn">Reanudar</button>
+  </div>
 
-    <body>
-        <h1>JUEGOS</h1>
-        <p>Bienvenido a la sección de mini juegos. Aquí encontrarás una variedad de juegos para disfrutar.</p>
-        <h2>Lista de Juegos</h2>
-        <ul>
-            <li><a href="">juego1</a></li>
-            <li><a href="">juego2</a></li>
-            <li><a href="">juego3</a></li>
-            <li><a href="">juegon</a></li>
-        </ul>
-        <!-- los botones contienn cada juego -->
-        <div>
-            <button>❓ Juego de Trivia</button>
-        </div>
-        <div>
-            <button>🧩 Juego de Acertijos</button>
-        </div>
-    </body>
-    <footer></footer>
+  <script>
+    const canvas = document.getElementById('game');
+    const ctx = canvas.getContext('2d');
+    const pauseMenu = document.getElementById('pauseMenu');
+    const resumeBtn = document.getElementById('resumeBtn');
+    const scoreDisplay = document.getElementById('score');
+    const pauseText = document.getElementById('pauseText');
 
+    const player = {
+      x: canvas.width / 2,
+      y: canvas.height - 100,
+      speed: 5,
+      shooting: false,
+      shootingTimer: 0,
+      headYoffset: 0,
+      headDirection: 1,
+      armAngle: 0,
+      armDir: 1,
+      emotion: 'normal',
+      emotionTimer: 0
+    };
+
+    const keys = {
+      left: false,
+      right: false,
+      space: false
+    };
+
+    const bullets = [];
+    const enemies = [];
+    let gamePaused = false;
+    let gameOver = false;
+
+    let score = 0;
+    const fireRate = 200;
+    let lastShotTime = 0;
+
+    let enemyInterval = setInterval(spawnEnemy, 1200);
+
+    function spawnEnemy() {
+      const enemySize = 30;
+      enemies.push({
+        x: Math.random() * (canvas.width - enemySize),
+        y: -enemySize,
+        width: enemySize,
+        height: enemySize,
+        speed: 2 + Math.random() * 2,
+        color: 'red'
+      });
+    }
+
+    window.addEventListener('keydown', e => {
+      if (e.repeat) return;
+      if (e.key === 'ArrowLeft') keys.left = true;
+      if (e.key === 'ArrowRight') keys.right = true;
+      if (e.key === ' ') keys.space = true;
+      if (e.key.toLowerCase() === 'p' && !gameOver) togglePause();
+      if (e.key.toLowerCase() === 'r' && gameOver) restartGame();
+    });
+
+    window.addEventListener('keyup', e => {
+      if (e.key === 'ArrowLeft') keys.left = false;
+      if (e.key === 'ArrowRight') keys.right = false;
+      if (e.key === ' ') keys.space = false;
+    });
+
+    function shoot() {
+      bullets.push({
+        x: player.x + 25,
+        y: player.y - 40,
+        width: 10,
+        height: 20,
+        speed: 7,
+        color: 'yellow'
+      });
+      player.shooting = true;
+      player.shootingTimer = 10;
+      player.emotion = 'happy';
+      player.emotionTimer = 30;
+    }
+
+    function togglePause() {
+      if (gameOver) return;
+      gamePaused = !gamePaused;
+      if (gamePaused) {
+        pauseText.textContent = 'PAUSA';
+        pauseMenu.style.display = 'block';
+        clearInterval(enemyInterval);
+      } else {
+        pauseMenu.style.display = 'none';
+        enemyInterval = setInterval(spawnEnemy, 1200);
+        loop();
+      }
+    }
+
+    resumeBtn.addEventListener('click', () => {
+      if (gamePaused) togglePause();
+    });
+
+    function endGame() {
+      gameOver = true;
+      gamePaused = true;
+      pauseText.innerHTML = `GAME OVER<br>Puntaje final: ${score}<br>Presioná R para reiniciar`;
+      pauseMenu.style.display = 'block';
+      clearInterval(enemyInterval);
+      player.emotion = 'sad';
+      player.emotionTimer = Infinity;
+    }
+
+    function restartGame() {
+      score = 0;
+      scoreDisplay.textContent = `Puntaje: ${score}`;
+      bullets.length = 0;
+      enemies.length = 0;
+      player.x = canvas.width / 2;
+      gameOver = false;
+      gamePaused = false;
+      pauseMenu.style.display = 'none';
+      player.emotion = 'normal';
+      player.emotionTimer = 0;
+      enemyInterval = setInterval(spawnEnemy, 1200);
+      loop();
+    }
+
+    function update() {
+      if (gamePaused) return;
+
+      const now = Date.now();
+
+      if (keys.left && player.x - 25 > 0) player.x -= player.speed;
+      if (keys.right && player.x + 25 < canvas.width) player.x += player.speed;
+
+      // Cabeza respira
+      player.headYoffset += player.headDirection * 0.3;
+      if (player.headYoffset > 5) player.headDirection = -1;
+      if (player.headYoffset < 0) player.headDirection = 1;
+
+      // Brazo derecho se mueve (oscila) y cambia si dispara
+      if (player.shooting) {
+        player.armAngle = 0.3;
+      } else {
+        player.armAngle += player.armDir * 0.05;
+        if (player.armAngle > 0.2 || player.armAngle < -0.2) player.armDir *= -1;
+      }
+
+      if (keys.space && now - lastShotTime > fireRate) {
+        shoot();
+        lastShotTime = now;
+      }
+
+      if (player.shootingTimer > 0) player.shootingTimer--;
+      else player.shooting = false;
+
+      if (player.emotionTimer > 0) {
+        player.emotionTimer--;
+        if (player.emotionTimer === 0 && !gameOver) player.emotion = 'normal';
+      }
+
+      for (let i = bullets.length - 1; i >= 0; i--) {
+        bullets[i].y -= bullets[i].speed;
+        if (bullets[i].y + bullets[i].height < 0) bullets.splice(i, 1);
+      }
+
+      for (let i = enemies.length - 1; i >= 0; i--) {
+        enemies[i].y += enemies[i].speed;
+        if (enemies[i].y > canvas.height) enemies.splice(i, 1);
+      }
+
+      for (let i = enemies.length - 1; i >= 0; i--) {
+        const e = enemies[i];
+        if (
+          e.x < player.x + 25 &&
+          e.x + e.width > player.x - 25 &&
+          e.y < player.y + 60 &&
+          e.y + e.height > player.y - 40
+        ) {
+          endGame();
+          return;
+        }
+      }
+
+      for (let i = enemies.length - 1; i >= 0; i--) {
+        const enemy = enemies[i];
+        for (let j = bullets.length - 1; j >= 0; j--) {
+          const bullet = bullets[j];
+          if (
+            bullet.x < enemy.x + enemy.width &&
+            bullet.x + bullet.width > enemy.x &&
+            bullet.y < enemy.y + enemy.height &&
+            bullet.y + bullet.height > enemy.y
+          ) {
+            enemies.splice(i, 1);
+            bullets.splice(j, 1);
+            score++;
+            scoreDisplay.textContent = `Puntaje: ${score}`;
+            break;
+          }
+        }
+      }
+    }
+
+    function drawPlayer(x, y, shooting, headOffset, armAngle, emotion) {
+      ctx.save();
+      ctx.translate(x, y);
+
+      // Pelo largo estilo metalero (líneas negras detrás de cabeza)
+      ctx.strokeStyle = '#111';
+      ctx.lineWidth = 4;
+      for(let i = -30; i <= 30; i += 10){
+        ctx.beginPath();
+        ctx.moveTo(i, -10 + headOffset);
+        ctx.lineTo(i, 30 + headOffset);
+        ctx.stroke();
+      }
+
+      // Cuerpo camiseta negra
+      ctx.fillStyle = '#111';
+      ctx.beginPath();
+      ctx.ellipse(0, 20, 22, 32, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Cinturón gris
+      ctx.fillStyle = '#666';
+      ctx.fillRect(-22, 40, 44, 10);
+
+      // Pantalones oscuros
+      ctx.fillStyle = '#222';
+      ctx.fillRect(-22, 50, 44, 30);
+
+      // Botas negras
+      ctx.fillStyle = '#000';
+      ctx.beginPath();
+      ctx.ellipse(-12, 85, 10, 6, 0, 0, Math.PI * 2);
+      ctx.ellipse(12, 85, 10, 6, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Cuello (piel clara)
+      ctx.fillStyle = '#f0c89e';
+      ctx.fillRect(-5, -10, 10, 10);
+
+      // Cabeza piel clara
+      ctx.beginPath();
+      ctx.fillStyle = '#f0c89e';
+      ctx.arc(0, -20 + headOffset, 15, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Sombrero gorra rocker
+      ctx.fillStyle = '#222';
+      ctx.beginPath();
+      ctx.ellipse(0, -50 + headOffset, 30, 15, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#444';
+      ctx.fillRect(-30, -50 + headOffset, 60, 8);
+
+      // Ojos (según emoción)
+      ctx.fillStyle = 'black';
+      if (emotion === 'normal') {
+        ctx.beginPath();
+        ctx.arc(-5, -23 + headOffset, 3, 0, Math.PI * 2);
+        ctx.arc(5, -23 + headOffset, 3, 0, Math.PI * 2);
+        ctx.fill();
+      } else if (emotion === 'happy') {
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(-5, -22 + headOffset, 4, 0, Math.PI, false);
+        ctx.arc(5, -22 + headOffset, 4, 0, Math.PI, false);
+        ctx.stroke();
+      } else if (emotion === 'sad') {
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(-9, -25 + headOffset);
+        ctx.lineTo(-1, -20 + headOffset);
+        ctx.moveTo(9, -25 + headOffset);
+        ctx.lineTo(1, -20 + headOffset);
+        ctx.stroke();
+      }
+
+      // Boca (según emoción)
+      ctx.strokeStyle = 'black';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      if (emotion === 'normal') {
+        ctx.moveTo(-5, -10 + headOffset);
+        ctx.lineTo(5, -10 + headOffset);
+      } else if (emotion === 'happy') {
+        ctx.arc(0, -10 + headOffset, 6, 0, Math.PI, false);
+      } else if (emotion === 'sad') {
+        ctx.moveTo(-5, -5 + headOffset);
+        ctx.lineTo(5, -15 + headOffset);
+      }
+      ctx.stroke();
+
+      // Pulseras (líneas en brazos)
+      ctx.strokeStyle = '#555';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(-30, 5);
+      ctx.lineTo(-15, 5);
+      ctx.moveTo(-30, 15);
+      ctx.lineTo(-15, 15);
+      ctx.stroke();
+
+      // Brazo izquierdo (estático, piel clara)
+      ctx.fillStyle = '#f0c89e';
+      ctx.beginPath();
+      ctx.ellipse(-30, 10, 7, 20, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Mano izquierda
+      ctx.beginPath();
+      ctx.arc(-30, 30, 7, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Brazo derecho guitarra (se mueve y cambia color si dispara)
+      ctx.save();
+      ctx.translate(25, 10);
+      ctx.rotate(armAngle);
+
+      // Mástil de la guitarra
+      ctx.fillStyle = shooting ? '#ff0' : '#440000';
+      ctx.fillRect(-5, -90, 10, 60);
+
+      // Cuerpo guitarra (base)
+      ctx.fillStyle = shooting ? '#ffa500' : '#770000';
+      ctx.beginPath();
+      ctx.moveTo(-8, -25);
+      ctx.lineTo(7, -40);
+      ctx.lineTo(15, 20);
+      ctx.lineTo(-20, 20);
+      ctx.closePath();
+      ctx.fill();
+
+      // Botones de la guitarra
+      ctx.fillStyle = 'black';
+      for (let i = -15; i < 20; i += 15) {
+        ctx.beginPath();
+        ctx.arc(i, -20, 3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Mano derecha (piel clara)
+      ctx.fillStyle = '#f0c89e';
+      ctx.beginPath();
+      ctx.arc(0, 20, 7, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+
+      ctx.restore();
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      drawPlayer(
+        player.x,
+        player.y,
+        player.shooting,
+        player.headYoffset,
+        player.armAngle,
+        player.emotion
+      );
+
+      bullets.forEach(bullet => {
+        ctx.fillStyle = bullet.color;
+        ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+      });
+
+      enemies.forEach(enemy => {
+        ctx.fillStyle = enemy.color;
+        ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+      });
+    }
+
+    function loop() {
+      if (!gamePaused) {
+        update();
+        draw();
+        requestAnimationFrame(loop);
+      }
+    }
+
+    loop();
+  </script>
+</body>
 </html>
