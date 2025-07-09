@@ -1,5 +1,6 @@
 // URL base del backend (cambiá esta IP cuando necesites)
-const API_URL = "http://192.168.100.234:3000";
+const API_URL = "http://3.144.234.10:3000";
+
 
 // Elementos
 const toggleLoginBtn = document.getElementById("toggleLogin");
