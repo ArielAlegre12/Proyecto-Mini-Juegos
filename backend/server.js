@@ -44,7 +44,11 @@ app.post('/login', (req, res) => {
   res.json({ message: 'Login exitoso', username });
 });
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+app.get('/', (req, res) => {
+  res.send('Servidor backend funcionando correctamente');
 });
 
+
+app.listen(3000, '0.0.0.0', () => {
+  console.log('Servidor corriendo en http://0.0.0.0:3000');
+});
