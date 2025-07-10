@@ -1,450 +1,74 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Metalero: Versión corregida</title>
-<style>
-  body { margin:0;background:#111;color:white;font-family:sans-serif;
-        user-select:none;overflow:hidden;
-        display:flex;flex-direction:column;align-items:center;
-        padding:10px;box-sizing:border-box; }
-  a { color:#a22;text-decoration:none;font-weight:bold; }
-  #backLink { margin-bottom:10px; }
-  #instructions { font-size:14px;background:rgba(0,0,0,0.6);
-                  padding:8px 15px;border-radius:8px;text-align:center;
-                  margin-bottom:10px;line-height:1.3; }
-  canvas { background:#222;border:2px solid #555;
-           max-width:100vw;width:100%;max-height:60vh;
-           border-radius:10px;box-shadow:0 0 15px #a22;
-           touch-action:none; }
-  #score { font-family:monospace;font-size:22px;background:rgba(0,0,0,0.6);
-           padding:8px 0;border-radius:10px;width:100%;
-           max-width:600px;text-align:center;margin-top:12px;
-           box-shadow:0 0 10px #700; }
-  #pauseOverlay { position:fixed;top:0;left:0;width:100vw;height:100vh;
-                  background:rgba(0,0,0,0.85);display:flex;
-                  flex-direction:column;justify-content:center;
-                  align-items:center;font-size:28px;
-                  visibility:hidden;z-index:100;text-align:center;
-                  padding:20px;box-sizing:border-box; }
-  #resumeBtn { margin-top:25px;padding:12px 30px;background:#a22;
-               border:none;color:white;font-size:20px;
-               cursor:pointer;border-radius:8px;
-               box-shadow:0 0 15px #a22; }
-  #resumeBtn:hover { background:#d33; }
-  #btnPauseMobile { position:fixed;top:10px;right:10px;
-                    background:#a22;width:50px;height:50px;
-                    border-radius:10px;font-size:28px;
-                    line-height:50px;text-align:center;
-                    z-index:30;box-shadow:0 0 10px #700;
-                    cursor:pointer; }
-  #btnPauseMobile:active { background:#d33;box-shadow:0 0 15px #d33; }
-  .joystickContainer { position:fixed;bottom:20px;
-                       width:180px;height:180px;background:#444;
-                       border-radius:50%;opacity:0.65;touch-action:none;
-                       user-select:none;z-index:25;
-                       box-shadow:0 0 20px #a22; }
-  .joystickStick { width:90px;height:90px;background:#a22;
-                    border-radius:50%;position:absolute;
-                    left:45px;top:45px;box-shadow:0 0 15px #700;
-                    touch-action:none; }
-  #joystickMove { left:15px; }
-  #joystickAim { right:15px; }
-  @media (max-width:450px){
-    .joystickContainer { width:140px;height:140px; }
-    .joystickStick { width:70px;height:70px;left:35px;top:35px; }
-    #btnPauseMobile { width:44px;height:44px;font-size:24px;
-                      line-height:44px;top:8px;right:8px; }
-    #instructions { font-size:12px;padding:6px 10px; }
-    #score { font-size:18px;padding:6px 0; }
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>Metalero - Juego Completo</title>
+  <link rel="stylesheet" href="/css/style_juego_disparo.css" />
 </head>
 <body>
 
-<div id="backLink"><a href="/index.html">Volver al inicio</a></div>
-<div id="instructions">
-  Usa joystick izquierdo para mover • joystick derecho para apuntar y disparar<br>
-  P para pausar/reanudar • Power-ups morados aumentan balas por 10 s
-</div>
+  <div id="backLink"><a href="/index.html">Volver al inicio</a></div>
+  <div id="instructions">
+    Usa joystick izquierdo para mover • joystick derecho para apuntar/disparar<br />
+    A/D o flechas para mover en PC • P o ⏸ para pausar/reanudar<br />
+    Power-ups morados aumentan balas durante 10 s
+  </div>
 
-<canvas id="game" width="600" height="400"></canvas>
-<div id="score">Puntaje: 0</div>
+  <canvas id="game" width="600" height="400"></canvas>
+  <div id="score">Puntaje: 0</div>
 
-<div id="pauseOverlay"><div id="pauseText">Juego en pausa</div>
-  <button id="resumeBtn">Reanudar</button>
-</div>
-<div id="btnPauseMobile" title="Pausar">⏸</div>
+  <div id="pauseOverlay">
+    <div id="pauseText">Juego en pausa</div>
+    <button id="resumeBtn">Reanudar</button>
+  </div>
 
-<div id="joystickMove" class="joystickContainer">
-  <div class="joystickStick"></div>
-</div>
-<div id="joystickAim" class="joystickContainer">
-  <div class="joystickStick"></div>
-</div>
+  <div id="btnPauseMobile" title="Pausar">⏸</div>
 
-<script>
-document.addEventListener('DOMContentLoaded', ()=>{
+  <div id="joystickMove" class="joystickContainer">
+    <div class="joystickStick"></div>
+  </div>
+  <div id="joystickAim" class="joystickContainer">
+    <div class="joystickStick"></div>
+  </div>
 
-  /*** Variables básicas ***/
-  const canvas = document.getElementById('game'),
-        ctx = canvas.getContext('2d');
+  <script src="game.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>Metalero - Juego Completo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
 
-  let player = { x:canvas.width/2, y:canvas.height-60, speed:5, vx:0 },
-      pointer = { x:canvas.width/2, y:canvas.height/2, down:false },
-      keys = { left:false, right:false },
-      bullets = [], enemies = [], powerUps = [],
-      score = 0, lastShot = 0, fireRate = 200,
-      gamePaused = false, gameOver = false,
-      powerUpActive = false, powerUpTimeout = null,
-      spawnInterval = null, animId = null,
-      moveTouchId = null, aimTouchId = null,
-      moveCenter = {}, aimCenter = {};
+  <div id="backLink"><a href="/index.html">Volver al inicio</a></div>
+  <div id="instructions">
+    Usa joystick izquierdo para mover • joystick derecho para apuntar/disparar<br />
+    A/D o flechas para mover en PC • P o ⏸ para pausar/reanudar<br />
+    Power-ups morados aumentan balas durante 10 s
+  </div>
 
-  const pauseOverlay = document.getElementById('pauseOverlay'),
-        pauseText = document.getElementById('pauseText'),
-        resumeBtn = document.getElementById('resumeBtn'),
-        btnPauseMobile = document.getElementById('btnPauseMobile'),
-        joystickMove = document.getElementById('joystickMove'),
-        joystickMoveStick = joystickMove.querySelector('.joystickStick'),
-        joystickAim = document.getElementById('joystickAim'),
-        joystickAimStick = joystickAim.querySelector('.joystickStick');
+  <canvas id="game" width="600" height="400"></canvas>
+  <div id="score">Puntaje: 0</div>
 
-  /*** Inicialización de joysticks ***/
-  function initJoystick(){
-    const rm = joystickMove.getBoundingClientRect(),
-          ra = joystickAim.getBoundingClientRect();
-    moveCenter = { x:rm.left+rm.width/2, y:rm.top+rm.height/2 };
-    aimCenter = { x:ra.left+ra.width/2, y:ra.top+ra.height/2 };
-    resetMove(); resetAim();
-  }
+  <div id="pauseOverlay">
+    <div id="pauseText">Juego en pausa</div>
+    <button id="resumeBtn">Reanudar</button>
+  </div>
 
-  function resetMove(){
-    joystickMoveStick.style.transform = `translate(0,0)`;
-    moveTouchId = null;
-    keys.left = keys.right = false;
-  }
-  function resetAim(){
-    joystickAimStick.style.transform = `translate(0,0)`;
-    aimTouchId = null;
-    pointer.down = false;
-  }
+  <div id="btnPauseMobile" title="Pausar">⏸</div>
 
-  function isInside(t,el){
-    const r = el.getBoundingClientRect();
-    return t.clientX>=r.left && t.clientX<=r.right && t.clientY>=r.top && t.clientY<=r.bottom;
-  }
+  <div id="joystickMove" class="joystickContainer">
+    <div class="joystickStick"></div>
+  </div>
+  <div id="joystickAim" class="joystickContainer">
+    <div class="joystickStick"></div>
+  </div>
 
-  /*** Eventos táctiles y de mouse ***/
-  function handleTouchStart(e){
-    e.preventDefault();
-    for(const t of e.changedTouches){
-      if(moveTouchId===null && isInside(t, joystickMove)){
-        moveTouchId = t.identifier;
-      }
-      if(aimTouchId===null && isInside(t, joystickAim)){
-        aimTouchId = t.identifier;
-      }
-    }
-    initJoystick();
-  }
-
-  function handleTouchMove(e){
-    e.preventDefault();
-    const maxD = parseInt(getComputedStyle(joystickMove).width)/2;
-    for(const t of e.changedTouches){
-      if(t.identifier===moveTouchId){
-        const dx = t.clientX - moveCenter.x,
-              dy = t.clientY - moveCenter.y,
-              dist = Math.hypot(dx,dy),
-              angle = Math.atan2(dy,dx),
-              clamped = Math.min(dist, maxD),
-              sx = Math.cos(angle)*clamped,
-              sy = Math.sin(angle)*clamped;
-        joystickMoveStick.style.transform = `translate(${sx}px,${sy}px)`;
-        keys.left = sx/maxD < -0.3;
-        keys.right = sx/maxD > 0.3;
-        player.vx = keys.left ? -player.speed : (keys.right ? player.speed : 0);
-      }
-      if(t.identifier===aimTouchId){
-        const dx = t.clientX - aimCenter.x,
-              dy = t.clientY - aimCenter.y,
-              dist = Math.hypot(dx,dy),
-              angle = Math.atan2(dy,dx),
-              clamped = Math.min(dist, maxD),
-              sx = Math.cos(angle)*clamped,
-              sy = Math.sin(angle)*clamped;
-        joystickAimStick.style.transform = `translate(${sx}px,${sy}px)`;
-        const normX = sx/maxD, normY = sy/maxD;
-        if(normX!==0||normY!==0){
-          pointer.down = true;
-          pointer.x = Math.min(Math.max(player.x+normX*canvas.width,0),canvas.width);
-          pointer.y = Math.min(Math.max(player.y+normY*canvas.height,0),canvas.height);
-        } else pointer.down = false;
-      }
-    }
-  }
-
-  function handleTouchEnd(e){
-    e.preventDefault();
-    for(const t of e.changedTouches){
-      if(t.identifier===moveTouchId) resetMove();
-      if(t.identifier===aimTouchId) resetAim();
-    }
-  }
-
-  function handleMouse(e){
-    const r = canvas.getBoundingClientRect();
-    pointer.x = e.clientX - r.left;
-    pointer.y = e.clientY - r.top;
-  }
-
-  joystickMove.addEventListener('touchstart', handleTouchStart, {passive:false});
-  joystickMove.addEventListener('touchmove', handleTouchMove, {passive:false});
-  joystickMove.addEventListener('touchend', handleTouchEnd, {passive:false});
-  joystickMove.addEventListener('touchcancel', handleTouchEnd, {passive:false});
-  joystickAim.addEventListener('touchstart', handleTouchStart, {passive:false});
-  joystickAim.addEventListener('touchmove', handleTouchMove, {passive:false});
-  joystickAim.addEventListener('touchend', handleTouchEnd, {passive:false});
-  joystickAim.addEventListener('touchcancel', handleTouchEnd, {passive:false});
-
-  window.addEventListener('keydown', e=>{
-    if(e.key==='a'||e.key==='ArrowLeft') keys.left = true;
-    if(e.key==='d'||e.key==='ArrowRight') keys.right = true;
-    if(e.key.toLowerCase()==='p') togglePause();
-  });
-  window.addEventListener('keyup', e=>{
-    if(e.key==='a'||e.key==='ArrowLeft') keys.left = false;
-    if(e.key==='d'||e.key==='ArrowRight') keys.right = false;
-  });
-
-  canvas.addEventListener('mousemove', handleMouse);
-  canvas.addEventListener('mousedown', ()=>pointer.down = true);
-  canvas.addEventListener('mouseup', ()=>pointer.down = false);
-
-  btnPauseMobile.addEventListener('click', togglePause);
-
-  /*** Funciones de juego ***/
-  function togglePause(){
-    gamePaused = !gamePaused;
-    if(gamePaused){
-      pauseOverlay.style.visibility = 'visible';
-      cancelAnimationFrame(animId);
-      clearInterval(spawnInterval);
-    } else {
-      if(gameOver){
-        location.reload(); // recarga la página para reiniciar
-      } else {
-        pauseOverlay.style.visibility = 'hidden';
-        startGame();
-      }
-    }
-  }
-
-  resumeBtn.addEventListener('click', togglePause);
-
-  function spawnEnemy(){
-    if(gamePaused||gameOver) return;
-    enemies.push({ x:Math.random()*(canvas.width-30)+15, y:-20, size:30, speed:2+Math.random()*1.5 });
-  }
-  function spawnPowerUp(){
-    if(gamePaused||gameOver) return;
-    powerUps.push({ x:Math.random()*(canvas.width-30)+15, y:-20, size:20, speed:2 });
-  }
-
-  function startGame(){
-    initJoystick();
-    spawnInterval = setInterval(()=>{
-      spawnEnemy();
-      if(Math.random()<0.3) spawnPowerUp();
-    }, 1000);
-    animId = requestAnimationFrame(loop);
-  }
-
-  function activatePowerUp(){
-    powerUpActive = true;
-    document.getElementById('score').style.color = '#a2a';
-    clearTimeout(powerUpTimeout);
-    powerUpTimeout = setTimeout(()=>{
-      powerUpActive = false;
-      document.getElementById('score').style.color = 'white';
-    }, 10000);
-  }
-
-  function loop(time){
-    animId = requestAnimationFrame(loop);
-
-    // Movimiento
-    player.x += player.vx;
-    player.x = Math.max(20,Math.min(canvas.width-20,player.x));
-
-    // Disparo automático
-    if(time - lastShot > fireRate && pointer.down && !gamePaused && !gameOver){
-      bullets.push({
-        x: player.x, y: player.y-15,
-        size: powerUpActive ? 14 : 6,
-        speed: 8,
-        angle: Math.atan2(pointer.y - player.y, pointer.x - player.x)
-      });
-      lastShot = time;
-    }
-
-    // Actualizar balas
-    bullets = bullets.filter(b=>{
-      b.x += Math.cos(b.angle)*b.speed;
-      b.y += Math.sin(b.angle)*b.speed;
-      return b.x>=0 && b.x<=canvas.width && b.y>=0 && b.y<=canvas.height;
-    });
-
-    // Enemigos y poderosos
-    enemies = enemies.filter(e=>{
-      e.y += e.speed;
-      const d = Math.hypot(e.x-player.x, e.y-player.y);
-      if(d < e.size + 20){
-        gameOver = true; togglePause();
-        pauseText.innerText = `¡Perdiste! Puntos: ${score}`;
-        return false;
-      }
-      if(e.y > canvas.height + e.size){
-        score = Math.max(0, score-1);
-        document.getElementById('score').innerText = `Puntaje: ${score}`;
-        return false;
-      }
-      return true;
-    });
-
-    powerUps = powerUps.filter(p=>{
-      p.y += p.speed;
-      const d = Math.hypot(p.x-player.x, p.y-player.y);
-      if(d < p.size + 20){ activatePowerUp(); return false; }
-      return p.y <= canvas.height + p.size;
-    });
-
-    // Colisiones balas - enemigos
-    enemies.forEach((e, ei)=>{
-      bullets.forEach((b, bi)=>{
-        if(Math.hypot(e.x-b.x, e.y-b.y) < e.size + b.size){
-          enemies.splice(ei,1);
-          bullets.splice(bi,1);
-          score++;
-          document.getElementById('score').innerText = `Puntaje: ${score}`;
-        }
-      });
-    });
-
-    // Dibujar todo
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    drawPlayer();
-    bullets.forEach(b=>{
-      ctx.fillStyle='#f33';
-      ctx.beginPath();
-      ctx.ellipse(b.x,b.y,b.size,b.size/2,0,0,Math.PI*2);
-      ctx.fill();
-    });
-    powerUps.forEach(p=>{
-      ctx.fillStyle='#a2a';
-      ctx.beginPath();
-      ctx.ellipse(p.x,p.y,p.size,p.size,0,0,Math.PI*2);
-      ctx.fill();
-      ctx.strokeStyle='#eee';
-      ctx.lineWidth=2;
-      ctx.beginPath();
-      ctx.moveTo(p.x-p.size/2,p.y);
-      ctx.lineTo(p.x+p.size/2,p.y);
-      ctx.moveTo(p.x,p.y-p.size/2);
-      ctx.lineTo(p.x,p.y+p.size/2);
-      ctx.stroke();
-    });
-    enemies.forEach(e=>{
-      ctx.fillStyle='#f00';
-      ctx.beginPath();
-      ctx.ellipse(e.x,e.y,e.size,e.size,0,0,Math.PI*2);
-      ctx.fill();
-    });
-
-    function drawPlayer(){
-      ctx.save();
-      ctx.translate(player.x,player.y);
-      ctx.fillStyle='#666';
-      ctx.beginPath();
-      ctx.ellipse(0,0,20,35,0,0,2*Math.PI);
-      ctx.fill();
-
-      ctx.fillStyle='#555';
-      ctx.beginPath();
-      ctx.ellipse(0,-45,15,18,0,0,2*Math.PI);
-      ctx.fill();
-
-      const dx = pointer.x-player.x,
-            dy = pointer.y-(player.y-48),
-            ang = Math.atan2(dy,dx),
-            ox = Math.cos(ang)*2,
-            oy = Math.sin(ang)*2;
-
-      ctx.fillStyle='white';
-      ctx.beginPath();
-      ctx.ellipse(-6,-48,5,7,0,0,2*Math.PI);
-      ctx.ellipse(6,-48,5,7,0,0,2*Math.PI);
-      ctx.fill();
-
-      ctx.fillStyle='black';
-      ctx.beginPath();
-      ctx.ellipse(-6+ox,-48+oy,2.5,3.5,0,0,2*Math.PI);
-      ctx.ellipse(6+ox,-48+oy,2.5,3.5,0,0,2*Math.PI);
-      ctx.fill();
-
-      ctx.strokeStyle='#222';
-      ctx.lineWidth=2;
-      ctx.beginPath();
-      ctx.moveTo(-6,-33);
-      ctx.quadraticCurveTo(0,-25,6,-33);
-      ctx.stroke();
-
-      ctx.fillStyle='#111';
-      ctx.beginPath();
-      ctx.moveTo(-18,-60);
-      ctx.bezierCurveTo(-12,-90,12,-90,18,-60);
-      ctx.lineTo(18,-40);
-      ctx.bezierCurveTo(12,-70,-12,-70,-18,-40);
-      ctx.closePath();
-      ctx.fill();
-
-      ctx.fillStyle='#222';
-      ctx.beginPath();
-      ctx.ellipse(0,-70,20,10,0,0,2*Math.PI);
-      ctx.fill();
-
-      ctx.strokeStyle='#a22'; ctx.lineWidth=4; ctx.lineCap='round';
-      ctx.beginPath();
-      ctx.moveTo(5,-15);
-      ctx.lineTo(40,0);
-      ctx.lineTo(5,20);
-      ctx.closePath();
-      ctx.fillStyle='#800'; ctx.fill();
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.moveTo(40,0);
-      ctx.lineTo(65,-10);
-      ctx.lineTo(65,10);
-      ctx.lineTo(40,0);
-      ctx.stroke();
-
-      ctx.strokeStyle='#ccc';
-      for(let i=0;i<4;i++){
-        ctx.beginPath();
-        ctx.moveTo(40+i*5,-10);
-        ctx.lineTo(40+i*5,10);
-        ctx.stroke();
-      }
-      ctx.restore();
-    }
-  }
-
-  // 🌟 Iniciar con retraso para asegurar que todo esté listo
-  setTimeout(startGame, 100);
-});
-</script>
+  <script src="/js/game_disparo.js"></script>
 </body>
 </html>
