@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Metalero que dispara y pierde (con controles móviles)</title>
+<title>Metalero con joystick y apuntado táctil</title>
 <style>
   body {
     margin: 0;
@@ -38,7 +38,7 @@
     margin: 80px auto 0;
     background: #222;
     border: 2px solid #555;
-    touch-action: none; /* para touch no haga scroll */
+    touch-action: none;
     max-width: 100vw;
   }
   #pauseOverlay {
@@ -70,37 +70,7 @@
   #resumeBtn:hover {
     background: #d33;
   }
-  /* Controles táctiles para móvil */
-  #mobileControls {
-    position: fixed;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90vw;
-    max-width: 600px;
-    display: flex;
-    justify-content: space-between;
-    z-index: 20;
-    user-select: none;
-  }
-  .btnControl {
-    background: #a22;
-    border-radius: 50%;
-    width: 70px;
-    height: 70px;
-    color: white;
-    font-size: 30px;
-    text-align: center;
-    line-height: 70px;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: none;
-    box-shadow: 0 0 10px #700;
-  }
-  .btnControl:active {
-    background: #d33;
-    box-shadow: 0 0 15px #d33;
-  }
+  /* Botón pausa arriba derecha */
   #btnPauseMobile {
     position: fixed;
     top: 10px;
@@ -121,18 +91,43 @@
     background: #d33;
     box-shadow: 0 0 15px #d33;
   }
-  @media(min-width: 600px) {
-    #mobileControls, #btnPauseMobile {
-      display: none; /* esconder controles táctiles en PC */
-    }
+  /* Joystick */
+  #joystickContainer {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 120px;
+    height: 120px;
+    touch-action: none;
+    user-select: none;
+    z-index: 25;
+  }
+  #joystickBase {
+    width: 120px;
+    height: 120px;
+    background: #444;
+    border-radius: 50%;
+    opacity: 0.6;
+    position: relative;
+  }
+  #joystickStick {
+    width: 60px;
+    height: 60px;
+    background: #a22;
+    border-radius: 50%;
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    box-shadow: 0 0 10px #700;
+    touch-action: none;
   }
 </style>
 </head>
 <body>
   <div id="infoText">
-    Click o toque para disparar<br>
-    Moverse con A/D o flechas o botones abajo<br>
-    Presioná <b>P</b> o pausa móvil para pausar
+    Mueve con joystick a la izquierda<br>
+    Apunta y dispara tocando en pantalla<br>
+    P para pausar o botón arriba derecha
   </div>
   <div id="score">Puntaje: 0</div>
   <canvas id="game" width="600" height="400"></canvas>
@@ -142,19 +137,20 @@
     <button id="resumeBtn">Reanudar</button>
   </div>
 
-  <!-- Controles táctiles -->
-  <div id="mobileControls">
-    <div id="btnLeft" class="btnControl">&#9664;</div>
-    <div id="btnRight" class="btnControl">&#9654;</div>
-  </div>
   <div id="btnPauseMobile" title="Pausar">⏸</div>
+
+  <div id="joystickContainer">
+    <div id="joystickBase">
+      <div id="joystickStick"></div>
+    </div>
+  </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('game');
   const ctx = canvas.getContext('2d');
 
-  // Estado jugador: posición y velocidad horizontal
+  // Jugador
   const player = {
     x: canvas.width / 2,
     y: canvas.height - 60,
@@ -162,19 +158,20 @@ document.addEventListener('DOMContentLoaded', () => {
     vx: 0
   };
 
-  // Estado del puntero (mouse o touch)
+  // Puntero para apuntar y disparar
   const pointer = {
     x: canvas.width / 2,
     y: canvas.height / 2,
     down: false
   };
 
-  // Estados de teclas presionadas y controles táctiles
+  // Control de teclas para PC
   const keys = {
     left: false,
     right: false
   };
 
+  // Bullets y enemigos
   const bullets = [];
   const enemies = [];
 
@@ -189,11 +186,99 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const pauseOverlay = document.getElementById('pauseOverlay');
   const resumeBtn = document.getElementById('resumeBtn');
-  const btnLeft = document.getElementById('btnLeft');
-  const btnRight = document.getElementById('btnRight');
   const btnPauseMobile = document.getElementById('btnPauseMobile');
 
-  // Eventos teclado para moverse y pausar
+  // Joystick elementos
+  const joystickContainer = document.getElementById('joystickContainer');
+  const joystickStick = document.getElementById('joystickStick');
+  const joystickBase = document.getElementById('joystickBase');
+
+  // Variables joystick
+  let joystickActive = false;
+  let joystickCenter = { x: 0, y: 0 };
+  let joystickPos = { x: 0, y: 0 };
+
+  // Inicializar joystick center cuando se cargue
+  function initJoystickCenter() {
+    const rect = joystickBase.getBoundingClientRect();
+    joystickCenter.x = rect.left + rect.width / 2;
+    joystickCenter.y = rect.top + rect.height / 2;
+    resetJoystick();
+  }
+
+  // Reset joystick a centro
+  function resetJoystick() {
+    joystickStick.style.transform = 'translate(0px, 0px)';
+    joystickPos.x = 0;
+    joystickPos.y = 0;
+    keys.left = false;
+    keys.right = false;
+  }
+
+  // Actualizar movimiento jugador según joystickPos.x (-1 a 1)
+  function updatePlayerFromJoystick() {
+    if (joystickPos.x < -0.3) {
+      keys.left = true;
+      keys.right = false;
+    } else if (joystickPos.x > 0.3) {
+      keys.left = false;
+      keys.right = true;
+    } else {
+      keys.left = false;
+      keys.right = false;
+    }
+  }
+
+  // Eventos joystick touch
+  joystickBase.addEventListener('touchstart', e => {
+    e.preventDefault();
+    joystickActive = true;
+    initJoystickCenter();
+    handleJoystickMove(e.touches[0]);
+  }, {passive: false});
+
+  joystickBase.addEventListener('touchmove', e => {
+    e.preventDefault();
+    if (!joystickActive) return;
+    handleJoystickMove(e.touches[0]);
+  }, {passive: false});
+
+  joystickBase.addEventListener('touchend', e => {
+    e.preventDefault();
+    joystickActive = false;
+    resetJoystick();
+  }, {passive: false});
+
+  joystickBase.addEventListener('touchcancel', e => {
+    e.preventDefault();
+    joystickActive = false;
+    resetJoystick();
+  }, {passive: false});
+
+  function handleJoystickMove(touch) {
+    const dx = touch.clientX - joystickCenter.x;
+    const dy = touch.clientY - joystickCenter.y;
+
+    // Máximo desplazamiento stick 50px (radio)
+    const maxDist = 50;
+    let dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist > maxDist) dist = maxDist;
+
+    // Ángulo para desplazar stick dentro del círculo
+    const angle = Math.atan2(dy, dx);
+
+    const stickX = Math.cos(angle) * dist;
+    const stickY = Math.sin(angle) * dist;
+
+    joystickStick.style.transform = `translate(${stickX}px, ${stickY}px)`;
+
+    joystickPos.x = stickX / maxDist; // -1 a 1
+    joystickPos.y = stickY / maxDist;
+
+    updatePlayerFromJoystick();
+  }
+
+  // Eventos teclado PC
   window.addEventListener('keydown', e => {
     if (e.key === 'a' || e.key === 'ArrowLeft') keys.left = true;
     if (e.key === 'd' || e.key === 'ArrowRight') keys.right = true;
@@ -207,38 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'd' || e.key === 'ArrowRight') keys.right = false;
   });
 
-  // Controles táctiles: mantener presionado para moverse
-  btnLeft.addEventListener('touchstart', e => {
-    e.preventDefault();
-    keys.left = true;
-  });
-  btnLeft.addEventListener('touchend', e => {
-    e.preventDefault();
-    keys.left = false;
-  });
-  btnLeft.addEventListener('touchcancel', e => {
-    keys.left = false;
-  });
-
-  btnRight.addEventListener('touchstart', e => {
-    e.preventDefault();
-    keys.right = true;
-  });
-  btnRight.addEventListener('touchend', e => {
-    e.preventDefault();
-    keys.right = false;
-  });
-  btnRight.addEventListener('touchcancel', e => {
-    keys.right = false;
-  });
-
-  // Botón pausa móvil
-  btnPauseMobile.addEventListener('click', () => {
-    if (gamePaused) resumeGame();
-    else pauseGame();
-  });
-
-  // Mouse para apuntar y click para disparar
+  // Apuntar con mouse y disparar con click
   canvas.addEventListener('mousemove', e => {
     const rect = canvas.getBoundingClientRect();
     pointer.x = e.clientX - rect.left;
@@ -251,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.button === 0) pointer.down = false;
   });
 
-  // Soporte táctil para móvil: apuntar y disparar
+  // Apuntar y disparar con touch (solo la primera finger para disparar)
   canvas.addEventListener('touchstart', e => {
     e.preventDefault();
     const rect = canvas.getBoundingClientRect();
@@ -260,7 +314,6 @@ document.addEventListener('DOMContentLoaded', () => {
     pointer.y = touch.clientY - rect.top;
     pointer.down = true;
   }, {passive: false});
-
   canvas.addEventListener('touchmove', e => {
     e.preventDefault();
     const rect = canvas.getBoundingClientRect();
@@ -268,29 +321,35 @@ document.addEventListener('DOMContentLoaded', () => {
     pointer.x = touch.clientX - rect.left;
     pointer.y = touch.clientY - rect.top;
   }, {passive: false});
-
   canvas.addEventListener('touchend', e => {
     e.preventDefault();
     pointer.down = false;
   }, {passive: false});
 
-  // Función para disparar bala
+  // Botón pausa
+  btnPauseMobile.addEventListener('click', () => {
+    if (gamePaused) resumeGame();
+    else pauseGame();
+  });
+
+  // Función disparar bala
   function shoot() {
     const dx = pointer.x - player.x;
     const dy = pointer.y - player.y;
     const mag = Math.hypot(dx, dy);
+    if(mag === 0) return; // evitar división por 0
     const vx = (dx / mag) * 6;
     const vy = (dy / mag) * 6;
     bullets.push({ x: player.x, y: player.y, vx, vy });
   }
 
-  // Crear enemigo nuevo en posición aleatoria arriba
+  // Crear enemigo nuevo arriba con posición aleatoria
   function spawnEnemy() {
     const x = Math.random() * (canvas.width - 30);
     enemies.push({ x, y: -30, size: 30, speed: 2 + Math.random() * 2 });
   }
 
-  // Comenzar y detener creación de enemigos
+  // Empezar/parar spawn
   function startSpawning() {
     spawnInterval = setInterval(spawnEnemy, 1000);
   }
@@ -298,29 +357,30 @@ document.addEventListener('DOMContentLoaded', () => {
     clearInterval(spawnInterval);
   }
 
+  // Actualizar estado del juego
   function update() {
-    if (gameOver) return; // Si perdió, no actualizar
+    if (gameOver) return;
 
-    // Actualizar velocidad horizontal según teclas y botones
+    // Movimiento jugador según teclas (o joystick)
     if (keys.left) player.vx = -player.speed;
     else if (keys.right) player.vx = player.speed;
     else player.vx = 0;
 
     player.x += player.vx;
 
-    // Limitar dentro del canvas
+    // Limitar dentro canvas
     if (player.x < 15) player.x = 15;
     if (player.x > canvas.width - 15) player.x = canvas.width - 15;
 
     const now = Date.now();
 
-    // Disparar si el puntero está presionado y respeta fireRate
+    // Disparar si puntero presionado y respeta fireRate
     if (pointer.down && now - lastShot > fireRate) {
       shoot();
       lastShot = now;
     }
 
-    // Actualizar posición de balas
+    // Actualizar balas
     bullets.forEach((b, i) => {
       b.x += b.vx;
       b.y += b.vy;
@@ -329,14 +389,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Actualizar enemigos y verificar colisión jugador-enemigo
+    // Actualizar enemigos y detectar colisión con jugador
     enemies.forEach((e, i) => {
       e.y += e.speed;
 
       // Quitar enemigos que bajaron del canvas
       if (e.y > canvas.height) enemies.splice(i, 1);
 
-      // Chequear colisión jugador-enemigo (rectángulos)
+      // Colisión jugador-enemigo (rectángulos)
       const playerLeft = player.x - 15;
       const playerRight = player.x + 15;
       const playerTop = player.y - 30;
@@ -359,7 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Colisiones balas-enemigos para destruir enemigos y sumar puntos
+    // Colisión balas-enemigos para eliminar enemigo y sumar puntos
     enemies.forEach((e, ei) => {
       bullets.forEach((b, bi) => {
         if (
@@ -377,10 +437,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Dibujar todo
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Calcular ángulo para rotar personaje hacia puntero
+    // Ángulo para rotar jugador hacia puntero
     const angle = Math.atan2(pointer.y - player.y, pointer.x - player.x);
     ctx.save();
     ctx.translate(player.x, player.y);
@@ -426,6 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.stroke();
   }
 
+  // Bucle principal
   function gameLoop() {
     if (!gamePaused) {
       update();
@@ -434,6 +496,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Pausar juego
   function pauseGame() {
     gamePaused = true;
     pauseOverlay.style.visibility = 'visible';
@@ -441,9 +504,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (animationFrameId) cancelAnimationFrame(animationFrameId);
   }
 
+  // Reanudar juego (o reiniciar si perdió)
   function resumeGame() {
     if (gameOver) {
-      // Reiniciar juego para jugar otra vez
       score = 0;
       gameOver = false;
       bullets.length = 0;
@@ -458,7 +521,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   resumeBtn.addEventListener('click', resumeGame);
 
-  // Control teclado para pausa (P)
+  // También pausar/reanudar con P
   window.addEventListener('keydown', e => {
     if (e.key.toLowerCase() === 'p') {
       if (gamePaused) resumeGame();
@@ -466,7 +529,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Iniciar juego
+  // Inicializar joystick cuando cargue la página
+  initJoystickCenter();
+
+  // Iniciar enemigos y loop
   startSpawning();
   gameLoop();
 });
