@@ -9,6 +9,7 @@
 <body>
 
   <div id="backLink"><a href="/index.html">Volver al inicio</a></div>
+
   <div id="instructions">
     Usa joystick izquierdo para mover • joystick derecho para apuntar/disparar<br />
     A/D o flechas para mover en PC • P o ⏸ para pausar/reanudar<br />
@@ -28,42 +29,11 @@
   <div id="joystickMove" class="joystickContainer">
     <div class="joystickStick"></div>
   </div>
+
   <div id="joystickAim" class="joystickContainer">
     <div class="joystickStick"></div>
   </div>
 
-  <script src="game.js"></script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no" />
-  <title>Metalero - Juego Completo</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-
-  
-
-  <canvas id="game" width="600" height="400"></canvas>
-  <div id="score">Puntaje: 0</div>
-
-  <div id="pauseOverlay">
-    <div id="pauseText">Juego en pausa</div>
-    <button id="resumeBtn">Reanudar</button>
-  </div>
-
-  <div id="btnPauseMobile" title="Pausar">⏸</div>
-
-  <div id="joystickMove" class="joystickContainer">
-    <div class="joystickStick"></div>
-  </div>
-  <div id="joystickAim" class="joystickContainer">
-    <div class="joystickStick"></div>
-  </div>
-
-  <script src="/js/game_disparo.js"></script>
+  <script src="js/game_disparo.js"></script>
 </body>
 </html>
