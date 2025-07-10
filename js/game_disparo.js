@@ -46,8 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const joystickMoveStick = joystickMove.querySelector('.joystickStick');
   const joystickAim = document.getElementById('joystickAim');
   const joystickAimStick = joystickAim.querySelector('.joystickStick');
+  const scoreDiv = document.getElementById('score');
 
-  // Inicializa centros de los joysticks
+  // Inicializa centros de los joysticks (para cálculo relativo)
   function initJoystick() {
     const rm = joystickMove.getBoundingClientRect();
     const ra = joystickAim.getBoundingClientRect();
@@ -151,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pointer.down = false;
   }
 
-  // Eventos
+  // Eventos joystick y mouse
   joystickMove.addEventListener('touchstart', handleTouchStart, { passive: false });
   joystickMove.addEventListener('touchmove', handleTouchMove, { passive: false });
   joystickMove.addEventListener('touchend', handleTouchEnd, { passive: false });
@@ -162,6 +163,11 @@ document.addEventListener('DOMContentLoaded', () => {
   joystickAim.addEventListener('touchend', handleTouchEnd, { passive: false });
   joystickAim.addEventListener('touchcancel', handleTouchEnd, { passive: false });
 
+  canvas.addEventListener('mousemove', handleMouse);
+  canvas.addEventListener('mousedown', handleMouseDown);
+  canvas.addEventListener('mouseup', handleMouseUp);
+
+  // Teclado para mover y pausar
   window.addEventListener('keydown', e => {
     if (e.key === 'a' || e.key === 'ArrowLeft') keys.left = true;
     if (e.key === 'd' || e.key === 'ArrowRight') keys.right = true;
@@ -172,10 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'd' || e.key === 'ArrowRight') keys.right = false;
   });
 
-  canvas.addEventListener('mousemove', handleMouse);
-  canvas.addEventListener('mousedown', handleMouseDown);
-  canvas.addEventListener('mouseup', handleMouseUp);
-
+  // Botones pausa móvil y reanudar overlay
   btnPauseMobile.addEventListener('click', togglePause);
   resumeBtn.addEventListener('click', togglePause);
 
@@ -220,11 +223,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Activar power-up: balas más grandes 10s
   function activatePowerUp() {
     powerUpActive = true;
-    document.getElementById('score').style.color = '#a2a';
+    scoreDiv.style.color = '#a2a';
     clearTimeout(powerUpTimeout);
     powerUpTimeout = setTimeout(() => {
       powerUpActive = false;
-      document.getElementById('score').style.color = 'white';
+      scoreDiv.style.color = 'white';
     }, 10000);
   }
 
@@ -241,6 +244,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Loop principal de juego
   function loop(time) {
+    if (gamePaused) return; // No avanzar si está pausado
+
     animId = requestAnimationFrame(loop);
 
     // Movimiento jugador con teclado o joystick
@@ -254,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
       else player.vx = 0;
     }
     player.x += player.vx;
-    player.x = Math.max(20, Math.min(canvas.width - 20, player.x));
+    player.x = Math.min(Math.max(player.x, 20), canvas.width - 20);
 
     // Disparo automático si el puntero está activo y no pausado
     if (time - lastShot > fireRate && pointer.down && !gamePaused && !gameOver) {
@@ -289,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Si enemigo pasa la pantalla, descuenta un punto
       if (e.y > canvas.height + e.size) {
         score = Math.max(0, score - 1);
-        document.getElementById('score').innerText = `Puntaje: ${score}`;
+        scoreDiv.innerText = `Puntaje: ${score}`;
         return false;
       }
       return true;
@@ -313,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
           enemies.splice(ei, 1);
           bullets.splice(bi, 1);
           score++;
-          document.getElementById('score').innerText = `Puntaje: ${score}`;
+          scoreDiv.innerText = `Puntaje: ${score}`;
         }
       });
     });
@@ -348,7 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.stroke();
     });
 
-    // Dibuja enemigos (cuadrados con cruz)
+    // Dibuja enemigos (círculos con cruz)
     enemies.forEach(e => {
       ctx.fillStyle = '#333';
       ctx.beginPath();
@@ -364,7 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.stroke();
     });
 
-    // Función que dibuja el jugador metalero con guitarra y cabello
+    // Dibuja jugador metalero con guitarra y cabello
     function drawPlayer() {
       const px = player.x;
       const py = player.y;
@@ -421,6 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.fillStyle = '#a22';
       ctx.strokeStyle = '#700';
       ctx.lineWidth = 3;
+
       // mástil
       ctx.beginPath();
       ctx.moveTo(px + 10, py - 15);
@@ -445,8 +451,8 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.lineTo(pointer.x, pointer.y);
       ctx.stroke();
     }
-
   }
 
+  // Iniciar juego
   startGame();
 });
