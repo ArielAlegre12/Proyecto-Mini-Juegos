@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Metalero con dos sticks virtuales</title>
+<title>Metalero con dos sticks multitouch</title>
 <style>
   body {
     margin: 0;
@@ -27,26 +27,28 @@
     padding: 5px 10px;
     border-radius: 8px;
   }
-  #score {
-    position: fixed;
-    top: 60px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: monospace;
-    font-size: 20px;
-    z-index: 15;
-    background: rgba(0,0,0,0.6);
-    padding: 3px 12px;
-    border-radius: 8px;
-    user-select: none;
-  }
   canvas {
     display: block;
-    margin: 120px auto 0;
+    margin: 80px auto 0;
     background: #222;
     border: 2px solid #555;
     touch-action: none;
     max-width: 100vw;
+  }
+  #score {
+    width: 600px;
+    margin: 10px auto 0;
+    font-family: monospace;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    user-select: none;
+    background: rgba(0,0,0,0.6);
+    padding: 5px 0;
+    border-radius: 8px;
+    box-sizing: border-box;
+    z-index: 15;
+    position: relative;
   }
   #pauseOverlay {
     position: fixed;
@@ -97,8 +99,6 @@
     background: #d33;
     box-shadow: 0 0 15px #d33;
   }
-
-  /* Joystick base */
   .joystickContainer {
     position: fixed;
     bottom: 20px;
@@ -122,7 +122,6 @@
     box-shadow: 0 0 10px #700;
     touch-action: none;
   }
-
   #joystickMove {
     left: 20px;
     bottom: 20px;
@@ -139,8 +138,10 @@
     Usa joystick derecho para apuntar y disparar<br>
     P para pausar o botón arriba a la derecha
   </div>
-  <div id="score">Puntaje: 0</div>
+
   <canvas id="game" width="600" height="400"></canvas>
+
+  <div id="score">Puntaje: 0</div>
 
   <div id="pauseOverlay">
     <div>Juego en pausa</div>
@@ -149,10 +150,10 @@
 
   <div id="btnPauseMobile" title="Pausar">⏸</div>
 
-  <div id="joystickMove" class="joystickContainer" style="position: fixed;">
+  <div id="joystickMove" class="joystickContainer">
     <div class="joystickStick"></div>
   </div>
-  <div id="joystickAim" class="joystickContainer" style="position: fixed;">
+  <div id="joystickAim" class="joystickContainer">
     <div class="joystickStick"></div>
   </div>
 
@@ -176,13 +177,12 @@ document.addEventListener('DOMContentLoaded', () => {
     down: false
   };
 
-  // Control de teclas para PC
+  // Teclas para movimiento PC
   const keys = {
     left: false,
     right: false
   };
 
-  // Bullets y enemigos
   const bullets = [];
   const enemies = [];
 
@@ -199,22 +199,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const resumeBtn = document.getElementById('resumeBtn');
   const btnPauseMobile = document.getElementById('btnPauseMobile');
 
-  // Joystick movimiento elementos
   const joystickMove = document.querySelector('#joystickMove');
   const joystickMoveStick = joystickMove.querySelector('.joystickStick');
-
-  // Joystick apuntado elementos
   const joystickAim = document.querySelector('#joystickAim');
   const joystickAimStick = joystickAim.querySelector('.joystickStick');
 
-  // Variables joystick movimiento
-  let moveActive = false;
-  let moveCenter = { x: 0, y: 0 };
-  let movePos = { x: 0, y: 0 };
+  // Variables multitouch: id del dedo activo para cada joystick o null si libre
+  let moveTouchId = null;
+  let aimTouchId = null;
 
-  // Variables joystick apuntado
-  let aimActive = false;
+  let moveCenter = { x: 0, y: 0 };
   let aimCenter = { x: 0, y: 0 };
+
+  let movePos = { x: 0, y: 0 };
   let aimPos = { x: 0, y: 0 };
 
   // Inicializar centros joystick
@@ -237,6 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
     movePos.y = 0;
     keys.left = false;
     keys.right = false;
+    moveTouchId = null;
   }
 
   // Reset joystick apuntado
@@ -245,6 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
     aimPos.x = 0;
     aimPos.y = 0;
     pointer.down = false;
+    aimTouchId = null;
   }
 
   // Actualizar movimiento jugador según movePos.x (-1 a 1)
@@ -268,36 +267,106 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     pointer.down = true;
-    // Calcular posición del puntero relativo al jugador
-    pointer.x = player.x + aimPos.x * 100; // 100px alcance máximo
+    pointer.x = player.x + aimPos.x * 100;
     pointer.y = player.y + aimPos.y * 100;
-    // Limitar puntero dentro canvas
     pointer.x = Math.min(Math.max(pointer.x, 0), canvas.width);
     pointer.y = Math.min(Math.max(pointer.y, 0), canvas.height);
   }
 
-  // Manejar movimiento joystick (touch)
+  // Manejo multitouch para joystick movimiento
   joystickMove.addEventListener('touchstart', e => {
     e.preventDefault();
-    moveActive = true;
     initJoystickCenters();
-    handleMoveJoystick(e.touches[0]);
+    for (const touch of e.changedTouches) {
+      if (moveTouchId === null && isTouchInside(touch, joystickMove)) {
+        moveTouchId = touch.identifier;
+        handleMoveJoystick(touch);
+        break;
+      }
+    }
   }, {passive: false});
+
   joystickMove.addEventListener('touchmove', e => {
     e.preventDefault();
-    if (!moveActive) return;
-    handleMoveJoystick(e.touches[0]);
+    for (const touch of e.changedTouches) {
+      if (touch.identifier === moveTouchId) {
+        handleMoveJoystick(touch);
+        break;
+      }
+    }
   }, {passive: false});
+
   joystickMove.addEventListener('touchend', e => {
     e.preventDefault();
-    moveActive = false;
-    resetMoveJoystick();
+    for (const touch of e.changedTouches) {
+      if (touch.identifier === moveTouchId) {
+        resetMoveJoystick();
+        break;
+      }
+    }
   }, {passive: false});
   joystickMove.addEventListener('touchcancel', e => {
     e.preventDefault();
-    moveActive = false;
-    resetMoveJoystick();
+    for (const touch of e.changedTouches) {
+      if (touch.identifier === moveTouchId) {
+        resetMoveJoystick();
+        break;
+      }
+    }
   }, {passive: false});
+
+  // Manejo multitouch para joystick apuntado
+  joystickAim.addEventListener('touchstart', e => {
+    e.preventDefault();
+    initJoystickCenters();
+    for (const touch of e.changedTouches) {
+      if (aimTouchId === null && isTouchInside(touch, joystickAim)) {
+        aimTouchId = touch.identifier;
+        handleAimJoystick(touch);
+        break;
+      }
+    }
+  }, {passive: false});
+
+  joystickAim.addEventListener('touchmove', e => {
+    e.preventDefault();
+    for (const touch of e.changedTouches) {
+      if (touch.identifier === aimTouchId) {
+        handleAimJoystick(touch);
+        break;
+      }
+    }
+  }, {passive: false});
+
+  joystickAim.addEventListener('touchend', e => {
+    e.preventDefault();
+    for (const touch of e.changedTouches) {
+      if (touch.identifier === aimTouchId) {
+        resetAimJoystick();
+        break;
+      }
+    }
+  }, {passive: false});
+  joystickAim.addEventListener('touchcancel', e => {
+    e.preventDefault();
+    for (const touch of e.changedTouches) {
+      if (touch.identifier === aimTouchId) {
+        resetAimJoystick();
+        break;
+      }
+    }
+  }, {passive: false});
+
+  // Helper para saber si un touch está dentro del contenedor joystick
+  function isTouchInside(touch, container) {
+    const rect = container.getBoundingClientRect();
+    return (
+      touch.clientX >= rect.left &&
+      touch.clientX <= rect.right &&
+      touch.clientY >= rect.top &&
+      touch.clientY <= rect.bottom
+    );
+  }
 
   function handleMoveJoystick(touch) {
     const dx = touch.clientX - moveCenter.x;
@@ -314,29 +383,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updatePlayerFromMoveJoystick();
   }
 
-  // Manejar apuntado joystick (touch)
-  joystickAim.addEventListener('touchstart', e => {
-    e.preventDefault();
-    aimActive = true;
-    initJoystickCenters();
-    handleAimJoystick(e.touches[0]);
-  }, {passive: false});
-  joystickAim.addEventListener('touchmove', e => {
-    e.preventDefault();
-    if (!aimActive) return;
-    handleAimJoystick(e.touches[0]);
-  }, {passive: false});
-  joystickAim.addEventListener('touchend', e => {
-    e.preventDefault();
-    aimActive = false;
-    resetAimJoystick();
-  }, {passive: false});
-  joystickAim.addEventListener('touchcancel', e => {
-    e.preventDefault();
-    aimActive = false;
-    resetAimJoystick();
-  }, {passive: false});
-
   function handleAimJoystick(touch) {
     const dx = touch.clientX - aimCenter.x;
     const dy = touch.clientY - aimCenter.y;
@@ -352,7 +398,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updatePointerFromAimJoystick();
   }
 
-  // Teclado PC
+  // Teclado PC para mover y pausar
   window.addEventListener('keydown', e => {
     if (e.key === 'a' || e.key === 'ArrowLeft') keys.left = true;
     if (e.key === 'd' || e.key === 'ArrowRight') keys.right = true;
@@ -379,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.button === 0) pointer.down = false;
   });
 
-  // Touch para disparar apuntado en PC (opcional, para probar joystick también)
+  // Touch canvas para disparar apuntado (opcional)
   canvas.addEventListener('touchstart', e => {
     e.preventDefault();
     const rect = canvas.getBoundingClientRect();
@@ -406,24 +452,12 @@ document.addEventListener('DOMContentLoaded', () => {
     else pauseGame();
   });
 
-  // Función disparar bala
-  function shoot() {
-    const dx = pointer.x - player.x;
-    const dy = pointer.y - player.y;
-    const mag = Math.hypot(dx, dy);
-    if(mag === 0) return;
-    const vx = (dx / mag) * 6;
-    const vy = (dy / mag) * 6;
-    bullets.push({ x: player.x, y: player.y, vx, vy });
-  }
-
-  // Crear enemigo nuevo arriba con posición aleatoria
+  // Lógica de juego
   function spawnEnemy() {
-    const x = Math.random() * (canvas.width - 30);
-    enemies.push({ x, y: -30, size: 30, speed: 2 + Math.random() * 2 });
+    if (gamePaused || gameOver) return;
+    const x = Math.random() * (canvas.width - 30) + 15;
+    enemies.push({ x, y: -20, size: 30, speed: 2 + Math.random() * 2 });
   }
-
-  // Empezar/parar spawn
   function startSpawning() {
     spawnInterval = setInterval(spawnEnemy, 1000);
   }
@@ -431,146 +465,18 @@ document.addEventListener('DOMContentLoaded', () => {
     clearInterval(spawnInterval);
   }
 
-  // Actualizar estado del juego
-  function update() {
-    if (gameOver) return;
-
-    // Movimiento jugador según teclas (o joystick)
-    if (keys.left) player.vx = -player.speed;
-    else if (keys.right) player.vx = player.speed;
-    else player.vx = 0;
-
-    player.x += player.vx;
-
-    // Limitar dentro canvas
-    if (player.x < 15) player.x = 15;
-    if (player.x > canvas.width - 15) player.x = canvas.width - 15;
-
-    const now = Date.now();
-
-    // Disparar si puntero presionado y respeta fireRate
-    if (pointer.down && now - lastShot > fireRate) {
-      shoot();
-      lastShot = now;
-    }
-
-    // Actualizar balas
-    bullets.forEach((b, i) => {
-      b.x += b.vx;
-      b.y += b.vy;
-      if (b.x < 0 || b.x > canvas.width || b.y < 0 || b.y > canvas.height) {
-        bullets.splice(i, 1);
-      }
-    });
-
-    // Actualizar enemigos y detectar colisión con jugador
-    enemies.forEach((e, i) => {
-      e.y += e.speed;
-
-      // Quitar enemigos que bajaron del canvas
-      if (e.y > canvas.height) enemies.splice(i, 1);
-
-      // Colisión jugador-enemigo (rectángulos)
-      const playerLeft = player.x - 15;
-      const playerRight = player.x + 15;
-      const playerTop = player.y - 30;
-      const playerBottom = player.y + 30;
-
-      const enemyLeft = e.x;
-      const enemyRight = e.x + e.size;
-      const enemyTop = e.y;
-      const enemyBottom = e.y + e.size;
-
-      const collision = !(playerRight < enemyLeft ||
-                          playerLeft > enemyRight ||
-                          playerBottom < enemyTop ||
-                          playerTop > enemyBottom);
-
-      if (collision) {
-        gameOver = true;
-        pauseGame();
-        alert('¡Perdiste! Tu puntaje final: ' + score);
-      }
-    });
-
-    // Colisión balas-enemigos para eliminar enemigo y sumar puntos
-    enemies.forEach((e, ei) => {
-      bullets.forEach((b, bi) => {
-        if (
-          b.x > e.x &&
-          b.x < e.x + e.size &&
-          b.y > e.y &&
-          b.y < e.y + e.size
-        ) {
-          enemies.splice(ei, 1);
-          bullets.splice(bi, 1);
-          score++;
-          document.getElementById('score').textContent = `Puntaje: ${score}`;
-        }
-      });
-    });
+  function restartGame() {
+    score = 0;
+    gameOver = false;
+    bullets.length = 0;
+    enemies.length = 0;
+    pauseOverlay.style.visibility = 'hidden';
+    document.getElementById('score').textContent = `Puntaje: ${score}`;
+    gamePaused = false;
+    startSpawning();
+    gameLoop();
   }
 
-  // Dibujar todo
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Ángulo para rotar jugador hacia puntero
-    const angle = Math.atan2(pointer.y - player.y, pointer.x - player.x);
-    ctx.save();
-    ctx.translate(player.x, player.y);
-    ctx.rotate(angle);
-
-    // Guitarra (arma)
-    ctx.fillStyle = '#a22';
-    ctx.fillRect(10, -5, 40, 10);
-    ctx.beginPath();
-    ctx.arc(50, 0, 10, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Cuerpo
-    ctx.fillStyle = '#333';
-    ctx.fillRect(-15, -30, 30, 60);
-
-    // Cabeza
-    ctx.beginPath();
-    ctx.fillStyle = '#f0c89e';
-    ctx.arc(0, -40, 15, 0, Math.PI * 2);
-    ctx.fill();
-
-    ctx.restore();
-
-    // Balas
-    ctx.fillStyle = 'yellow';
-    bullets.forEach(b => {
-      ctx.beginPath();
-      ctx.arc(b.x, b.y, 4, 0, Math.PI * 2);
-      ctx.fill();
-    });
-
-    // Enemigos
-    ctx.fillStyle = 'red';
-    enemies.forEach(e => {
-      ctx.fillRect(e.x, e.y, e.size, e.size);
-    });
-
-    // Mira (puntero)
-    ctx.strokeStyle = 'white';
-    ctx.beginPath();
-    ctx.arc(pointer.x, pointer.y, 5, 0, Math.PI * 2);
-    ctx.stroke();
-  }
-
-  // Bucle principal
-  function gameLoop() {
-    if (!gamePaused) {
-      update();
-      draw();
-      animationFrameId = requestAnimationFrame(gameLoop);
-    }
-  }
-
-  // Pausar juego
   function pauseGame() {
     gamePaused = true;
     pauseOverlay.style.visibility = 'visible';
@@ -578,37 +484,250 @@ document.addEventListener('DOMContentLoaded', () => {
     if (animationFrameId) cancelAnimationFrame(animationFrameId);
   }
 
-  // Reanudar juego (o reiniciar si perdió)
   function resumeGame() {
-    if (gameOver) {
-      score = 0;
-      gameOver = false;
-      bullets.length = 0;
-      enemies.length = 0;
-      document.getElementById('score').textContent = `Puntaje: ${score}`;
+    if (gameOver) restartGame();
+    else {
+      gamePaused = false;
+      pauseOverlay.style.visibility = 'hidden';
+      startSpawning();
+      gameLoop();
     }
-    gamePaused = false;
-    pauseOverlay.style.visibility = 'hidden';
-    startSpawning();
-    gameLoop();
   }
 
   resumeBtn.addEventListener('click', resumeGame);
 
-  // También pausar/reanudar con P
-  window.addEventListener('keydown', e => {
-    if (e.key.toLowerCase() === 'p') {
-      if (gamePaused) resumeGame();
-      else pauseGame();
+  // Disparo automático mientras pointer.down
+  function shoot(time) {
+    if (gamePaused || gameOver) return;
+    if (time - lastShot > fireRate && pointer.down) {
+      const angle = Math.atan2(pointer.y - player.y, pointer.x - player.x);
+      bullets.push({
+        x: player.x + Math.cos(angle) * 20,
+        y: player.y + Math.sin(angle) * 20,
+        vx: Math.cos(angle) * 10,
+        vy: Math.sin(angle) * 10,
+        size: 8
+      });
+      lastShot = time;
     }
-  });
+  }
 
-  // Inicializar joystick cuando cargue la página
+  // Actualizar jugador posición
+  function updatePlayer() {
+    if (keys.left) player.vx = -player.speed;
+    else if (keys.right) player.vx = player.speed;
+    else player.vx = 0;
+
+    player.x += player.vx;
+    if (player.x < 20) player.x = 20;
+    if (player.x > canvas.width - 20) player.x = canvas.width - 20;
+  }
+
+  // Actualizar balas
+  function updateBullets() {
+    for (let i = bullets.length -1; i >=0; i--) {
+      const b = bullets[i];
+      b.x += b.vx;
+      b.y += b.vy;
+
+      // Quitar balas fuera de pantalla
+      if (b.x < 0 || b.x > canvas.width || b.y < 0 || b.y > canvas.height) {
+        bullets.splice(i,1);
+      }
+    }
+  }
+
+  // Actualizar enemigos
+  function updateEnemies() {
+    for (let i = enemies.length -1; i >=0; i--) {
+      const e = enemies[i];
+      e.y += e.speed;
+
+      // Verificar colisión con jugador -> game over
+      const dx = e.x - player.x;
+      const dy = e.y - player.y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < e.size + 20) {
+        gameOver = true;
+        pauseGame();
+        pauseOverlay.firstElementChild.textContent = "¡Perdiste! Puntos: " + score;
+        return;
+      }
+
+      // Quitar enemigos que salen abajo
+      if (e.y > canvas.height + e.size) {
+        enemies.splice(i,1);
+      }
+    }
+  }
+
+  // Colisiones balas - enemigos
+  function checkCollisions() {
+    for (let i = enemies.length -1; i >=0; i--) {
+      const e = enemies[i];
+      for (let j = bullets.length -1; j >=0; j--) {
+        const b = bullets[j];
+        const dx = e.x - b.x;
+        const dy = e.y - b.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < e.size + b.size) {
+          enemies.splice(i,1);
+          bullets.splice(j,1);
+          score++;
+          document.getElementById('score').textContent = `Puntaje: ${score}`;
+          break;
+        }
+      }
+    }
+  }
+
+  // Dibujar jugador metálico con guitarra y cabello
+  function drawPlayer() {
+    ctx.save();
+    ctx.translate(player.x, player.y);
+
+    // Cuerpo - gris metal
+    ctx.fillStyle = '#666';
+    ctx.beginPath();
+    ctx.ellipse(0, 0, 20, 35, 0, 0, Math.PI*2);
+    ctx.fill();
+
+    // Cabeza - metálico
+    ctx.fillStyle = '#555';
+    ctx.beginPath();
+    ctx.ellipse(0, -45, 15, 18, 0, 0, Math.PI*2);
+    ctx.fill();
+
+    // Ojos - blanco con emoción (ojos grandes)
+    ctx.fillStyle = 'white';
+    ctx.beginPath();
+    ctx.ellipse(-6, -48, 5, 7, 0, 0, Math.PI*2);
+    ctx.ellipse(6, -48, 5, 7, 0, 0, Math.PI*2);
+    ctx.fill();
+
+    // Pupilas negras (mirando al puntero)
+    let eyeDirX = pointer.x - player.x;
+    let eyeDirY = pointer.y - (player.y - 48);
+    let eyeAngle = Math.atan2(eyeDirY, eyeDirX);
+    let pupilOffsetX = Math.cos(eyeAngle) * 2;
+    let pupilOffsetY = Math.sin(eyeAngle) * 2;
+    ctx.fillStyle = 'black';
+    ctx.beginPath();
+    ctx.ellipse(-6 + pupilOffsetX, -48 + pupilOffsetY, 2.5, 3.5, 0, 0, Math.PI*2);
+    ctx.ellipse(6 + pupilOffsetX, -48 + pupilOffsetY, 2.5, 3.5, 0, 0, Math.PI*2);
+    ctx.fill();
+
+    // Boca sonriente
+    ctx.strokeStyle = '#222';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(-6, -33);
+    ctx.quadraticCurveTo(0, -25, 6, -33);
+    ctx.stroke();
+
+    // Cabello largo y negro (metalero)
+    ctx.fillStyle = '#111';
+    ctx.beginPath();
+    ctx.moveTo(-18, -60);
+    ctx.bezierCurveTo(-12, -90, 12, -90, 18, -60);
+    ctx.lineTo(18, -40);
+    ctx.bezierCurveTo(12, -70, -12, -70, -18, -40);
+    ctx.closePath();
+    ctx.fill();
+
+    // Sombrero (gorro de lana negro)
+    ctx.fillStyle = '#222';
+    ctx.beginPath();
+    ctx.ellipse(0, -70, 20, 10, 0, 0, Math.PI*2);
+    ctx.fill();
+
+    // Guitarra (arma)
+    ctx.strokeStyle = '#a22';
+    ctx.lineWidth = 4;
+    ctx.lineCap = 'round';
+
+    // Cuerpo guitarra
+    ctx.beginPath();
+    ctx.moveTo(5, -15);
+    ctx.lineTo(40, 0);
+    ctx.lineTo(5, 20);
+    ctx.closePath();
+    ctx.fillStyle = '#800';
+    ctx.fill();
+    ctx.stroke();
+
+    // Mango guitarra
+    ctx.beginPath();
+    ctx.moveTo(40, 0);
+    ctx.lineTo(65, -10);
+    ctx.lineTo(65, 10);
+    ctx.lineTo(40, 0);
+    ctx.stroke();
+
+    // Cuerdas
+    ctx.strokeStyle = '#ccc';
+    for (let i = 0; i < 4; i++) {
+      ctx.beginPath();
+      ctx.moveTo(40 + i*5, -10);
+      ctx.lineTo(40 + i*5, 10);
+      ctx.stroke();
+    }
+
+    ctx.restore();
+  }
+
+  // Dibujar balas
+  function drawBullets() {
+    ctx.fillStyle = '#f33';
+    bullets.forEach(b => {
+      ctx.beginPath();
+      ctx.ellipse(b.x, b.y, b.size, b.size/2, 0, 0, Math.PI*2);
+      ctx.fill();
+    });
+  }
+
+  // Dibujar enemigos (rojos)
+  function drawEnemies() {
+    ctx.fillStyle = '#f00';
+    enemies.forEach(e => {
+      ctx.beginPath();
+      ctx.ellipse(e.x, e.y, e.size, e.size, 0, 0, Math.PI*2);
+      ctx.fill();
+    });
+  }
+
+  // Borrar pantalla
+  function clear() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  // Loop principal
+  function gameLoop(time=0) {
+    if (gamePaused) return;
+
+    clear();
+
+    updatePlayer();
+    updateBullets();
+    updateEnemies();
+    checkCollisions();
+    shoot(time);
+
+    drawPlayer();
+    drawBullets();
+    drawEnemies();
+
+    if (!gameOver) {
+      animationFrameId = requestAnimationFrame(gameLoop);
+    }
+  }
+
+  // Iniciar juego
+  restartGame();
+
+  // Al iniciar, calcular centros joysticks
   initJoystickCenters();
-
-  // Iniciar enemigos y loop
-  startSpawning();
-  gameLoop();
+  window.addEventListener('resize', initJoystickCenters);
 });
 </script>
 </body>
