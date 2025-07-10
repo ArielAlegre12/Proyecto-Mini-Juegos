@@ -3,49 +3,48 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Metalero que dispara y pierde al tocar enemigos</title>
+<title>Metalero que dispara y pierde (con controles móviles)</title>
 <style>
   body {
     margin: 0;
     background: #111;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    user-select: none;
-    position: relative;
     font-family: sans-serif;
     color: white;
+    user-select: none;
+    overflow: hidden;
   }
   #infoText {
     position: absolute;
     top: 10px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 16px;
-    z-index: 10;
+    font-size: 14px;
     max-width: 90vw;
     text-align: center;
+    z-index: 15;
+    line-height: 1.2;
   }
   #score {
     position: absolute;
-    top: 40px;
+    top: 50px;
     left: 50%;
     transform: translateX(-50%);
     font-family: monospace;
     font-size: 18px;
-    z-index: 10;
+    z-index: 15;
   }
   canvas {
+    display: block;
+    margin: 80px auto 0;
     background: #222;
     border: 2px solid #555;
-    display: block;
-    touch-action: none; /* evitar scroll con toque en canvas */
+    touch-action: none; /* para touch no haga scroll */
+    max-width: 100vw;
   }
   #pauseOverlay {
-    position: absolute;
+    position: fixed;
     top: 0; left: 0;
-    width: 100%; height: 100%;
+    width: 100vw; height: 100vh;
     background: rgba(0,0,0,0.75);
     display: flex;
     justify-content: center;
@@ -56,7 +55,7 @@
     font-weight: bold;
     user-select: none;
     visibility: hidden;
-    z-index: 20;
+    z-index: 100;
   }
   #resumeBtn {
     margin-top: 20px;
@@ -71,10 +70,70 @@
   #resumeBtn:hover {
     background: #d33;
   }
+  /* Controles táctiles para móvil */
+  #mobileControls {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90vw;
+    max-width: 600px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 20;
+    user-select: none;
+  }
+  .btnControl {
+    background: #a22;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    line-height: 70px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+    box-shadow: 0 0 10px #700;
+  }
+  .btnControl:active {
+    background: #d33;
+    box-shadow: 0 0 15px #d33;
+  }
+  #btnPauseMobile {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: #a22;
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    font-size: 24px;
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 30;
+    user-select: none;
+    box-shadow: 0 0 10px #700;
+  }
+  #btnPauseMobile:active {
+    background: #d33;
+    box-shadow: 0 0 15px #d33;
+  }
+  @media(min-width: 600px) {
+    #mobileControls, #btnPauseMobile {
+      display: none; /* esconder controles táctiles en PC */
+    }
+  }
 </style>
 </head>
 <body>
-  <div id="infoText">Click o toque para disparar | Moverse con A/D o flechas | Presioná <b>P</b> para pausar</div>
+  <div id="infoText">
+    Click o toque para disparar<br>
+    Moverse con A/D o flechas o botones abajo<br>
+    Presioná <b>P</b> o pausa móvil para pausar
+  </div>
   <div id="score">Puntaje: 0</div>
   <canvas id="game" width="600" height="400"></canvas>
 
@@ -82,6 +141,13 @@
     <div>Juego en pausa</div>
     <button id="resumeBtn">Reanudar</button>
   </div>
+
+  <!-- Controles táctiles -->
+  <div id="mobileControls">
+    <div id="btnLeft" class="btnControl">&#9664;</div>
+    <div id="btnRight" class="btnControl">&#9654;</div>
+  </div>
+  <div id="btnPauseMobile" title="Pausar">⏸</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -103,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
     down: false
   };
 
-  // Estados de teclas presionadas
+  // Estados de teclas presionadas y controles táctiles
   const keys = {
     left: false,
     right: false
@@ -123,6 +189,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const pauseOverlay = document.getElementById('pauseOverlay');
   const resumeBtn = document.getElementById('resumeBtn');
+  const btnLeft = document.getElementById('btnLeft');
+  const btnRight = document.getElementById('btnRight');
+  const btnPauseMobile = document.getElementById('btnPauseMobile');
 
   // Eventos teclado para moverse y pausar
   window.addEventListener('keydown', e => {
@@ -133,10 +202,40 @@ document.addEventListener('DOMContentLoaded', () => {
       else pauseGame();
     }
   });
-
   window.addEventListener('keyup', e => {
     if (e.key === 'a' || e.key === 'ArrowLeft') keys.left = false;
     if (e.key === 'd' || e.key === 'ArrowRight') keys.right = false;
+  });
+
+  // Controles táctiles: mantener presionado para moverse
+  btnLeft.addEventListener('touchstart', e => {
+    e.preventDefault();
+    keys.left = true;
+  });
+  btnLeft.addEventListener('touchend', e => {
+    e.preventDefault();
+    keys.left = false;
+  });
+  btnLeft.addEventListener('touchcancel', e => {
+    keys.left = false;
+  });
+
+  btnRight.addEventListener('touchstart', e => {
+    e.preventDefault();
+    keys.right = true;
+  });
+  btnRight.addEventListener('touchend', e => {
+    e.preventDefault();
+    keys.right = false;
+  });
+  btnRight.addEventListener('touchcancel', e => {
+    keys.right = false;
+  });
+
+  // Botón pausa móvil
+  btnPauseMobile.addEventListener('click', () => {
+    if (gamePaused) resumeGame();
+    else pauseGame();
   });
 
   // Mouse para apuntar y click para disparar
@@ -145,7 +244,6 @@ document.addEventListener('DOMContentLoaded', () => {
     pointer.x = e.clientX - rect.left;
     pointer.y = e.clientY - rect.top;
   });
-
   canvas.addEventListener('mousedown', e => {
     if (e.button === 0) pointer.down = true;
   });
@@ -203,7 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function update() {
     if (gameOver) return; // Si perdió, no actualizar
 
-    // Actualizar velocidad horizontal según teclas
+    // Actualizar velocidad horizontal según teclas y botones
     if (keys.left) player.vx = -player.speed;
     else if (keys.right) player.vx = player.speed;
     else player.vx = 0;
