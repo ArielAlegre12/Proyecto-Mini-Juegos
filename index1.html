@@ -1,913 +1,450 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>Metalero con power-ups y joysticks multitouch</title>
-  <style>
-    /* Reset y base */
-    body {
-      margin: 0;
-      background: #111;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: white;
-      user-select: none;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      padding: 10px;
-      box-sizing: border-box;
-    }
-
-    #instructions {
-      font-size: 14px;
-      max-width: 90vw;
-      text-align: center;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 8px 15px;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      line-height: 1.3;
-    }
-
-    a {
-      color: #a22;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    #backLink {
-      margin-bottom: 10px;
-      user-select: none;
-    }
-
-    canvas {
-      background: #222;
-      border: 2px solid #555;
-      touch-action: none;
-      max-width: 100vw;
-      width: 100%;
-      max-height: 60vh;
-      border-radius: 10px;
-      box-shadow: 0 0 15px #a22;
-    }
-
-    #score {
-      font-family: monospace;
-      font-size: 22px;
-      text-align: center;
-      color: white;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 8px 0;
-      border-radius: 10px;
-      width: 100%;
-      max-width: 600px;
-      margin-top: 12px;
-      user-select: none;
-      box-shadow: 0 0 10px #700;
-    }
-
-    #pauseOverlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.85);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      color: white;
-      font-size: 28px;
-      font-weight: bold;
-      user-select: none;
-      visibility: hidden;
-      z-index: 100;
-      padding: 20px;
-      box-sizing: border-box;
-      text-align: center;
-    }
-
-    #resumeBtn {
-      margin-top: 25px;
-      padding: 12px 30px;
-      background: #a22;
-      border: none;
-      color: white;
-      font-size: 20px;
-      cursor: pointer;
-      border-radius: 8px;
-      box-shadow: 0 0 15px #a22;
-    }
-
-    #resumeBtn:hover {
-      background: #d33;
-    }
-
-    #btnPauseMobile {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      background: #a22;
-      width: 50px;
-      height: 50px;
-      border-radius: 10px;
-      font-size: 28px;
-      line-height: 50px;
-      text-align: center;
-      cursor: pointer;
-      z-index: 30;
-      user-select: none;
-      box-shadow: 0 0 10px #700;
-    }
-
-    #btnPauseMobile:active {
-      background: #d33;
-      box-shadow: 0 0 15px #d33;
-    }
-
-    .joystickContainer {
-      position: fixed;
-      bottom: 20px;
-      width: 180px;
-      height: 180px;
-      touch-action: none;
-      user-select: none;
-      z-index: 25;
-      background: #444;
-      border-radius: 50%;
-      opacity: 0.65;
-      box-shadow: 0 0 20px #a22;
-    }
-
-    .joystickStick {
-      width: 90px;
-      height: 90px;
-      background: #a22;
-      border-radius: 50%;
-      position: absolute;
-      left: 45px;
-      top: 45px;
-      box-shadow: 0 0 15px #700;
-      touch-action: none;
-    }
-
-    #joystickMove {
-      left: 15px;
-      bottom: 20px;
-    }
-
-    #joystickAim {
-      right: 15px;
-      bottom: 20px;
-    }
-
-    /* Ajustes para pantallas pequeñas (celulares) */
-    @media (max-width: 450px) {
-      #instructions {
-        font-size: 12px;
-        padding: 6px 10px;
-      }
-
-      #score {
-        font-size: 18px;
-        padding: 6px 0;
-      }
-
-      .joystickContainer {
-        width: 90px;
-        height: 90px;
-        opacity: 0.7;
-      }
-
-      .joystickStick {
-        width: 45px;
-        height: 45px;
-        left: 22px;
-        top: 22px;
-      }
-
-      #btnPauseMobile {
-        width: 44px;
-        height: 44px;
-        font-size: 24px;
-        line-height: 44px;
-        border-radius: 8px;
-        top: 8px;
-        right: 8px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Metalero: Versión corregida</title>
+<style>
+  body { margin:0;background:#111;color:white;font-family:sans-serif;
+        user-select:none;overflow:hidden;
+        display:flex;flex-direction:column;align-items:center;
+        padding:10px;box-sizing:border-box; }
+  a { color:#a22;text-decoration:none;font-weight:bold; }
+  #backLink { margin-bottom:10px; }
+  #instructions { font-size:14px;background:rgba(0,0,0,0.6);
+                  padding:8px 15px;border-radius:8px;text-align:center;
+                  margin-bottom:10px;line-height:1.3; }
+  canvas { background:#222;border:2px solid #555;
+           max-width:100vw;width:100%;max-height:60vh;
+           border-radius:10px;box-shadow:0 0 15px #a22;
+           touch-action:none; }
+  #score { font-family:monospace;font-size:22px;background:rgba(0,0,0,0.6);
+           padding:8px 0;border-radius:10px;width:100%;
+           max-width:600px;text-align:center;margin-top:12px;
+           box-shadow:0 0 10px #700; }
+  #pauseOverlay { position:fixed;top:0;left:0;width:100vw;height:100vh;
+                  background:rgba(0,0,0,0.85);display:flex;
+                  flex-direction:column;justify-content:center;
+                  align-items:center;font-size:28px;
+                  visibility:hidden;z-index:100;text-align:center;
+                  padding:20px;box-sizing:border-box; }
+  #resumeBtn { margin-top:25px;padding:12px 30px;background:#a22;
+               border:none;color:white;font-size:20px;
+               cursor:pointer;border-radius:8px;
+               box-shadow:0 0 15px #a22; }
+  #resumeBtn:hover { background:#d33; }
+  #btnPauseMobile { position:fixed;top:10px;right:10px;
+                    background:#a22;width:50px;height:50px;
+                    border-radius:10px;font-size:28px;
+                    line-height:50px;text-align:center;
+                    z-index:30;box-shadow:0 0 10px #700;
+                    cursor:pointer; }
+  #btnPauseMobile:active { background:#d33;box-shadow:0 0 15px #d33; }
+  .joystickContainer { position:fixed;bottom:20px;
+                       width:180px;height:180px;background:#444;
+                       border-radius:50%;opacity:0.65;touch-action:none;
+                       user-select:none;z-index:25;
+                       box-shadow:0 0 20px #a22; }
+  .joystickStick { width:90px;height:90px;background:#a22;
+                    border-radius:50%;position:absolute;
+                    left:45px;top:45px;box-shadow:0 0 15px #700;
+                    touch-action:none; }
+  #joystickMove { left:15px; }
+  #joystickAim { right:15px; }
+  @media (max-width:450px){
+    .joystickContainer { width:140px;height:140px; }
+    .joystickStick { width:70px;height:70px;left:35px;top:35px; }
+    #btnPauseMobile { width:44px;height:44px;font-size:24px;
+                      line-height:44px;top:8px;right:8px; }
+    #instructions { font-size:12px;padding:6px 10px; }
+    #score { font-size:18px;padding:6px 0; }
+  }
+</style>
 </head>
-
 <body>
-  <div id="backLink"><a href="/index.html">Volver al inicio</a></div>
 
-  <div id="instructions">
-    Usa joystick izquierdo para mover<br>
-    Usa joystick derecho para apuntar y disparar<br>
-    P para pausar o botón arriba a la derecha<br>
-    Recoge power-ups morados para balas más grandes por 10 segundos
-  </div>
+<div id="backLink"><a href="/index.html">Volver al inicio</a></div>
+<div id="instructions">
+  Usa joystick izquierdo para mover • joystick derecho para apuntar y disparar<br>
+  P para pausar/reanudar • Power-ups morados aumentan balas por 10 s
+</div>
 
-  <canvas id="game" width="600" height="400"></canvas>
+<canvas id="game" width="600" height="400"></canvas>
+<div id="score">Puntaje: 0</div>
 
-  <div id="score">Puntaje: 0</div>
+<div id="pauseOverlay"><div id="pauseText">Juego en pausa</div>
+  <button id="resumeBtn">Reanudar</button>
+</div>
+<div id="btnPauseMobile" title="Pausar">⏸</div>
 
-  <div id="pauseOverlay">
-    <div>Juego en pausa</div>
-    <button id="resumeBtn">Reanudar</button>
-  </div>
+<div id="joystickMove" class="joystickContainer">
+  <div class="joystickStick"></div>
+</div>
+<div id="joystickAim" class="joystickContainer">
+  <div class="joystickStick"></div>
+</div>
 
-  <div id="btnPauseMobile" title="Pausar">⏸</div>
+<script>
+document.addEventListener('DOMContentLoaded', ()=>{
 
-  <div id="joystickMove" class="joystickContainer">
-    <div class="joystickStick"></div>
-  </div>
-  <div id="joystickAim" class="joystickContainer">
-    <div class="joystickStick"></div>
-  </div>
+  /*** Variables básicas ***/
+  const canvas = document.getElementById('game'),
+        ctx = canvas.getContext('2d');
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const canvas = document.getElementById('game');
-      const ctx = canvas.getContext('2d');
+  let player = { x:canvas.width/2, y:canvas.height-60, speed:5, vx:0 },
+      pointer = { x:canvas.width/2, y:canvas.height/2, down:false },
+      keys = { left:false, right:false },
+      bullets = [], enemies = [], powerUps = [],
+      score = 0, lastShot = 0, fireRate = 200,
+      gamePaused = false, gameOver = false,
+      powerUpActive = false, powerUpTimeout = null,
+      spawnInterval = null, animId = null,
+      moveTouchId = null, aimTouchId = null,
+      moveCenter = {}, aimCenter = {};
 
-      // Jugador
-      const player = {
-        x: canvas.width / 2,
-        y: canvas.height - 60,
-        speed: 5,
-        vx: 0
-      };
+  const pauseOverlay = document.getElementById('pauseOverlay'),
+        pauseText = document.getElementById('pauseText'),
+        resumeBtn = document.getElementById('resumeBtn'),
+        btnPauseMobile = document.getElementById('btnPauseMobile'),
+        joystickMove = document.getElementById('joystickMove'),
+        joystickMoveStick = joystickMove.querySelector('.joystickStick'),
+        joystickAim = document.getElementById('joystickAim'),
+        joystickAimStick = joystickAim.querySelector('.joystickStick');
 
-      // Puntero para apuntar y disparar
-      const pointer = {
-        x: canvas.width / 2,
-        y: canvas.height / 2,
-        down: false
-      };
+  /*** Inicialización de joysticks ***/
+  function initJoystick(){
+    const rm = joystickMove.getBoundingClientRect(),
+          ra = joystickAim.getBoundingClientRect();
+    moveCenter = { x:rm.left+rm.width/2, y:rm.top+rm.height/2 };
+    aimCenter = { x:ra.left+ra.width/2, y:ra.top+ra.height/2 };
+    resetMove(); resetAim();
+  }
 
-      // Teclas para movimiento PC
-      const keys = {
-        left: false,
-        right: false
-      };
+  function resetMove(){
+    joystickMoveStick.style.transform = `translate(0,0)`;
+    moveTouchId = null;
+    keys.left = keys.right = false;
+  }
+  function resetAim(){
+    joystickAimStick.style.transform = `translate(0,0)`;
+    aimTouchId = null;
+    pointer.down = false;
+  }
 
-      const bullets = [];
-      const enemies = [];
-      const powerUps = [];
+  function isInside(t,el){
+    const r = el.getBoundingClientRect();
+    return t.clientX>=r.left && t.clientX<=r.right && t.clientY>=r.top && t.clientY<=r.bottom;
+  }
 
-      let score = 0;
-      let lastShot = 0;
-      const fireRate = 200;
-
-      let gamePaused = false;
-      let animationFrameId = null;
-      let spawnInterval = null;
-      let powerUpTimeout = null;
-      let powerUpActive = false;
-      let gameOver = false;
-
-      const pauseOverlay = document.getElementById('pauseOverlay');
-      const resumeBtn = document.getElementById('resumeBtn');
-      const btnPauseMobile = document.getElementById('btnPauseMobile');
-
-      const joystickMove = document.querySelector('#joystickMove');
-      const joystickMoveStick = joystickMove.querySelector('.joystickStick');
-      const joystickAim = document.querySelector('#joystickAim');
-      const joystickAimStick = joystickAim.querySelector('.joystickStick');
-
-      // Variables multitouch: id del dedo activo para cada joystick o null si libre
-      let moveTouchId = null;
-      let aimTouchId = null;
-
-      let moveCenter = { x: 0, y: 0 };
-      let aimCenter = { x: 0, y: 0 };
-
-      let movePos = { x: 0, y: 0 };
-      let aimPos = { x: 0, y: 0 };
-
-      // Inicializar centros joystick
-      function initJoystickCenters() {
-        const rectMove = joystickMove.getBoundingClientRect();
-        moveCenter.x = rectMove.left + rectMove.width / 2;
-        moveCenter.y = rectMove.top + rectMove.height / 2;
-        resetMoveJoystick();
-
-        const rectAim = joystickAim.getBoundingClientRect();
-        aimCenter.x = rectAim.left + rectAim.width / 2;
-        aimCenter.y = rectAim.top + rectAim.height / 2;
-        resetAimJoystick();
+  /*** Eventos táctiles y de mouse ***/
+  function handleTouchStart(e){
+    e.preventDefault();
+    for(const t of e.changedTouches){
+      if(moveTouchId===null && isInside(t, joystickMove)){
+        moveTouchId = t.identifier;
       }
-
-      // Reset joystick movimiento
-      function resetMoveJoystick() {
-        joystickMoveStick.style.transform = 'translate(0px, 0px)';
-        movePos.x = 0;
-        movePos.y = 0;
-        keys.left = false;
-        keys.right = false;
-        moveTouchId = null;
+      if(aimTouchId===null && isInside(t, joystickAim)){
+        aimTouchId = t.identifier;
       }
+    }
+    initJoystick();
+  }
 
-      // Reset joystick apuntado
-      function resetAimJoystick() {
-        joystickAimStick.style.transform = 'translate(0px, 0px)';
-        aimPos.x = 0;
-        aimPos.y = 0;
-        pointer.down = false;
-        aimTouchId = null;
+  function handleTouchMove(e){
+    e.preventDefault();
+    const maxD = parseInt(getComputedStyle(joystickMove).width)/2;
+    for(const t of e.changedTouches){
+      if(t.identifier===moveTouchId){
+        const dx = t.clientX - moveCenter.x,
+              dy = t.clientY - moveCenter.y,
+              dist = Math.hypot(dx,dy),
+              angle = Math.atan2(dy,dx),
+              clamped = Math.min(dist, maxD),
+              sx = Math.cos(angle)*clamped,
+              sy = Math.sin(angle)*clamped;
+        joystickMoveStick.style.transform = `translate(${sx}px,${sy}px)`;
+        keys.left = sx/maxD < -0.3;
+        keys.right = sx/maxD > 0.3;
+        player.vx = keys.left ? -player.speed : (keys.right ? player.speed : 0);
       }
-
-      // Actualizar movimiento jugador según movePos.x (-1 a 1)
-      function updatePlayerFromMoveJoystick() {
-        if (movePos.x < -0.3) {
-          keys.left = true;
-          keys.right = false;
-        } else if (movePos.x > 0.3) {
-          keys.left = false;
-          keys.right = true;
-        } else {
-          keys.left = false;
-          keys.right = false;
-        }
+      if(t.identifier===aimTouchId){
+        const dx = t.clientX - aimCenter.x,
+              dy = t.clientY - aimCenter.y,
+              dist = Math.hypot(dx,dy),
+              angle = Math.atan2(dy,dx),
+              clamped = Math.min(dist, maxD),
+              sx = Math.cos(angle)*clamped,
+              sy = Math.sin(angle)*clamped;
+        joystickAimStick.style.transform = `translate(${sx}px,${sy}px)`;
+        const normX = sx/maxD, normY = sy/maxD;
+        if(normX!==0||normY!==0){
+          pointer.down = true;
+          pointer.x = Math.min(Math.max(player.x+normX*canvas.width,0),canvas.width);
+          pointer.y = Math.min(Math.max(player.y+normY*canvas.height,0),canvas.height);
+        } else pointer.down = false;
       }
+    }
+  }
 
-      // Actualizar puntero según aimPos
-      function updatePointerFromAimJoystick() {
-        if (aimPos.x === 0 && aimPos.y === 0) {
-          pointer.down = false; // no apunta ni dispara si no movió joystick
-          return;
-        }
-        pointer.down = true;
-        pointer.x = player.x + aimPos.x * 100;
-        pointer.y = player.y + aimPos.y * 100;
-        pointer.x = Math.min(Math.max(pointer.x, 0), canvas.width);
-        pointer.y = Math.min(Math.max(pointer.y, 0), canvas.height);
-      }
+  function handleTouchEnd(e){
+    e.preventDefault();
+    for(const t of e.changedTouches){
+      if(t.identifier===moveTouchId) resetMove();
+      if(t.identifier===aimTouchId) resetAim();
+    }
+  }
 
-      // Manejo multitouch para joystick movimiento
-      joystickMove.addEventListener('touchstart', e => {
-        e.preventDefault();
-        initJoystickCenters();
-        for (const touch of e.changedTouches) {
-          if (moveTouchId === null && isTouchInside(touch, joystickMove)) {
-            moveTouchId = touch.identifier;
-            handleMoveJoystick(touch);
-            break;
-          }
-        }
-      }, { passive: false });
+  function handleMouse(e){
+    const r = canvas.getBoundingClientRect();
+    pointer.x = e.clientX - r.left;
+    pointer.y = e.clientY - r.top;
+  }
 
-      joystickMove.addEventListener('touchmove', e => {
-        e.preventDefault();
-        for (const touch of e.changedTouches) {
-          if (touch.identifier === moveTouchId) {
-            handleMoveJoystick(touch);
-            break;
-          }
-        }
-      }, { passive: false });
+  joystickMove.addEventListener('touchstart', handleTouchStart, {passive:false});
+  joystickMove.addEventListener('touchmove', handleTouchMove, {passive:false});
+  joystickMove.addEventListener('touchend', handleTouchEnd, {passive:false});
+  joystickMove.addEventListener('touchcancel', handleTouchEnd, {passive:false});
+  joystickAim.addEventListener('touchstart', handleTouchStart, {passive:false});
+  joystickAim.addEventListener('touchmove', handleTouchMove, {passive:false});
+  joystickAim.addEventListener('touchend', handleTouchEnd, {passive:false});
+  joystickAim.addEventListener('touchcancel', handleTouchEnd, {passive:false});
 
-      joystickMove.addEventListener('touchend', e => {
-        e.preventDefault();
-        for (const touch of e.changedTouches) {
-          if (touch.identifier === moveTouchId) {
-            resetMoveJoystick();
-            break;
-          }
-        }
-      }, { passive: false });
-      joystickMove.addEventListener('touchcancel', e => {
-        e.preventDefault();
-        for (const touch of e.changedTouches) {
-          if (touch.identifier === moveTouchId) {
-            resetMoveJoystick();
-            break;
-          }
-        }
-      }, { passive: false });
+  window.addEventListener('keydown', e=>{
+    if(e.key==='a'||e.key==='ArrowLeft') keys.left = true;
+    if(e.key==='d'||e.key==='ArrowRight') keys.right = true;
+    if(e.key.toLowerCase()==='p') togglePause();
+  });
+  window.addEventListener('keyup', e=>{
+    if(e.key==='a'||e.key==='ArrowLeft') keys.left = false;
+    if(e.key==='d'||e.key==='ArrowRight') keys.right = false;
+  });
 
-      // Manejo multitouch para joystick apuntado
-      joystickAim.addEventListener('touchstart', e => {
-        e.preventDefault();
-        initJoystickCenters();
-        for (const touch of e.changedTouches) {
-          if (aimTouchId === null && isTouchInside(touch, joystickAim)) {
-            aimTouchId = touch.identifier;
-            handleAimJoystick(touch);
-            break;
-          }
-        }
-      }, { passive: false });
+  canvas.addEventListener('mousemove', handleMouse);
+  canvas.addEventListener('mousedown', ()=>pointer.down = true);
+  canvas.addEventListener('mouseup', ()=>pointer.down = false);
 
-      joystickAim.addEventListener('touchmove', e => {
-        e.preventDefault();
-        for (const touch of e.changedTouches) {
-          if (touch.identifier === aimTouchId) {
-            handleAimJoystick(touch);
-            break;
-          }
-        }
-      }, { passive: false });
+  btnPauseMobile.addEventListener('click', togglePause);
 
-      joystickAim.addEventListener('touchend', e => {
-        e.preventDefault();
-        for (const touch of e.changedTouches) {
-          if (touch.identifier === aimTouchId) {
-            resetAimJoystick();
-            break;
-          }
-        }
-      }, { passive: false });
-      joystickAim.addEventListener('touchcancel', e => {
-        e.preventDefault();
-        for (const touch of e.changedTouches) {
-          if (touch.identifier === aimTouchId) {
-            resetAimJoystick();
-            break;
-          }
-        }
-      }, { passive: false });
-
-      // Helper para saber si un touch está dentro del contenedor joystick
-      function isTouchInside(touch, container) {
-        const rect = container.getBoundingClientRect();
-        return (
-          touch.clientX >= rect.left &&
-          touch.clientX <= rect.right &&
-          touch.clientY >= rect.top &&
-          touch.clientY <= rect.bottom
-        );
-      }
-
-      function handleMoveJoystick(touch) {
-        const dx = touch.clientX - moveCenter.x;
-        const dy = touch.clientY - moveCenter.y;
-        const maxDist = 50;
-        let dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist > maxDist) dist = maxDist;
-        const angle = Math.atan2(dy, dx);
-        const stickX = Math.cos(angle) * dist;
-        const stickY = Math.sin(angle) * dist;
-        joystickMoveStick.style.transform = `translate(${stickX}px, ${stickY}px)`;
-        movePos.x = stickX / maxDist;
-        movePos.y = stickY / maxDist;
-        updatePlayerFromMoveJoystick();
-      }
-
-      function handleAimJoystick(touch) {
-        const dx = touch.clientX - aimCenter.x;
-        const dy = touch.clientY - aimCenter.y;
-        const maxDist = 50;
-        let dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist > maxDist) dist = maxDist;
-        const angle = Math.atan2(dy, dx);
-        const stickX = Math.cos(angle) * dist;
-        const stickY = Math.sin(angle) * dist;
-        joystickAimStick.style.transform = `translate(${stickX}px, ${stickY}px)`;
-        aimPos.x = stickX / maxDist;
-        aimPos.y = stickY / maxDist;
-        updatePointerFromAimJoystick();
-      }
-
-      // Teclado PC para mover y pausar
-      window.addEventListener('keydown', e => {
-        if (e.key === 'a' || e.key === 'ArrowLeft') keys.left = true;
-        if (e.key === 'd' || e.key === 'ArrowRight') keys.right = true;
-        if (e.key.toLowerCase() === 'p') {
-          if (gamePaused) resumeGame();
-          else pauseGame();
-        }
-      });
-      window.addEventListener('keyup', e => {
-        if (e.key === 'a' || e.key === 'ArrowLeft') keys.left = false;
-        if (e.key === 'd' || e.key === 'ArrowRight') keys.right = false;
-      });
-
-      // Mouse apuntado y disparo
-      canvas.addEventListener('mousemove', e => {
-        const rect = canvas.getBoundingClientRect();
-        pointer.x = e.clientX - rect.left;
-        pointer.y = e.clientY - rect.top;
-      });
-      canvas.addEventListener('mousedown', e => {
-        if (e.button === 0) pointer.down = true;
-      });
-      canvas.addEventListener('mouseup', e => {
-        if (e.button === 0) pointer.down = false;
-      });
-
-      // Touch canvas para disparar apuntado (opcional)
-      canvas.addEventListener('touchstart', e => {
-        e.preventDefault();
-        const rect = canvas.getBoundingClientRect();
-        const touch = e.touches[0];
-        pointer.x = touch.clientX - rect.left;
-        pointer.y = touch.clientY - rect.top;
-        pointer.down = true;
-      }, { passive: false });
-      canvas.addEventListener('touchmove', e => {
-        e.preventDefault();
-        const rect = canvas.getBoundingClientRect();
-        const touch = e.touches[0];
-        pointer.x = touch.clientX - rect.left;
-        pointer.y = touch.clientY - rect.top;
-      }, { passive: false });
-      canvas.addEventListener('touchend', e => {
-        e.preventDefault();
-        pointer.down = false;
-      }, { passive: false });
-
-      // Botón pausa
-      btnPauseMobile.addEventListener('click', () => {
-        if (gamePaused) resumeGame();
-        else pauseGame();
-      });
-
-      // Función para crear un power-up
-      function spawnPowerUp() {
-        if (gamePaused || gameOver) return;
-        const x = Math.random() * (canvas.width - 30) + 15;
-        powerUps.push({
-          x,
-          y: -20,
-          size: 20,
-          speed: 2,
-          active: true
-        });
-      }
-      function startSpawning() {
-        spawnInterval = setInterval(() => {
-          spawnEnemy();
-          // Cada 10 segundos chance de power-up
-          if (Math.random() < 0.25) spawnPowerUp();
-        }, 1000);
-      }
-      function stopSpawning() {
-        clearInterval(spawnInterval);
-      }
-      function spawnEnemy() {
-        if (gamePaused || gameOver) return;
-        const x = Math.random() * (canvas.width - 30) + 15;
-        enemies.push({
-          x,
-          y: -20,
-          size: 30,
-          speed: 2 + Math.random() * 1.5
-        });
-      }
-
-      // Actualizar jugador
-      function updatePlayer() {
-        if (keys.left) player.vx = -player.speed;
-        else if (keys.right) player.vx = player.speed;
-        else player.vx = 0;
-
-        player.x += player.vx;
-        player.x = Math.min(Math.max(player.x, 20), canvas.width - 20);
-      }
-
-      // Actualizar balas
-      function updateBullets() {
-        for (let i = bullets.length - 1; i >= 0; i--) {
-          const b = bullets[i];
-          b.x += Math.cos(b.angle) * b.speed;
-          b.y += Math.sin(b.angle) * b.speed;
-
-          if (
-            b.x < 0 || b.x > canvas.width ||
-            b.y < 0 || b.y > canvas.height
-          ) {
-            bullets.splice(i, 1);
-          }
-        }
-      }
-
-      // Actualizar enemigos y power-ups
-      function updateEnemies() {
-        for (let i = enemies.length - 1; i >= 0; i--) {
-          const e = enemies[i];
-          e.y += e.speed;
-
-          // Colisión con jugador - game over
-          const dx = e.x - player.x;
-          const dy = e.y - player.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < e.size + 20) {
-            gameOver = true;
-            pauseGame();
-            pauseOverlay.firstElementChild.textContent = "¡Perdiste! Puntos: " + score;
-            return;
-          }
-
-          // Enemigo pasa abajo -> pierde punto
-          if (e.y > canvas.height + e.size) {
-            enemies.splice(i, 1);
-            score = Math.max(0, score - 1);
-            document.getElementById('score').textContent = `Puntaje: ${score}`;
-          }
-        }
-
-        for (let i = powerUps.length - 1; i >= 0; i--) {
-          const p = powerUps[i];
-          p.y += p.speed;
-
-          // Colisión con jugador -> activar power-up
-          const dx = p.x - player.x;
-          const dy = p.y - player.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < p.size + 20) {
-            powerUps.splice(i, 1);
-            activatePowerUp();
-          }
-
-          // Power-up pasa abajo -> simplemente eliminar
-          if (p.y > canvas.height + p.size) {
-            powerUps.splice(i, 1);
-          }
-        }
-      }
-
-      // Detectar colisiones balas - enemigos
-      function checkCollisions() {
-        for (let i = enemies.length - 1; i >= 0; i--) {
-          const e = enemies[i];
-          for (let j = bullets.length - 1; j >= 0; j--) {
-            const b = bullets[j];
-            const dx = e.x - b.x;
-            const dy = e.y - b.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < e.size + b.size) {
-              enemies.splice(i, 1);
-              bullets.splice(j, 1);
-              score++;
-              document.getElementById('score').textContent = `Puntaje: ${score}`;
-              break;
-            }
-          }
-        }
-      }
-
-      // Función disparar
-      function shoot(time) {
-        if (time - lastShot > fireRate && pointer.down && !gamePaused && !gameOver) {
-          bullets.push({
-            x: player.x,
-            y: player.y - 15,
-            size: powerUpActive ? 14 : 6,
-            speed: 8,
-            angle: Math.atan2(pointer.y - player.y, pointer.x - player.x)
-          });
-          lastShot = time;
-        }
-      }
-
-      // Dibujar jugador metálico con guitarra y cabello
-      function drawPlayer() {
-        ctx.save();
-        ctx.translate(player.x, player.y);
-
-        // Cuerpo
-        ctx.fillStyle = '#666';
-        ctx.beginPath();
-        ctx.ellipse(0, 0, 20, 35, 0, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Cabeza
-        ctx.fillStyle = '#555';
-        ctx.beginPath();
-        ctx.ellipse(0, -45, 15, 18, 0, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Ojos blancos
-        ctx.fillStyle = 'white';
-        ctx.beginPath();
-        ctx.ellipse(-6, -48, 5, 7, 0, 0, Math.PI * 2);
-        ctx.ellipse(6, -48, 5, 7, 0, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Pupilas negras mirando puntero
-        let eyeDirX = pointer.x - player.x;
-        let eyeDirY = pointer.y - (player.y - 48);
-        let eyeAngle = Math.atan2(eyeDirY, eyeDirX);
-        let pupilOffsetX = Math.cos(eyeAngle) * 2;
-        let pupilOffsetY = Math.sin(eyeAngle) * 2;
-        ctx.fillStyle = 'black';
-        ctx.beginPath();
-        ctx.ellipse(-6 + pupilOffsetX, -48 + pupilOffsetY, 2.5, 3.5, 0, 0, Math.PI * 2);
-        ctx.ellipse(6 + pupilOffsetX, -48 + pupilOffsetY, 2.5, 3.5, 0, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Boca sonriente
-        ctx.strokeStyle = '#222';
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(-6, -33);
-        ctx.quadraticCurveTo(0, -25, 6, -33);
-        ctx.stroke();
-
-        // Cabello largo y negro (metalero)
-        ctx.fillStyle = '#111';
-        ctx.beginPath();
-        ctx.moveTo(-18, -60);
-        ctx.bezierCurveTo(-12, -90, 12, -90, 18, -60);
-        ctx.lineTo(18, -40);
-        ctx.bezierCurveTo(12, -70, -12, -70, -18, -40);
-        ctx.closePath();
-        ctx.fill();
-
-        // Sombrero (gorro de lana negro)
-        ctx.fillStyle = '#222';
-        ctx.beginPath();
-        ctx.ellipse(0, -70, 20, 10, 0, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Guitarra (arma)
-        ctx.strokeStyle = '#a22';
-        ctx.lineWidth = 4;
-        ctx.lineCap = 'round';
-
-        // Cuerpo guitarra
-        ctx.beginPath();
-        ctx.moveTo(5, -15);
-        ctx.lineTo(40, 0);
-        ctx.lineTo(5, 20);
-        ctx.closePath();
-        ctx.fillStyle = '#800';
-        ctx.fill();
-        ctx.stroke();
-
-        // Mango guitarra
-        ctx.beginPath();
-        ctx.moveTo(40, 0);
-        ctx.lineTo(65, -10);
-        ctx.lineTo(65, 10);
-        ctx.lineTo(40, 0);
-        ctx.stroke();
-
-        // Cuerdas guitarra
-        ctx.strokeStyle = '#ccc';
-        for (let i = 0; i < 4; i++) {
-          ctx.beginPath();
-          ctx.moveTo(40 + i * 5, -10);
-          ctx.lineTo(40 + i * 5, 10);
-          ctx.stroke();
-        }
-
-        ctx.restore();
-      }
-
-      // Dibujar balas
-      function drawBullets() {
-        ctx.fillStyle = '#f33';
-        bullets.forEach(b => {
-          ctx.beginPath();
-          ctx.ellipse(b.x, b.y, b.size, b.size / 2, 0, 0, Math.PI * 2);
-          ctx.fill();
-        });
-      }
-
-      // Dibujar enemigos rojos
-      function drawEnemies() {
-        ctx.fillStyle = '#f00';
-        enemies.forEach(e => {
-          ctx.beginPath();
-          ctx.ellipse(e.x, e.y, e.size, e.size, 0, 0, Math.PI * 2);
-          ctx.fill();
-        });
-      }
-
-      // Dibujar power-ups morados
-      function drawPowerUps() {
-        ctx.fillStyle = '#a2a';
-        powerUps.forEach(p => {
-          ctx.beginPath();
-          ctx.ellipse(p.x, p.y, p.size, p.size, 0, 0, Math.PI * 2);
-          ctx.fill();
-
-          // Cruz dentro del power-up
-          ctx.strokeStyle = '#eee';
-          ctx.lineWidth = 2;
-          ctx.beginPath();
-          ctx.moveTo(p.x - p.size / 2, p.y);
-          ctx.lineTo(p.x + p.size / 2, p.y);
-          ctx.moveTo(p.x, p.y - p.size / 2);
-          ctx.lineTo(p.x, p.y + p.size / 2);
-          ctx.stroke();
-        });
-      }
-
-      // Limpiar pantalla
-      function clear() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-      }
-
-      // Función activar power-up (balas grandes por 10s)
-      function activatePowerUp() {
-        powerUpActive = true;
-        // Cambiar color del score para aviso visual
-        document.getElementById('score').style.color = '#a2a';
-        if (powerUpTimeout) clearTimeout(powerUpTimeout);
-        powerUpTimeout = setTimeout(() => {
-          powerUpActive = false;
-          document.getElementById('score').style.color = 'white';
-        }, 10000);
-      }
-
-      // Loop principal juego
-      function gameLoop(time = 0) {
-        if (gamePaused) return;
-
-        clear();
-
-        updatePlayer();
-        updateBullets();
-        updateEnemies();
-        checkCollisions();
-        shoot(time);
-
-        drawPlayer();
-        drawBullets();
-        drawEnemies();
-        drawPowerUps();
-
-        if (!gameOver) {
-          animationFrameId = requestAnimationFrame(gameLoop);
-        }
-      }
-
-      // Pausar juego
-      function pauseGame() {
-        gamePaused = true;
-        pauseOverlay.style.visibility = 'visible';
-        cancelAnimationFrame(animationFrameId);
-        stopSpawning();
-      }
-
-      // Reanudar juego
-      function resumeGame() {
-        if (gameOver) return;
-        gamePaused = false;
+  /*** Funciones de juego ***/
+  function togglePause(){
+    gamePaused = !gamePaused;
+    if(gamePaused){
+      pauseOverlay.style.visibility = 'visible';
+      cancelAnimationFrame(animId);
+      clearInterval(spawnInterval);
+    } else {
+      if(gameOver){
+        location.reload(); // recarga la página para reiniciar
+      } else {
         pauseOverlay.style.visibility = 'hidden';
-        animationFrameId = requestAnimationFrame(gameLoop);
-        startSpawning();
+        startGame();
       }
+    }
+  }
 
-      // Reiniciar juego
-      function restartGame() {
-        score = 0;
-        gameOver = false;
-        powerUpActive = false;
-        document.getElementById('score').textContent = `Puntaje: ${score}`;
-        document.getElementById('score').style.color = 'white';
-        pauseOverlay.firstElementChild.textContent = "Juego en pausa";
-        enemies.length = 0;
-        bullets.length = 0;
-        powerUps.length = 0;
-        player.x = canvas.width / 2;
-        player.y = canvas.height - 60;
-        resumeGame();
-      }
+  resumeBtn.addEventListener('click', togglePause);
 
-      // Empezar generación enemigos y power-ups
-      startSpawning();
-      resumeGame(); // Inicia el juego al cargar
+  function spawnEnemy(){
+    if(gamePaused||gameOver) return;
+    enemies.push({ x:Math.random()*(canvas.width-30)+15, y:-20, size:30, speed:2+Math.random()*1.5 });
+  }
+  function spawnPowerUp(){
+    if(gamePaused||gameOver) return;
+    powerUps.push({ x:Math.random()*(canvas.width-30)+15, y:-20, size:20, speed:2 });
+  }
 
+  function startGame(){
+    initJoystick();
+    spawnInterval = setInterval(()=>{
+      spawnEnemy();
+      if(Math.random()<0.3) spawnPowerUp();
+    }, 1000);
+    animId = requestAnimationFrame(loop);
+  }
 
-      // Evento botón reanudar
-      resumeBtn.addEventListener('click', resumeGame);
+  function activatePowerUp(){
+    powerUpActive = true;
+    document.getElementById('score').style.color = '#a2a';
+    clearTimeout(powerUpTimeout);
+    powerUpTimeout = setTimeout(()=>{
+      powerUpActive = false;
+      document.getElementById('score').style.color = 'white';
+    }, 10000);
+  }
 
-      // Inicializar joystick y actualizar al redimensionar ventana
-      initJoystickCenters();
-      window.addEventListener('resize', initJoystickCenters);
+  function loop(time){
+    animId = requestAnimationFrame(loop);
 
-      // Función disparo llamada en loop
-      function shoot(time) {
-        if (time - lastShot > fireRate && pointer.down && !gamePaused && !gameOver) {
-          bullets.push({
-            x: player.x,
-            y: player.y - 15,
-            size: powerUpActive ? 14 : 6,
-            speed: 8,
-            angle: Math.atan2(pointer.y - player.y, pointer.x - player.x)
-          });
-          lastShot = time;
-        }
-      }
+    // Movimiento
+    player.x += player.vx;
+    player.x = Math.max(20,Math.min(canvas.width-20,player.x));
 
-      // Comentar cada función / línea si querés que te explique
+    // Disparo automático
+    if(time - lastShot > fireRate && pointer.down && !gamePaused && !gameOver){
+      bullets.push({
+        x: player.x, y: player.y-15,
+        size: powerUpActive ? 14 : 6,
+        speed: 8,
+        angle: Math.atan2(pointer.y - player.y, pointer.x - player.x)
+      });
+      lastShot = time;
+    }
+
+    // Actualizar balas
+    bullets = bullets.filter(b=>{
+      b.x += Math.cos(b.angle)*b.speed;
+      b.y += Math.sin(b.angle)*b.speed;
+      return b.x>=0 && b.x<=canvas.width && b.y>=0 && b.y<=canvas.height;
     });
-  </script>
-</body>
 
+    // Enemigos y poderosos
+    enemies = enemies.filter(e=>{
+      e.y += e.speed;
+      const d = Math.hypot(e.x-player.x, e.y-player.y);
+      if(d < e.size + 20){
+        gameOver = true; togglePause();
+        pauseText.innerText = `¡Perdiste! Puntos: ${score}`;
+        return false;
+      }
+      if(e.y > canvas.height + e.size){
+        score = Math.max(0, score-1);
+        document.getElementById('score').innerText = `Puntaje: ${score}`;
+        return false;
+      }
+      return true;
+    });
+
+    powerUps = powerUps.filter(p=>{
+      p.y += p.speed;
+      const d = Math.hypot(p.x-player.x, p.y-player.y);
+      if(d < p.size + 20){ activatePowerUp(); return false; }
+      return p.y <= canvas.height + p.size;
+    });
+
+    // Colisiones balas - enemigos
+    enemies.forEach((e, ei)=>{
+      bullets.forEach((b, bi)=>{
+        if(Math.hypot(e.x-b.x, e.y-b.y) < e.size + b.size){
+          enemies.splice(ei,1);
+          bullets.splice(bi,1);
+          score++;
+          document.getElementById('score').innerText = `Puntaje: ${score}`;
+        }
+      });
+    });
+
+    // Dibujar todo
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    drawPlayer();
+    bullets.forEach(b=>{
+      ctx.fillStyle='#f33';
+      ctx.beginPath();
+      ctx.ellipse(b.x,b.y,b.size,b.size/2,0,0,Math.PI*2);
+      ctx.fill();
+    });
+    powerUps.forEach(p=>{
+      ctx.fillStyle='#a2a';
+      ctx.beginPath();
+      ctx.ellipse(p.x,p.y,p.size,p.size,0,0,Math.PI*2);
+      ctx.fill();
+      ctx.strokeStyle='#eee';
+      ctx.lineWidth=2;
+      ctx.beginPath();
+      ctx.moveTo(p.x-p.size/2,p.y);
+      ctx.lineTo(p.x+p.size/2,p.y);
+      ctx.moveTo(p.x,p.y-p.size/2);
+      ctx.lineTo(p.x,p.y+p.size/2);
+      ctx.stroke();
+    });
+    enemies.forEach(e=>{
+      ctx.fillStyle='#f00';
+      ctx.beginPath();
+      ctx.ellipse(e.x,e.y,e.size,e.size,0,0,Math.PI*2);
+      ctx.fill();
+    });
+
+    function drawPlayer(){
+      ctx.save();
+      ctx.translate(player.x,player.y);
+      ctx.fillStyle='#666';
+      ctx.beginPath();
+      ctx.ellipse(0,0,20,35,0,0,2*Math.PI);
+      ctx.fill();
+
+      ctx.fillStyle='#555';
+      ctx.beginPath();
+      ctx.ellipse(0,-45,15,18,0,0,2*Math.PI);
+      ctx.fill();
+
+      const dx = pointer.x-player.x,
+            dy = pointer.y-(player.y-48),
+            ang = Math.atan2(dy,dx),
+            ox = Math.cos(ang)*2,
+            oy = Math.sin(ang)*2;
+
+      ctx.fillStyle='white';
+      ctx.beginPath();
+      ctx.ellipse(-6,-48,5,7,0,0,2*Math.PI);
+      ctx.ellipse(6,-48,5,7,0,0,2*Math.PI);
+      ctx.fill();
+
+      ctx.fillStyle='black';
+      ctx.beginPath();
+      ctx.ellipse(-6+ox,-48+oy,2.5,3.5,0,0,2*Math.PI);
+      ctx.ellipse(6+ox,-48+oy,2.5,3.5,0,0,2*Math.PI);
+      ctx.fill();
+
+      ctx.strokeStyle='#222';
+      ctx.lineWidth=2;
+      ctx.beginPath();
+      ctx.moveTo(-6,-33);
+      ctx.quadraticCurveTo(0,-25,6,-33);
+      ctx.stroke();
+
+      ctx.fillStyle='#111';
+      ctx.beginPath();
+      ctx.moveTo(-18,-60);
+      ctx.bezierCurveTo(-12,-90,12,-90,18,-60);
+      ctx.lineTo(18,-40);
+      ctx.bezierCurveTo(12,-70,-12,-70,-18,-40);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.fillStyle='#222';
+      ctx.beginPath();
+      ctx.ellipse(0,-70,20,10,0,0,2*Math.PI);
+      ctx.fill();
+
+      ctx.strokeStyle='#a22'; ctx.lineWidth=4; ctx.lineCap='round';
+      ctx.beginPath();
+      ctx.moveTo(5,-15);
+      ctx.lineTo(40,0);
+      ctx.lineTo(5,20);
+      ctx.closePath();
+      ctx.fillStyle='#800'; ctx.fill();
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(40,0);
+      ctx.lineTo(65,-10);
+      ctx.lineTo(65,10);
+      ctx.lineTo(40,0);
+      ctx.stroke();
+
+      ctx.strokeStyle='#ccc';
+      for(let i=0;i<4;i++){
+        ctx.beginPath();
+        ctx.moveTo(40+i*5,-10);
+        ctx.lineTo(40+i*5,10);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+  }
+
+  // 🌟 Iniciar con retraso para asegurar que todo esté listo
+  setTimeout(startGame, 100);
+});
+</script>
+</body>
 </html>
