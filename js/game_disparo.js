@@ -1,6 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('game');
   const ctx = canvas.getContext('2d');
+  document.getElementById('exitBtn').addEventListener('click', () => {
+    window.location.href = '/index.html';
+  });
+
   //sonido de fondo
   const backgroundMusic = new Audio('backgraund/space-sound-109576.mp3');
   backgroundMusic.loop = true;
