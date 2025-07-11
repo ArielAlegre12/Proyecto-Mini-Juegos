@@ -422,11 +422,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Mover enemigos
-    for (let i = enemies.length - 1; i >= 0; i--) {
-      const e = enemies[i];
-      e.y += e.speed;
-      if (e.y - e.size > canvas.height) enemies.splice(i, 1);
-    }
+    // Mover enemigos
+for (let i = enemies.length - 1; i >= 0; i--) {
+  const e = enemies[i];
+  e.y += e.speed;
+  if (e.y - e.size > canvas.height) {
+    enemies.splice(i, 1);
+    score -= 1; // Resta 1 punto, puede ser negativo
+    updateScoreDisplay(); // Actualiza en pantalla
+  }
+}
+
 
     // Mover power-ups
     for (let i = powerUps.length - 1; i >= 0; i--) {
