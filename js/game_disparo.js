@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('game');
   const ctx = canvas.getContext('2d');
 
+
   // Jugador con posicion, velocidad y tamaño normal
   const player = {
     x: canvas.width / 2,
@@ -27,6 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const bullets = [];
   const enemies = [];
   const powerUps = [];
+  const explosions = []; 
+
 
   let score = 0;
   let lastShot = 0;
@@ -63,6 +66,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let movePos = { x: 0, y: 0 };
   let aimPos = { x: 0, y: 0 };
+ 
+
+  function createExplosion(x, y) { 
+  for (let i = 0; i < 15; i++) {
+    explosions.push({
+      x,
+      y,
+      vx: (Math.random() - 0.5) * 4,
+      vy: (Math.random() - 0.5) * 4,
+      life: 30,
+      color: `hsl(${Math.random() * 360}, 100%, 60%)`
+    });
+  }
+} 
+ 
+
 
   // Mostrar puntaje en pantalla
   function updateScoreDisplay() {
@@ -426,6 +445,7 @@ document.addEventListener('DOMContentLoaded', () => {
           enemies.splice(i, 1);
           bullets.splice(j, 1);
           score++;
+          createExplosion(e.x, e.y);
           if (score > bestScore) {
             bestScore = score;
             localStorage.setItem('bestScore', bestScore);
@@ -436,6 +456,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
+    
+
 
     // Chequear colision jugador - enemigos
     for (const e of enemies) {
@@ -447,7 +469,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
     }
-
+    
     // Chequear colision jugador - powerUps
     for (let i = powerUps.length - 1; i >= 0; i--) {
       const p = powerUps[i];
@@ -464,6 +486,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (powerUpActive && time > powerUpEndTime) {
       powerUpActive = false;
     }
+
+    // Actualizar explosiones
+    for (let i = explosions.length - 1; i >= 0; i--) {
+  const p = explosions[i];
+  p.x += p.vx;
+  p.y += p.vy;
+  p.life--;
+  if (p.life <= 0) explosions.splice(i, 1);
+}
+
   }
 
   // Dibujar el jugador con detalles como antes (guitarra, cabello, etc)
@@ -511,14 +543,38 @@ function drawPlayer() {
 
 
   // Dibujar balas
-  function drawBullets() {
-    for (const b of bullets) {
-      ctx.fillStyle = powerUpActive ? '#d9a0ff' : '#ff8';
-      ctx.beginPath();
-      ctx.arc(b.x, b.y, b.size, 0, Math.PI * 2);
-      ctx.fill();
-    }
+function drawBullets() {
+  for (const b of bullets) {
+    // Color según powerUp activo
+    ctx.fillStyle = powerUpActive ? '#d9a0ff' : '#ff8';
+
+    // Dibujar círculo principal
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, b.size, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Agregar un pequeño resplandor alrededor (halo)
+    const gradient = ctx.createRadialGradient(b.x, b.y, b.size * 0.5, b.x, b.y, b.size * 2);
+    gradient.addColorStop(0, 'rgba(255, 255, 200, 0.7)');
+    gradient.addColorStop(1, 'rgba(255, 255, 200, 0)');
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, b.size * 2, 0, Math.PI * 2);
+    ctx.fill();
   }
+}
+
+function drawExplosions() {
+  for (const p of explosions) {
+    ctx.fillStyle = p.color;
+    ctx.globalAlpha = p.life / 30;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+}
+
 
   // Dibujar enemigos (círculos rojos)
 
@@ -599,6 +655,7 @@ function drawPlayer() {
     drawBullets();
     drawEnemies(time);
     drawPowerUps();
+    drawExplosions();
 
     // Mostrar texto pausa en overlay si pausado o game over
     if (gamePaused) {
