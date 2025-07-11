@@ -1,6 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('game');
   const ctx = canvas.getContext('2d');
+//sonido de fondo
+  const backgroundMusic = new Audio('backgraund/space-sound-109576.mp3');
+  backgroundMusic.loop = true;
+  backgroundMusic.volume = 0.3;
+
+// Cargar sonido de disparo
+const shootSound = new Audio('backgraund/laser-shot-.mp3');
+shootSound.volume = 0.5;  // volumen ajustable
 
 
   // Jugador con posicion, velocidad y tamaño normal
@@ -67,6 +75,15 @@ document.addEventListener('DOMContentLoaded', () => {
   let movePos = { x: 0, y: 0 };
   let aimPos = { x: 0, y: 0 };
  
+  // Inicializar música al primer click
+   function startMusic() {
+    backgroundMusic.play().catch(() => {
+      console.log('Reproducción bloqueada hasta interacción');
+    });
+    document.removeEventListener('click', startMusic);
+  }
+
+  document.addEventListener('click', startMusic);
 
   function createExplosion(x, y) { 
   for (let i = 0; i < 15; i++) {
@@ -385,24 +402,32 @@ document.addEventListener('DOMContentLoaded', () => {
   resumeBtn.addEventListener('click', resumeGame);
 
   // Disparo automático mientras pointer.down
-  function shoot(time) {
-    if (gamePaused || gameOver) return;
-    if (time - lastShot > fireRate && pointer.down) {
-      const dx = pointer.x - player.x;
-      const dy = pointer.y - player.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      const speed = 10;
-      const size = powerUpActive ? 12 : 6; // disparo más grande si powerup activo
-      bullets.push({
-        x: player.x,
-        y: player.y,
-        vx: (dx / dist) * speed,
-        vy: (dy / dist) * speed,
-        size
-      });
-      lastShot = time;
-    }
+ function shoot(time) {
+  if (gamePaused || gameOver) return;
+
+  if (time - lastShot > fireRate && pointer.down) {
+    const dx = pointer.x - player.x;
+    const dy = pointer.y - player.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    const speed = 10;
+    const size = powerUpActive ? 12 : 6;
+
+    bullets.push({
+      x: player.x,
+      y: player.y,
+      vx: (dx / dist) * speed,
+      vy: (dy / dist) * speed,
+      size
+    });
+
+    // Reproducir sonido de disparo (reiniciando para poder disparar rápido)
+    shootSound.currentTime = 0;
+    shootSound.play();
+
+    lastShot = time;
   }
+}
+
 
   // Actualizar lógica del juego
   function update(time) {
