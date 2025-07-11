@@ -48,6 +48,7 @@ powerUpSound.volume = 0.5;  // podés ajustar volumen
   let lastShot = 0;
   const fireRate = 200;
 
+  let soundEnabled = true;
   let gamePaused = false;
   let animationFrameId = null;
   let spawnInterval = null;
@@ -64,11 +65,27 @@ powerUpSound.volume = 0.5;  // podés ajustar volumen
   const pauseOverlay = document.getElementById('pauseOverlay');
   const resumeBtn = document.getElementById('resumeBtn');
   const btnPauseMobile = document.getElementById('btnPauseMobile');
+  // Botón para activar/desactivar sonido
+const toggleSoundBtn = document.getElementById('toggleSoundBtn');
+toggleSoundBtn.addEventListener('click', () => {
+  soundEnabled = !soundEnabled;
+  localStorage.setItem('soundEnabled', soundEnabled);
+  updateSoundButton();
+  if (soundEnabled) {
+    backgroundMusic.play();
+  } else {
+    backgroundMusic.pause();
+  }
+});
+
+
 
   const joystickMove = document.querySelector('#joystickMove');
   const joystickMoveStick = joystickMove.querySelector('.joystickStick');
   const joystickAim = document.querySelector('#joystickAim');
   const joystickAimStick = joystickAim.querySelector('.joystickStick');
+
+  
 
   // Variables multitouch para sticks (igual que antes)
   let moveTouchId = null;
@@ -89,6 +106,12 @@ powerUpSound.volume = 0.5;  // podés ajustar volumen
   }
 
   document.addEventListener('click', startMusic);
+
+  function playSound(sound) {
+  if (!soundEnabled) return;
+  sound.currentTime = 0;
+  sound.play();
+}
 
   function createExplosion(x, y) { 
   for (let i = 0; i < 15; i++) {
@@ -406,6 +429,13 @@ powerUpSound.volume = 0.5;  // podés ajustar volumen
 
   resumeBtn.addEventListener('click', resumeGame);
 
+  function updateSoundButton() {
+  if (toggleSoundBtn) {
+    toggleSoundBtn.textContent = soundEnabled ? 'Sonido: ON 🔊' : 'Sonido: OFF 🔇';
+  }
+}
+
+
   // Disparo automático mientras pointer.down
  function shoot(time) {
   if (gamePaused || gameOver) return;
@@ -427,7 +457,11 @@ powerUpSound.volume = 0.5;  // podés ajustar volumen
 
     // Reproducir sonido de disparo (reiniciando para poder disparar rápido)
     shootSound.currentTime = 0;
-    shootSound.play();
+    if (soundEnabled) {
+  shootSound.currentTime = 0;
+  shootSound.play();
+}
+
 
     lastShot = time;
   }
