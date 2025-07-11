@@ -402,7 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
     enemies.length = 0;
     powerUps.length = 0;
     pauseOverlay.style.visibility = 'hidden';
-    pauseOverlay.firstElementChild.textContent = "Juego en pausa";
+    pauseOverlay.firstElementChild.textContent = "Menu de pausa Rey";
     updateScoreDisplay();
     gamePaused = false;
     startSpawning();
