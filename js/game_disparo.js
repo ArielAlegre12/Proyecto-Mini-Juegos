@@ -623,14 +623,44 @@ function drawExplosions() {
 
 
   // Dibujar power-ups (círculos morados)
+function drawPowerUp(powerUp, time) {
+  const x = powerUp.x;
+  const y = powerUp.y;
+  const size = powerUp.size;
+  const pulse = 0.5 + 0.5 * Math.sin(time / 200);
+  const rotation = time / 300;
+
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(rotation);
+
+  // Halo brillante
+  ctx.beginPath();
+  ctx.fillStyle = `rgba(255, 255, 0, ${0.2 * pulse})`;
+  ctx.arc(0, 0, size * 1.8, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Estrella (5 puntas)
+  ctx.beginPath();
+  ctx.moveTo(0, -size);
+  for (let i = 1; i < 10; i++) {
+    const angle = (i * Math.PI) / 5;
+    const radius = i % 2 === 0 ? size : size / 2;
+    ctx.lineTo(Math.sin(angle) * radius, -Math.cos(angle) * radius);
+  }
+  ctx.closePath();
+  ctx.fillStyle = `rgba(255, 215, 0, 1)`; // dorado brillante
+  ctx.fill();
+  ctx.restore();
+}
+
+
   function drawPowerUps() {
     for (const p of powerUps) {
-      ctx.fillStyle = '#a0a';
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
+   drawPowerUp(p, performance.now());
+}
+
+}
 
   // Loop principal
   let lastTime = 0;
