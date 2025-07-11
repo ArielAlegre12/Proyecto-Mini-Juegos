@@ -1081,3 +1081,34 @@ body.dark-mode .btn-pista:hover:not(:disabled) {
   font-size: 14px;
   color: green;
 }
+
+
+/* Contenedor del texto y botón dentro de cada juego */
+.container p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  margin-bottom: 20px;
+  max-width: 600px; /* para que no quede muy ancho */
+}
+.dark-mode .container p {
+  color: #fff;
+}
+
+
+/* Botón estilo acorde al sitio */
+.boton-juego {
+  display: inline-block;
+  background-color: #a22;
+  color: white;
+  padding: 12px 28px;
+  font-size: 18px;
+  text-decoration: none;
+  border-radius: 8px;
+  box-shadow: 0 0 15px #a22;
+  transition: background-color 0.3s ease;
+}
+
+.boton-juego:hover {
+  background-color: #d33;
+}
