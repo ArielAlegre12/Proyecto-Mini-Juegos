@@ -10,6 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
 const shootSound = new Audio('backgraund/laser-shot-.mp3');
 shootSound.volume = 0.5;  // volumen ajustable
 
+// Cargar sonido de power-up
+const powerUpSound = new Audio('backgraund/laser-zap-90575.mp3');
+powerUpSound.volume = 0.5;  // podés ajustar volumen
+
+
 
   // Jugador con posicion, velocidad y tamaño normal
   const player = {
@@ -502,16 +507,22 @@ for (let i = enemies.length - 1; i >= 0; i--) {
     }
     
     // Chequear colision jugador - powerUps
-    for (let i = powerUps.length - 1; i >= 0; i--) {
-      const p = powerUps[i];
-      const dist = Math.hypot(p.x - player.x, p.y - player.y);
-      if (dist < p.size + player.size) {
-        powerUps.splice(i, 1);
-        powerUpActive = true;
-        powerUpEndTime = time + 10000; // dura 10 segundos
-        break;
-      }
-    }
+for (let i = powerUps.length - 1; i >= 0; i--) {
+  const p = powerUps[i];
+  const dist = Math.hypot(p.x - player.x, p.y - player.y);
+  if (dist < p.size + player.size) {
+    powerUps.splice(i, 1);
+    powerUpActive = true;
+    powerUpEndTime = time + 10000; // dura 10 segundos
+
+    powerUpSound.currentTime = 0;
+    powerUpSound.play();
+
+    break;
+  }
+}
+
+
 
     // Controlar tiempo power-up
     if (powerUpActive && time > powerUpEndTime) {
