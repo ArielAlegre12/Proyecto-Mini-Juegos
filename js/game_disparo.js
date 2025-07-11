@@ -103,15 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let movePos = { x: 0, y: 0 };
   let aimPos = { x: 0, y: 0 };
 
-  // Inicializar música al primer click
-  function startMusic() {
-    backgroundMusic.play().catch(() => {
-      console.log('Reproducción bloqueada hasta interacción');
-    });
-    document.removeEventListener('click', startMusic);
-  }
-
-  document.addEventListener('click', startMusic);
+ 
 
   function playSound(sound) {
     if (!soundEnabled) return;
@@ -339,8 +331,18 @@ document.addEventListener('DOMContentLoaded', () => {
     pointer.y = e.clientY - rect.top;
   });
   canvas.addEventListener('mousedown', e => {
-    if (e.button === 0) pointer.down = true;
-  });
+  if (e.button === 0) {
+    pointer.down = true;
+
+    // Activar música si está activado el sonido y aún no se ha reproducido
+    if (soundEnabled && backgroundMusic.paused) {
+      backgroundMusic.play().catch(err => {
+        console.log('El navegador bloqueó la reproducción automática:', err);
+      });
+    }
+  }
+});
+
   canvas.addEventListener('mouseup', e => {
     if (e.button === 0) pointer.down = false;
   });
@@ -412,6 +414,12 @@ document.addEventListener('DOMContentLoaded', () => {
     startSpawning();
     startPowerUps();
     gameLoop();
+    if (soundEnabled) {
+      backgroundMusic.currentTime = 0;
+      backgroundMusic.play().catch(() => {
+        console.log('Audio bloqueado hasta una interacción del usuario.');
+      });
+    }
   }
 
   function pauseGame() {
