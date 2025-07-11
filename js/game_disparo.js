@@ -312,17 +312,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Teclado PC
   window.addEventListener('keydown', e => {
-    if (e.key === 'a' || e.key === 'ArrowLeft') keys.left = true;
-    if (e.key === 'd' || e.key === 'ArrowRight') keys.right = true;
-    if (e.key.toLowerCase() === 'p') {
-      if (gamePaused) resumeGame();
-      else pauseGame();
-    }
-  });
-  window.addEventListener('keyup', e => {
-    if (e.key === 'a' || e.key === 'ArrowLeft') keys.left = false;
-    if (e.key === 'd' || e.key === 'ArrowRight') keys.right = false;
-  });
+  const key = e.key.toLowerCase();
+  if (key === 'a' || key === 'arrowleft') keys.left = true;
+  if (key === 'd' || key === 'arrowright') keys.right = true;
+  if (key === 'p') {
+    if (gamePaused) resumeGame();
+    else pauseGame();
+  }
+});
+window.addEventListener('keyup', e => {
+  const key = e.key.toLowerCase();
+  if (key === 'a' || key === 'arrowleft') keys.left = false;
+  if (key === 'd' || key === 'arrowright') keys.right = false;
+});
 
   // Mouse apuntado y disparo
   canvas.addEventListener('mousemove', e => {
@@ -488,8 +490,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
 
         } else {
-          shootSound.currentTime = 0;
-          shootSound.play();
+          playSound(shootSound);
         }
       }
 
