@@ -437,7 +437,7 @@ toggleSoundBtn.addEventListener('click', () => {
 
 
   // Disparo automático mientras pointer.down
- function shoot(time) {
+function shoot(time) {
   if (gamePaused || gameOver) return;
 
   if (time - lastShot > fireRate && pointer.down) {
@@ -455,13 +455,16 @@ toggleSoundBtn.addEventListener('click', () => {
       size
     });
 
-    // Reproducir sonido de disparo (reiniciando para poder disparar rápido)
-    shootSound.currentTime = 0;
+    // ✅ Elegir el sonido según si hay power-up
     if (soundEnabled) {
-  shootSound.currentTime = 0;
-  shootSound.play();
-}
-
+      if (powerUpActive) {
+        powerUpSound.currentTime = 0;
+        powerUpSound.play();
+      } else {
+        shootSound.currentTime = 0;
+        shootSound.play();
+      }
+    }
 
     lastShot = time;
   }
