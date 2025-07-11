@@ -467,36 +467,48 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Dibujar el jugador con detalles como antes (guitarra, cabello, etc)
-  function drawPlayer() {
-    const p = player;
+function drawPlayer() {
+  const p = player;
 
-    // Cuerpo (círculo rojo oscuro)
-    ctx.fillStyle = '#a22';
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-    ctx.fill();
+  // Calcular ángulo entre jugador y puntero (donde apunta)
+  const dx = pointer.x - p.x;
+  const dy = pointer.y - p.y;
+  const angle = Math.atan2(dy, dx);
 
-    // Guitarra (cuadrado pequeño y líneas)
-    ctx.fillStyle = '#700';
-    ctx.fillRect(p.x - 8, p.y - 5, 16, 10);
-    ctx.strokeStyle = '#400';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(p.x - 8, p.y);
-    ctx.lineTo(p.x + 8, p.y);
-    ctx.stroke();
+  ctx.save();
 
-    // Cabello (picos en la parte superior)
-    ctx.fillStyle = '#d33';
-    for (let i = -3; i <= 3; i++) {
-      ctx.beginPath();
-      ctx.moveTo(p.x + i * 5, p.y - p.size);
-      ctx.lineTo(p.x + i * 5 + 5, p.y - p.size - 10);
-      ctx.lineTo(p.x + i * 5 + 10, p.y - p.size);
-      ctx.closePath();
-      ctx.fill();
-    }
-  }
+  // Mover el origen al centro del jugador
+  ctx.translate(p.x, p.y);
+  // Rotar el canvas según el ángulo calculado
+  ctx.rotate(angle);
+
+  // Dibujar la nave centrada en (0,0) porque ya trasladamos el contexto
+  // Cuerpo nave
+  ctx.fillStyle = '#3b82f6'; // azul
+  ctx.beginPath();
+  ctx.moveTo(20, 0);
+  ctx.lineTo(-20, -15);
+  ctx.lineTo(-20, 15);
+  ctx.closePath();
+  ctx.fill();
+
+  // Propulsor animado (puede usar un contador global o timestamp para animar)
+  const time = Date.now() * 0.01;
+  const flameHeight = 10 + Math.sin(time) * 5;
+
+  ctx.fillStyle = '#ff4500'; // naranja
+  ctx.beginPath();
+  ctx.moveTo(-20, 0);
+  ctx.lineTo(-20 - flameHeight, 8);
+  ctx.lineTo(-20 - flameHeight, -8);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.restore();
+}
+
+
+
 
   // Dibujar balas
   function drawBullets() {
@@ -509,14 +521,50 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Dibujar enemigos (círculos rojos)
-  function drawEnemies() {
-    for (const e of enemies) {
-      ctx.fillStyle = '#a22';
-      ctx.beginPath();
-      ctx.arc(e.x, e.y, e.size, 0, Math.PI * 2);
-      ctx.fill();
-    }
+
+  function drawEnemy(enemy, time) {
+  const oscillation = Math.sin(time / 300) * 5; // movimiento flotante
+  
+  const x = enemy.x;
+  const y = enemy.y + oscillation;
+  const size = enemy.size;
+
+  // Base del platillo (óvalo)
+  ctx.fillStyle = '#888'; 
+  ctx.beginPath();
+  ctx.ellipse(x, y, size * 1.5, size, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Cúpula (semi círculo transparente)
+  ctx.fillStyle = 'rgba(100, 200, 255, 0.7)';
+  ctx.beginPath();
+  ctx.ellipse(x, y - size * 0.5, size * 1.2, size * 0.8, 0, 0, Math.PI, true);
+  ctx.fill();
+
+  // Luz central parpadeante
+  const lightAlpha = 0.5 + 0.5 * Math.sin(time / 100);
+  ctx.fillStyle = `rgba(255, 255, 0, ${lightAlpha.toFixed(2)})`;
+  ctx.beginPath();
+  ctx.arc(x, y, size * 0.4, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Opcional: borde negro para definición
+  ctx.strokeStyle = '#333';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.ellipse(x, y, size * 1.5, size, 0, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.ellipse(x, y - size * 0.5, size * 1.2, size * 0.8, 0, 0, Math.PI, true);
+  ctx.stroke();
+}
+
+ function drawEnemies(time) {
+  for (const e of enemies) {
+    drawEnemy(e, time);
   }
+}
+
 
   // Dibujar power-ups (círculos morados)
   function drawPowerUps() {
@@ -547,9 +595,9 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Dibujar elementos
-    drawPlayer();
+    drawPlayer(time);
     drawBullets();
-    drawEnemies();
+    drawEnemies(time);
     drawPowerUps();
 
     // Mostrar texto pausa en overlay si pausado o game over
