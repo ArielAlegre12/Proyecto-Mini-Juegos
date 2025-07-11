@@ -86,6 +86,25 @@ canvas {
 #resumeBtn:hover {
   background: #d33;
 }
+
+.pause-button {
+  margin-top: 30px; 
+  padding: 14px 36px; 
+  background: #a22;
+  border: none; 
+  color: white; 
+  font-size: 22px;
+  cursor: pointer; 
+  border-radius: 8px;
+  box-shadow: 0 0 15px #a22;
+  transition: background 0.3s;
+}
+
+.pause-button:hover {
+  background: #d33;
+}
+
+
 #btnPauseMobile {
   position: fixed; 
   top: 12px; 

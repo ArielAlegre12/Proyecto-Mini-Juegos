@@ -1,18 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('game');
   const ctx = canvas.getContext('2d');
-//sonido de fondo
+  //sonido de fondo
   const backgroundMusic = new Audio('backgraund/space-sound-109576.mp3');
   backgroundMusic.loop = true;
   backgroundMusic.volume = 0.3;
 
-// Cargar sonido de disparo
-const shootSound = new Audio('backgraund/laser-shot-.mp3');
-shootSound.volume = 0.5;  // volumen ajustable
+  // Cargar sonido de disparo
+  const shootSound = new Audio('backgraund/laser-shot-.mp3');
+  shootSound.volume = 0.5;  // volumen ajustable
 
-// Cargar sonido de power-up
-const powerUpSound = new Audio('backgraund/laser-zap-90575.mp3');
-powerUpSound.volume = 0.5;  // podés ajustar volumen
+  // Cargar sonido de power-up
+  const powerUpSound = new Audio('backgraund/laser-zap-90575.mp3');
+  powerUpSound.volume = 0.5;  // podés ajustar volumen
 
 
 
@@ -41,7 +41,7 @@ powerUpSound.volume = 0.5;  // podés ajustar volumen
   const bullets = [];
   const enemies = [];
   const powerUps = [];
-  const explosions = []; 
+  const explosions = [];
 
 
   let score = 0;
@@ -65,18 +65,20 @@ powerUpSound.volume = 0.5;  // podés ajustar volumen
   const pauseOverlay = document.getElementById('pauseOverlay');
   const resumeBtn = document.getElementById('resumeBtn');
   const btnPauseMobile = document.getElementById('btnPauseMobile');
+  const restartBtn = document.getElementById('restartBtn');
+
   // Botón para activar/desactivar sonido
-const toggleSoundBtn = document.getElementById('toggleSoundBtn');
-toggleSoundBtn.addEventListener('click', () => {
-  soundEnabled = !soundEnabled;
-  localStorage.setItem('soundEnabled', soundEnabled);
-  updateSoundButton();
-  if (soundEnabled) {
-    backgroundMusic.play();
-  } else {
-    backgroundMusic.pause();
-  }
-});
+  const toggleSoundBtn = document.getElementById('toggleSoundBtn');
+  toggleSoundBtn.addEventListener('click', () => {
+    soundEnabled = !soundEnabled;
+    localStorage.setItem('soundEnabled', soundEnabled);
+    updateSoundButton();
+    if (soundEnabled) {
+      backgroundMusic.play();
+    } else {
+      backgroundMusic.pause();
+    }
+  });
 
 
 
@@ -85,7 +87,7 @@ toggleSoundBtn.addEventListener('click', () => {
   const joystickAim = document.querySelector('#joystickAim');
   const joystickAimStick = joystickAim.querySelector('.joystickStick');
 
-  
+
 
   // Variables multitouch para sticks (igual que antes)
   let moveTouchId = null;
@@ -96,9 +98,9 @@ toggleSoundBtn.addEventListener('click', () => {
 
   let movePos = { x: 0, y: 0 };
   let aimPos = { x: 0, y: 0 };
- 
+
   // Inicializar música al primer click
-   function startMusic() {
+  function startMusic() {
     backgroundMusic.play().catch(() => {
       console.log('Reproducción bloqueada hasta interacción');
     });
@@ -108,24 +110,24 @@ toggleSoundBtn.addEventListener('click', () => {
   document.addEventListener('click', startMusic);
 
   function playSound(sound) {
-  if (!soundEnabled) return;
-  sound.currentTime = 0;
-  sound.play();
-}
-
-  function createExplosion(x, y) { 
-  for (let i = 0; i < 15; i++) {
-    explosions.push({
-      x,
-      y,
-      vx: (Math.random() - 0.5) * 4,
-      vy: (Math.random() - 0.5) * 4,
-      life: 30,
-      color: `hsl(${Math.random() * 360}, 100%, 60%)`
-    });
+    if (!soundEnabled) return;
+    sound.currentTime = 0;
+    sound.play();
   }
-} 
- 
+
+  function createExplosion(x, y) {
+    for (let i = 0; i < 15; i++) {
+      explosions.push({
+        x,
+        y,
+        vx: (Math.random() - 0.5) * 4,
+        vy: (Math.random() - 0.5) * 4,
+        life: 30,
+        color: `hsl(${Math.random() * 360}, 100%, 60%)`
+      });
+    }
+  }
+
 
 
   // Mostrar puntaje en pantalla
@@ -426,49 +428,54 @@ toggleSoundBtn.addEventListener('click', () => {
       gameLoop();
     }
   }
+  restartBtn.addEventListener('click', () => {
+    restartGame();
+  });
+
+
 
   resumeBtn.addEventListener('click', resumeGame);
 
   function updateSoundButton() {
-  if (toggleSoundBtn) {
-    toggleSoundBtn.textContent = soundEnabled ? 'Sonido: ON 🔊' : 'Sonido: OFF 🔇';
+    if (toggleSoundBtn) {
+      toggleSoundBtn.textContent = soundEnabled ? 'Sonido: ON 🔊' : 'Sonido: OFF 🔇';
+    }
   }
-}
 
 
   // Disparo automático mientras pointer.down
-function shoot(time) {
-  if (gamePaused || gameOver) return;
+  function shoot(time) {
+    if (gamePaused || gameOver) return;
 
-  if (time - lastShot > fireRate && pointer.down) {
-    const dx = pointer.x - player.x;
-    const dy = pointer.y - player.y;
-    const dist = Math.sqrt(dx * dx + dy * dy);
-    const speed = 10;
-    const size = powerUpActive ? 12 : 6;
+    if (time - lastShot > fireRate && pointer.down) {
+      const dx = pointer.x - player.x;
+      const dy = pointer.y - player.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const speed = 10;
+      const size = powerUpActive ? 12 : 6;
 
-    bullets.push({
-      x: player.x,
-      y: player.y,
-      vx: (dx / dist) * speed,
-      vy: (dy / dist) * speed,
-      size
-    });
+      bullets.push({
+        x: player.x,
+        y: player.y,
+        vx: (dx / dist) * speed,
+        vy: (dy / dist) * speed,
+        size
+      });
 
-    // ✅ Elegir el sonido según si hay power-up
-    if (soundEnabled) {
-      if (powerUpActive) {
-        powerUpSound.currentTime = 0;
-        powerUpSound.play();
-      } else {
-        shootSound.currentTime = 0;
-        shootSound.play();
+      // ✅ Elegir el sonido según si hay power-up
+      if (soundEnabled) {
+        if (powerUpActive) {
+          powerUpSound.currentTime = 0;
+          powerUpSound.play();
+        } else {
+          shootSound.currentTime = 0;
+          shootSound.play();
+        }
       }
-    }
 
-    lastShot = time;
+      lastShot = time;
+    }
   }
-}
 
 
   // Actualizar lógica del juego
@@ -490,15 +497,15 @@ function shoot(time) {
 
     // Mover enemigos
     // Mover enemigos
-for (let i = enemies.length - 1; i >= 0; i--) {
-  const e = enemies[i];
-  e.y += e.speed;
-  if (e.y - e.size > canvas.height) {
-    enemies.splice(i, 1);
-    score -= 1; // Resta 1 punto, puede ser negativo
-    updateScoreDisplay(); // Actualiza en pantalla
-  }
-}
+    for (let i = enemies.length - 1; i >= 0; i--) {
+      const e = enemies[i];
+      e.y += e.speed;
+      if (e.y - e.size > canvas.height) {
+        enemies.splice(i, 1);
+        score -= 1; // Resta 1 punto, puede ser negativo
+        updateScoreDisplay(); // Actualiza en pantalla
+      }
+    }
 
 
     // Mover power-ups
@@ -529,7 +536,7 @@ for (let i = enemies.length - 1; i >= 0; i--) {
         }
       }
     }
-    
+
 
 
     // Chequear colision jugador - enemigos
@@ -542,22 +549,22 @@ for (let i = enemies.length - 1; i >= 0; i--) {
         return;
       }
     }
-    
+
     // Chequear colision jugador - powerUps
-for (let i = powerUps.length - 1; i >= 0; i--) {
-  const p = powerUps[i];
-  const dist = Math.hypot(p.x - player.x, p.y - player.y);
-  if (dist < p.size + player.size) {
-    powerUps.splice(i, 1);
-    powerUpActive = true;
-    powerUpEndTime = time + 10000; // dura 10 segundos
+    for (let i = powerUps.length - 1; i >= 0; i--) {
+      const p = powerUps[i];
+      const dist = Math.hypot(p.x - player.x, p.y - player.y);
+      if (dist < p.size + player.size) {
+        powerUps.splice(i, 1);
+        powerUpActive = true;
+        powerUpEndTime = time + 10000; // dura 10 segundos
 
-    powerUpSound.currentTime = 0;
-    powerUpSound.play();
+        powerUpSound.currentTime = 0;
+        powerUpSound.play();
 
-    break;
-  }
-}
+        break;
+      }
+    }
 
 
 
@@ -568,178 +575,178 @@ for (let i = powerUps.length - 1; i >= 0; i--) {
 
     // Actualizar explosiones
     for (let i = explosions.length - 1; i >= 0; i--) {
-  const p = explosions[i];
-  p.x += p.vx;
-  p.y += p.vy;
-  p.life--;
-  if (p.life <= 0) explosions.splice(i, 1);
-}
+      const p = explosions[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      p.life--;
+      if (p.life <= 0) explosions.splice(i, 1);
+    }
 
   }
 
   // Dibujar el jugador con detalles como antes (guitarra, cabello, etc)
-function drawPlayer() {
-  const p = player;
+  function drawPlayer() {
+    const p = player;
 
-  // Calcular ángulo entre jugador y puntero (donde apunta)
-  const dx = pointer.x - p.x;
-  const dy = pointer.y - p.y;
-  const angle = Math.atan2(dy, dx);
+    // Calcular ángulo entre jugador y puntero (donde apunta)
+    const dx = pointer.x - p.x;
+    const dy = pointer.y - p.y;
+    const angle = Math.atan2(dy, dx);
 
-  ctx.save();
+    ctx.save();
 
-  // Mover el origen al centro del jugador
-  ctx.translate(p.x, p.y);
-  // Rotar el canvas según el ángulo calculado
-  ctx.rotate(angle);
+    // Mover el origen al centro del jugador
+    ctx.translate(p.x, p.y);
+    // Rotar el canvas según el ángulo calculado
+    ctx.rotate(angle);
 
-  // Dibujar la nave centrada en (0,0) porque ya trasladamos el contexto
-  // Cuerpo nave
-  ctx.fillStyle = '#3b82f6'; // azul
-  ctx.beginPath();
-  ctx.moveTo(20, 0);
-  ctx.lineTo(-20, -15);
-  ctx.lineTo(-20, 15);
-  ctx.closePath();
-  ctx.fill();
+    // Dibujar la nave centrada en (0,0) porque ya trasladamos el contexto
+    // Cuerpo nave
+    ctx.fillStyle = '#3b82f6'; // azul
+    ctx.beginPath();
+    ctx.moveTo(20, 0);
+    ctx.lineTo(-20, -15);
+    ctx.lineTo(-20, 15);
+    ctx.closePath();
+    ctx.fill();
 
-  // Propulsor animado (puede usar un contador global o timestamp para animar)
-  const time = Date.now() * 0.01;
-  const flameHeight = 10 + Math.sin(time) * 5;
+    // Propulsor animado (puede usar un contador global o timestamp para animar)
+    const time = Date.now() * 0.01;
+    const flameHeight = 10 + Math.sin(time) * 5;
 
-  ctx.fillStyle = '#ff4500'; // naranja
-  ctx.beginPath();
-  ctx.moveTo(-20, 0);
-  ctx.lineTo(-20 - flameHeight, 8);
-  ctx.lineTo(-20 - flameHeight, -8);
-  ctx.closePath();
-  ctx.fill();
+    ctx.fillStyle = '#ff4500'; // naranja
+    ctx.beginPath();
+    ctx.moveTo(-20, 0);
+    ctx.lineTo(-20 - flameHeight, 8);
+    ctx.lineTo(-20 - flameHeight, -8);
+    ctx.closePath();
+    ctx.fill();
 
-  ctx.restore();
-}
+    ctx.restore();
+  }
 
 
 
 
   // Dibujar balas
-function drawBullets() {
-  for (const b of bullets) {
-    // Color según powerUp activo
-    ctx.fillStyle = powerUpActive ? '#d9a0ff' : '#ff8';
+  function drawBullets() {
+    for (const b of bullets) {
+      // Color según powerUp activo
+      ctx.fillStyle = powerUpActive ? '#d9a0ff' : '#ff8';
 
-    // Dibujar círculo principal
-    ctx.beginPath();
-    ctx.arc(b.x, b.y, b.size, 0, Math.PI * 2);
-    ctx.fill();
+      // Dibujar círculo principal
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, b.size, 0, Math.PI * 2);
+      ctx.fill();
 
-    // Agregar un pequeño resplandor alrededor (halo)
-    const gradient = ctx.createRadialGradient(b.x, b.y, b.size * 0.5, b.x, b.y, b.size * 2);
-    gradient.addColorStop(0, 'rgba(255, 255, 200, 0.7)');
-    gradient.addColorStop(1, 'rgba(255, 255, 200, 0)');
-    ctx.fillStyle = gradient;
-    ctx.beginPath();
-    ctx.arc(b.x, b.y, b.size * 2, 0, Math.PI * 2);
-    ctx.fill();
+      // Agregar un pequeño resplandor alrededor (halo)
+      const gradient = ctx.createRadialGradient(b.x, b.y, b.size * 0.5, b.x, b.y, b.size * 2);
+      gradient.addColorStop(0, 'rgba(255, 255, 200, 0.7)');
+      gradient.addColorStop(1, 'rgba(255, 255, 200, 0)');
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, b.size * 2, 0, Math.PI * 2);
+      ctx.fill();
+    }
   }
-}
 
-function drawExplosions() {
-  for (const p of explosions) {
-    ctx.fillStyle = p.color;
-    ctx.globalAlpha = p.life / 30;
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
-    ctx.fill();
+  function drawExplosions() {
+    for (const p of explosions) {
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.life / 30;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
   }
-  ctx.globalAlpha = 1;
-}
 
 
   // Dibujar enemigos (círculos rojos)
 
   function drawEnemy(enemy, time) {
-  const oscillation = Math.sin(time / 300) * 5; // movimiento flotante
-  
-  const x = enemy.x;
-  const y = enemy.y + oscillation;
-  const size = enemy.size;
+    const oscillation = Math.sin(time / 300) * 5; // movimiento flotante
 
-  // Base del platillo (óvalo)
-  ctx.fillStyle = '#888'; 
-  ctx.beginPath();
-  ctx.ellipse(x, y, size * 1.5, size, 0, 0, Math.PI * 2);
-  ctx.fill();
+    const x = enemy.x;
+    const y = enemy.y + oscillation;
+    const size = enemy.size;
 
-  // Cúpula (semi círculo transparente)
-  ctx.fillStyle = 'rgba(100, 200, 255, 0.7)';
-  ctx.beginPath();
-  ctx.ellipse(x, y - size * 0.5, size * 1.2, size * 0.8, 0, 0, Math.PI, true);
-  ctx.fill();
+    // Base del platillo (óvalo)
+    ctx.fillStyle = '#888';
+    ctx.beginPath();
+    ctx.ellipse(x, y, size * 1.5, size, 0, 0, Math.PI * 2);
+    ctx.fill();
 
-  // Luz central parpadeante
-  const lightAlpha = 0.5 + 0.5 * Math.sin(time / 100);
-  ctx.fillStyle = `rgba(255, 255, 0, ${lightAlpha.toFixed(2)})`;
-  ctx.beginPath();
-  ctx.arc(x, y, size * 0.4, 0, Math.PI * 2);
-  ctx.fill();
+    // Cúpula (semi círculo transparente)
+    ctx.fillStyle = 'rgba(100, 200, 255, 0.7)';
+    ctx.beginPath();
+    ctx.ellipse(x, y - size * 0.5, size * 1.2, size * 0.8, 0, 0, Math.PI, true);
+    ctx.fill();
 
-  // Opcional: borde negro para definición
-  ctx.strokeStyle = '#333';
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.ellipse(x, y, size * 1.5, size, 0, 0, Math.PI * 2);
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.ellipse(x, y - size * 0.5, size * 1.2, size * 0.8, 0, 0, Math.PI, true);
-  ctx.stroke();
-}
+    // Luz central parpadeante
+    const lightAlpha = 0.5 + 0.5 * Math.sin(time / 100);
+    ctx.fillStyle = `rgba(255, 255, 0, ${lightAlpha.toFixed(2)})`;
+    ctx.beginPath();
+    ctx.arc(x, y, size * 0.4, 0, Math.PI * 2);
+    ctx.fill();
 
- function drawEnemies(time) {
-  for (const e of enemies) {
-    drawEnemy(e, time);
+    // Opcional: borde negro para definición
+    ctx.strokeStyle = '#333';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.ellipse(x, y, size * 1.5, size, 0, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.ellipse(x, y - size * 0.5, size * 1.2, size * 0.8, 0, 0, Math.PI, true);
+    ctx.stroke();
   }
-}
+
+  function drawEnemies(time) {
+    for (const e of enemies) {
+      drawEnemy(e, time);
+    }
+  }
 
 
   // Dibujar power-ups (círculos morados)
-function drawPowerUp(powerUp, time) {
-  const x = powerUp.x;
-  const y = powerUp.y;
-  const size = powerUp.size;
-  const pulse = 0.5 + 0.5 * Math.sin(time / 200);
-  const rotation = time / 300;
+  function drawPowerUp(powerUp, time) {
+    const x = powerUp.x;
+    const y = powerUp.y;
+    const size = powerUp.size;
+    const pulse = 0.5 + 0.5 * Math.sin(time / 200);
+    const rotation = time / 300;
 
-  ctx.save();
-  ctx.translate(x, y);
-  ctx.rotate(rotation);
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(rotation);
 
-  // Halo brillante
-  ctx.beginPath();
-  ctx.fillStyle = `rgba(255, 255, 0, ${0.2 * pulse})`;
-  ctx.arc(0, 0, size * 1.8, 0, Math.PI * 2);
-  ctx.fill();
+    // Halo brillante
+    ctx.beginPath();
+    ctx.fillStyle = `rgba(255, 255, 0, ${0.2 * pulse})`;
+    ctx.arc(0, 0, size * 1.8, 0, Math.PI * 2);
+    ctx.fill();
 
-  // Estrella (5 puntas)
-  ctx.beginPath();
-  ctx.moveTo(0, -size);
-  for (let i = 1; i < 10; i++) {
-    const angle = (i * Math.PI) / 5;
-    const radius = i % 2 === 0 ? size : size / 2;
-    ctx.lineTo(Math.sin(angle) * radius, -Math.cos(angle) * radius);
+    // Estrella (5 puntas)
+    ctx.beginPath();
+    ctx.moveTo(0, -size);
+    for (let i = 1; i < 10; i++) {
+      const angle = (i * Math.PI) / 5;
+      const radius = i % 2 === 0 ? size : size / 2;
+      ctx.lineTo(Math.sin(angle) * radius, -Math.cos(angle) * radius);
+    }
+    ctx.closePath();
+    ctx.fillStyle = `rgba(255, 215, 0, 1)`; // dorado brillante
+    ctx.fill();
+    ctx.restore();
   }
-  ctx.closePath();
-  ctx.fillStyle = `rgba(255, 215, 0, 1)`; // dorado brillante
-  ctx.fill();
-  ctx.restore();
-}
 
 
   function drawPowerUps() {
     for (const p of powerUps) {
-   drawPowerUp(p, performance.now());
-}
+      drawPowerUp(p, performance.now());
+    }
 
-}
+  }
 
   // Loop principal
   let lastTime = 0;

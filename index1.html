@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no" />
   <title>Metalero - Juego Completo</title>
   <link rel="stylesheet" href="/css/style_juego_disparo.css" />
 </head>
+
 <body>
 
   <div id="backLink"><a href="/index.html">Volver al inicio</a></div>
@@ -21,8 +23,10 @@
 
   <div id="pauseOverlay">
     <div id="pauseText">Juego en pausa</div>
-    <button id="toggleSoundBtn">Sonido: On</button>
-    <button id="resumeBtn">Reanudar</button>
+    <button id="toggleSoundBtn" class="pause-button">Sonido: On</button>
+    <button id="resumeBtn" class="pause-button">Reanudar</button>
+    <button id="restartBtn" class="pause-button">Reiniciar</button>
+
   </div>
 
   <div id="btnPauseMobile" title="Pausar">⏸</div>
@@ -37,4 +41,5 @@
 
   <script src="js/game_disparo.js"></script>
 </body>
+
 </html>
