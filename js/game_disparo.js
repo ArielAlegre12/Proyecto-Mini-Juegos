@@ -482,8 +482,11 @@ document.addEventListener('DOMContentLoaded', () => {
       // ✅ Elegir el sonido según si hay power-up
       if (soundEnabled) {
         if (powerUpActive) {
-          powerUpSound.currentTime = 0;
-          powerUpSound.play();
+          if (soundEnabled) {
+            powerUpSound.currentTime = 0;
+            powerUpSound.play();
+          }
+
         } else {
           shootSound.currentTime = 0;
           shootSound.play();
@@ -576,8 +579,11 @@ document.addEventListener('DOMContentLoaded', () => {
         powerUpActive = true;
         powerUpEndTime = time + 10000; // dura 10 segundos
 
-        powerUpSound.currentTime = 0;
-        powerUpSound.play();
+        if (soundEnabled) {
+          powerUpSound.currentTime = 0;
+          powerUpSound.play();
+        }
+
 
         break;
       }
