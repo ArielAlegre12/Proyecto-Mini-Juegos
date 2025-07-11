@@ -29,7 +29,7 @@ export function setupMenu() {
     const submenu = document.getElementById('submenuJuegos');
     submenu.classList.toggle('show');
   });
-   
+
   // Toggle submenú login 
   const toggleLoginBtn = document.getElementById("toggleLogin");
   const submenuLogin = document.getElementById("submenuLogin");
@@ -37,46 +37,48 @@ export function setupMenu() {
     toggleLoginBtn.addEventListener("click", () => {
       submenuLogin.classList.toggle("show");
     });
-    document.getElementById("toggleLogin").addEventListener("click", () => {
-  const submenu = document.getElementById("submenuLogin");
-  submenu.classList.toggle("show");
-});
-
   }
 
   // Click en juego - cierra menú y submenú, hace scroll y abre acordeón
   document.querySelectorAll('.juego-link').forEach(link => {
     link.addEventListener('click', (e) => {
-      e.preventDefault();
+      if (link.dataset.juego) {
+        e.preventDefault();
 
-      const juegoId = link.dataset.juego;
-      const section = document.getElementById(juegoId);
+        const juegoId = link.dataset.juego;
+        const section = document.getElementById(juegoId);
 
-      mainNav.classList.remove('open');
-      hamburgerBtn.classList.remove('open');
+        mainNav.classList.remove('open');
+        hamburgerBtn.classList.remove('open');
 
-      document.getElementById('toggleJuegos').classList.remove('active');
+        document.getElementById('toggleJuegos').classList.remove('active');
 
-      section.scrollIntoView({ behavior: 'smooth' });
+        section.scrollIntoView({ behavior: 'smooth' });
 
-      setTimeout(() => {
-        // Cierra todos los acordeones abiertos
-        document.querySelectorAll('.accordion-content.active').forEach(item => {
-          item.classList.remove('active');
-        });
+        setTimeout(() => {
+          // Cierra todos los acordeones abiertos
+          document.querySelectorAll('.accordion-content.active').forEach(item => {
+            item.classList.remove('active');
+          });
 
-        // Abre el acordeón correspondiente
-        const content = section.querySelector('.accordion-content');
-        content?.classList.add('active');
+          // Abre el acordeón correspondiente
+          const content = section.querySelector('.accordion-content');
+          content?.classList.add('active');
 
-        // Ejecuta lógica específica
-        if (juegoId === 'juegoTrivia') {
-          import('./trivia.js').then(mod => mod.loadTriviaQuestions());
-        }
-        if (juegoId === 'juegoAcertijos') {
-          import('./acertijos.js').then(mod => mod.cargarAcertijos());
-        }
-      }, 400);
+          // Ejecuta lógica específica según el juego
+          if (juegoId === 'juegoTrivia') {
+            import('./trivia.js').then(mod => mod.loadTriviaQuestions());
+          }
+          if (juegoId === 'juegoAcertijos') {
+            import('./acertijos.js').then(mod => mod.cargarAcertijos());
+          }
+        }, 400);
+      } else {
+        // Para links sin data-juego, permitir navegación normal y cerrar menú
+        mainNav.classList.remove('open');
+        hamburgerBtn.classList.remove('open');
+        document.getElementById('toggleJuegos').classList.remove('active');
+      }
     });
   });
 }
