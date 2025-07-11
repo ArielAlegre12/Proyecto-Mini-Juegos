@@ -37,6 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let spawnInterval = null;
   let powerUpInterval = null;
   let gameOver = false;
+  let bestScore = localStorage.getItem('bestScore') || 0;
+  bestScore = Number(bestScore);
+
 
   let powerUpActive = false;
   let powerUpEndTime = 0;
@@ -60,6 +63,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let movePos = { x: 0, y: 0 };
   let aimPos = { x: 0, y: 0 };
+
+  // Mostrar puntaje en pantalla
+  function updateScoreDisplay() {
+    const scoreDiv = document.getElementById('score');
+    if (scoreDiv) {
+      scoreDiv.textContent = `Puntaje: ${score} | Mejor: ${bestScore}`;
+    }
+  }
+
 
   // Igual que antes: inicializar centros joystick
   function initJoystickCenters() {
@@ -127,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
         break;
       }
     }
-  }, {passive: false});
+  }, { passive: false });
   joystickMove.addEventListener('touchmove', e => {
     e.preventDefault();
     for (const touch of e.changedTouches) {
@@ -136,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
         break;
       }
     }
-  }, {passive: false});
+  }, { passive: false });
   joystickMove.addEventListener('touchend', e => {
     e.preventDefault();
     for (const touch of e.changedTouches) {
@@ -145,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
         break;
       }
     }
-  }, {passive: false});
+  }, { passive: false });
   joystickMove.addEventListener('touchcancel', e => {
     e.preventDefault();
     for (const touch of e.changedTouches) {
@@ -154,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
         break;
       }
     }
-  }, {passive: false});
+  }, { passive: false });
 
   joystickAim.addEventListener('touchstart', e => {
     e.preventDefault();
@@ -166,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
         break;
       }
     }
-  }, {passive: false});
+  }, { passive: false });
   joystickAim.addEventListener('touchmove', e => {
     e.preventDefault();
     for (const touch of e.changedTouches) {
@@ -175,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
         break;
       }
     }
-  }, {passive: false});
+  }, { passive: false });
   joystickAim.addEventListener('touchend', e => {
     e.preventDefault();
     for (const touch of e.changedTouches) {
@@ -184,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
         break;
       }
     }
-  }, {passive: false});
+  }, { passive: false });
   joystickAim.addEventListener('touchcancel', e => {
     e.preventDefault();
     for (const touch of e.changedTouches) {
@@ -193,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
         break;
       }
     }
-  }, {passive: false});
+  }, { passive: false });
 
   // Helper para chequear si el touch está dentro del joystick
   function isTouchInside(touch, container) {
@@ -210,11 +222,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const dx = touch.clientX - moveCenter.x;
     const dy = touch.clientY - moveCenter.y;
     const maxDist = 50;
-    let dist = Math.sqrt(dx*dx + dy*dy);
+    let dist = Math.sqrt(dx * dx + dy * dy);
     if (dist > maxDist) dist = maxDist;
     const angle = Math.atan2(dy, dx);
-    const stickX = Math.cos(angle)*dist;
-    const stickY = Math.sin(angle)*dist;
+    const stickX = Math.cos(angle) * dist;
+    const stickY = Math.sin(angle) * dist;
     joystickMoveStick.style.transform = `translate(${stickX}px, ${stickY}px)`;
     movePos.x = stickX / maxDist;
     movePos.y = stickY / maxDist;
@@ -225,11 +237,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const dx = touch.clientX - aimCenter.x;
     const dy = touch.clientY - aimCenter.y;
     const maxDist = 50;
-    let dist = Math.sqrt(dx*dx + dy*dy);
+    let dist = Math.sqrt(dx * dx + dy * dy);
     if (dist > maxDist) dist = maxDist;
     const angle = Math.atan2(dy, dx);
-    const stickX = Math.cos(angle)*dist;
-    const stickY = Math.sin(angle)*dist;
+    const stickX = Math.cos(angle) * dist;
+    const stickY = Math.sin(angle) * dist;
     joystickAimStick.style.transform = `translate(${stickX}px, ${stickY}px)`;
     aimPos.x = stickX / maxDist;
     aimPos.y = stickY / maxDist;
@@ -271,18 +283,18 @@ document.addEventListener('DOMContentLoaded', () => {
     pointer.x = touch.clientX - rect.left;
     pointer.y = touch.clientY - rect.top;
     pointer.down = true;
-  }, {passive: false});
+  }, { passive: false });
   canvas.addEventListener('touchmove', e => {
     e.preventDefault();
     const rect = canvas.getBoundingClientRect();
     const touch = e.touches[0];
     pointer.x = touch.clientX - rect.left;
     pointer.y = touch.clientY - rect.top;
-  }, {passive: false});
+  }, { passive: false });
   canvas.addEventListener('touchend', e => {
     e.preventDefault();
     pointer.down = false;
-  }, {passive: false});
+  }, { passive: false });
 
   // Botón pausa móvil
   btnPauseMobile.addEventListener('click', () => {
@@ -325,7 +337,7 @@ document.addEventListener('DOMContentLoaded', () => {
     powerUps.length = 0;
     pauseOverlay.style.visibility = 'hidden';
     pauseOverlay.firstElementChild.textContent = "Juego en pausa";
-    document.getElementById('score').textContent = `Puntaje: ${score}`;
+    updateScoreDisplay();
     gamePaused = false;
     startSpawning();
     startPowerUps();
@@ -383,38 +395,43 @@ document.addEventListener('DOMContentLoaded', () => {
     player.x = Math.min(Math.max(player.x, player.size), canvas.width - player.size);
 
     // Mover balas
-    for (let i = bullets.length -1; i >= 0; i--) {
+    for (let i = bullets.length - 1; i >= 0; i--) {
       const b = bullets[i];
       b.x += b.vx;
       b.y += b.vy;
-      if (b.x < 0 || b.x > canvas.width || b.y < 0 || b.y > canvas.height) bullets.splice(i,1);
+      if (b.x < 0 || b.x > canvas.width || b.y < 0 || b.y > canvas.height) bullets.splice(i, 1);
     }
 
     // Mover enemigos
-    for (let i = enemies.length -1; i >= 0; i--) {
+    for (let i = enemies.length - 1; i >= 0; i--) {
       const e = enemies[i];
       e.y += e.speed;
-      if (e.y - e.size > canvas.height) enemies.splice(i,1);
+      if (e.y - e.size > canvas.height) enemies.splice(i, 1);
     }
 
     // Mover power-ups
-    for (let i = powerUps.length -1; i >= 0; i--) {
+    for (let i = powerUps.length - 1; i >= 0; i--) {
       const p = powerUps[i];
       p.y += p.speed;
-      if (p.y - p.size > canvas.height) powerUps.splice(i,1);
+      if (p.y - p.size > canvas.height) powerUps.splice(i, 1);
     }
 
     // Chequear colisiones balas - enemigos
-    for (let i = enemies.length -1; i >= 0; i--) {
+    for (let i = enemies.length - 1; i >= 0; i--) {
       const e = enemies[i];
-      for (let j = bullets.length -1; j >= 0; j--) {
+      for (let j = bullets.length - 1; j >= 0; j--) {
         const b = bullets[j];
         const dist = Math.hypot(e.x - b.x, e.y - b.y);
         if (dist < e.size + b.size) {
-          enemies.splice(i,1);
-          bullets.splice(j,1);
+          enemies.splice(i, 1);
+          bullets.splice(j, 1);
           score++;
-          document.getElementById('score').textContent = `Puntaje: ${score}`;
+          if (score > bestScore) {
+            bestScore = score;
+            localStorage.setItem('bestScore', bestScore);
+          }
+          updateScoreDisplay();
+
           break;
         }
       }
@@ -432,11 +449,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Chequear colision jugador - powerUps
-    for (let i = powerUps.length -1; i >= 0; i--) {
+    for (let i = powerUps.length - 1; i >= 0; i--) {
       const p = powerUps[i];
       const dist = Math.hypot(p.x - player.x, p.y - player.y);
       if (dist < p.size + player.size) {
-        powerUps.splice(i,1);
+        powerUps.splice(i, 1);
         powerUpActive = true;
         powerUpEndTime = time + 10000; // dura 10 segundos
         break;
