@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let movePos = { x: 0, y: 0 };
   let aimPos = { x: 0, y: 0 };
 
- 
+
 
   function playSound(sound) {
     if (!soundEnabled) return;
@@ -331,17 +331,17 @@ document.addEventListener('DOMContentLoaded', () => {
     pointer.y = e.clientY - rect.top;
   });
   canvas.addEventListener('mousedown', e => {
-  if (e.button === 0) {
-    pointer.down = true;
+    if (e.button === 0) {
+      pointer.down = true;
 
-    // Activar música si está activado el sonido y aún no se ha reproducido
-    if (soundEnabled && backgroundMusic.paused) {
-      backgroundMusic.play().catch(err => {
-        console.log('El navegador bloqueó la reproducción automática:', err);
-      });
+      // Activar música si está activado el sonido y aún no se ha reproducido
+      if (soundEnabled && backgroundMusic.paused) {
+        backgroundMusic.play().catch(err => {
+          console.log('El navegador bloqueó la reproducción automática:', err);
+        });
+      }
     }
-  }
-});
+  });
 
   canvas.addEventListener('mouseup', e => {
     if (e.button === 0) pointer.down = false;
@@ -408,7 +408,7 @@ document.addEventListener('DOMContentLoaded', () => {
     enemies.length = 0;
     powerUps.length = 0;
     pauseOverlay.style.visibility = 'hidden';
-    pauseOverlay.firstElementChild.textContent = "Menu de pausa Rey";
+    pauseOverlay.firstElementChild.textContent = gameOver ? "Game Over! Haz perdido." : "Menú de Pausa";
     updateScoreDisplay();
     gamePaused = false;
     startSpawning();
@@ -425,6 +425,11 @@ document.addEventListener('DOMContentLoaded', () => {
   function pauseGame() {
     gamePaused = true;
     pauseOverlay.style.visibility = 'visible';
+    if (gameOver) {
+      resumeBtn.style.display = 'none';
+    } else {
+      resumeBtn.style.display = 'inline-block';
+    }
     stopSpawning();
     stopPowerUps();
     if (animationFrameId) cancelAnimationFrame(animationFrameId);
