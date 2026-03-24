@@ -12,7 +12,7 @@ export async function setupAcertijos() {
 
 export async function cargarAcertijos() {
   try {
-    const res = await fetch('/data/acertijo.json');
+    const res = await fetch('data/acertijo.json');
     acertijos = await res.json();
     shuffleArray(acertijos);
     indiceAcertijo = 0;
