@@ -70,7 +70,7 @@ export function setupMenu() {
             import('./trivia.js').then(mod => mod.loadTriviaQuestions());
           }
           if (juegoId === 'juegoAcertijos') {
-            import('./acertijos.js').then(mod => mod.cargarAcertijos());
+            import('.acertijos.js').then(mod => mod.cargarAcertijos());
           }
         }, 400);
       } else {
