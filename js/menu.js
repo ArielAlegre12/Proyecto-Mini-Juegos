@@ -35,6 +35,7 @@ export function setupMenu() {
   const submenuLogin = document.getElementById("submenuLogin");
   if (toggleLoginBtn && submenuLogin) {
     toggleLoginBtn.addEventListener("click", () => {
+      e.stopImmediatePropagation();
       submenuLogin.classList.toggle("show");
     });
   }
