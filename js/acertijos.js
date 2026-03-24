@@ -1,6 +1,6 @@
 // acertijos.js
 
-import { shuffleArray } from 'utils.js';
+import { shuffleArray } from './utils.js';
 
 let acertijos = [];
 let indiceAcertijo = 0;
