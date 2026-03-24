@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('game');
   const ctx = canvas.getContext('2d');
   document.getElementById('exitBtn').addEventListener('click', () => {
-    window.location.href = '/index.html';
+    window.location.href = 'index.html';
   });
 
   //sonido de fondo

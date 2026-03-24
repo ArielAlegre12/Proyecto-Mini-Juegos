@@ -1,5 +1,5 @@
 // trivia.js
-import { shuffleArray } from './utils.js';
+import { shuffleArray } from '.utils.js';
 
 let triviaQuestions = [];
 let currentTriviaQuestionIndex = 0;
@@ -7,7 +7,7 @@ let triviaFeedbackParagraph;
 
 export async function loadTriviaQuestions() {
   try {
-    const response = await fetch('/data/preguntas_trivia_es.json');
+    const response = await fetch('data/preguntas_trivia_es.json');
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
