@@ -1,21 +1,30 @@
 export function setupMenu() {
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const mainNav = document.getElementById('mainNav');
+  const toggleLoginBtn = document.getElementById("toggleLogin");
+  const submenuLogin = document.getElementById("submenuLogin");
 
   hamburgerBtn.addEventListener('click', () => {
     mainNav.classList.toggle('open');
-    hamburgerBtn.classList.toggle('open'); // Para animar el icono a una 'X'
+    hamburgerBtn.classList.toggle('open'); //para animar el icono a una 'X'
   });
 
-  // Cerrar menú si clic afuera
-  document.addEventListener('click', (event) => {
-    if (!hamburgerBtn.contains(event.target) && !mainNav.contains(event.target)) {
+  //cerrar menú si clic afuera
+  document.addEventListener('click', (event) =>{
+    //verifico si existen antes de preguntar por .contains
+    const isLoginClick = toggleLoginBtn && toggleLoginBtn.contains(event.target);
+    const isSubMenuClick = submenuLogin && submenuLogin.contains(event.target);
+    const isHamburgerClick =  hamburgerBtn.contains(event.target);
+    const isNavClick = mainNav.contains(event.target);
+
+    if(!isHamburgerClick && !isNavClick && !isLoginClick && !isSubMenuClick){
       mainNav.classList.remove('open');
       hamburgerBtn.classList.remove('open');
+      if(submenuLogin) submenuLogin.classList.remove('show');
     }
   });
 
-  // Cerrar menú si se clickea en un link
+  //cerrar menú si se clickea en un link
   mainNav.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       mainNav.classList.remove('open');
@@ -23,24 +32,26 @@ export function setupMenu() {
     });
   });
 
-  // Toggle submenú juegos
+  //toggle submenú juegos
   document.getElementById('toggleJuegos').addEventListener('click', function () {
     this.classList.toggle('active');
     const submenu = document.getElementById('submenuJuegos');
     submenu.classList.toggle('show');
   });
 
-  // Toggle submenú login 
-  const toggleLoginBtn = document.getElementById("toggleLogin");
-  const submenuLogin = document.getElementById("submenuLogin");
-  if (toggleLoginBtn && submenuLogin) {
-    toggleLoginBtn.addEventListener("click", () => {
-      e.stopImmediatePropagation();
-      submenuLogin.classList.toggle("show");
+  //toggle submenú login 
+  if(toggleLoginBtn){
+    toggleLoginBtn.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+
+      if(submenuLogin){
+        submenuLogin.classList.toggle('open');
+      }
     });
   }
 
-  // Click en juego - cierra menú y submenú, hace scroll y abre acordeón
+  //click en juego - cierra menú y submenú, hace scroll y abre acordeón
   document.querySelectorAll('.juego-link').forEach(link => {
     link.addEventListener('click', (e) => {
       if (link.dataset.juego) {
@@ -57,16 +68,16 @@ export function setupMenu() {
         section.scrollIntoView({ behavior: 'smooth' });
 
         setTimeout(() => {
-          // Cierra todos los acordeones abiertos
+          //cierra todos los acordeones abiertos
           document.querySelectorAll('.accordion-content.active').forEach(item => {
             item.classList.remove('active');
           });
 
-          // Abre el acordeón correspondiente
+          //abre el acordeón correspondiente
           const content = section.querySelector('.accordion-content');
           content?.classList.add('active');
 
-          // Ejecuta lógica específica según el juego
+          //ejecuta lógica específica según el juego
           if (juegoId === 'juegoTrivia') {
             import('./trivia.js').then(mod => mod.loadTriviaQuestions());
           }
@@ -75,7 +86,7 @@ export function setupMenu() {
           }
         }, 400);
       } else {
-        // Para links sin data-juego, permitir navegación normal y cerrar menú
+        //para links sin data-juego, permitir navegación normal y cerrar menú
         mainNav.classList.remove('open');
         hamburgerBtn.classList.remove('open');
         document.getElementById('toggleJuegos').classList.remove('active');
