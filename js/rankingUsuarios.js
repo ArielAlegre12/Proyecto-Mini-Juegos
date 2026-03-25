@@ -1,150 +1,81 @@
 const KEY_USUARIOS = "rankingUsuarios"; 
 const KEY_USUARIO_ACTUAL = "usuarioActualRanking";
 
-// =====================
-// FUNCIONES INTERNAS
-// =====================
+// --- PERSISTENCIA ---
+const obtenerUsuarios = () => JSON.parse(localStorage.getItem(KEY_USUARIOS)) || [];
+const guardarUsuarios = (usuarios) => localStorage.setItem(KEY_USUARIOS, JSON.stringify(usuarios));
 
-function obtenerUsuariosRanking() {
-  const usuarios = localStorage.getItem(KEY_USUARIOS);
-  return usuarios ? JSON.parse(usuarios) : [];
-}
-
-function guardarUsuariosRanking(usuarios) {
-  localStorage.setItem(KEY_USUARIOS, JSON.stringify(usuarios));
-}
-
-// =====================
-// FUNCIONES GLOBALES
-// =====================
-
-window.registrarUsuarioRanking = function (nombre, clave) {
+// --- LOGICA GLOBAL ---
+window.registrarUsuarioRanking = (nombre, clave) => {
   if (!nombre || !clave) return false;
-
-  const usuarios = obtenerUsuariosRanking();
-
+  const usuarios = obtenerUsuarios();
   if (usuarios.some(u => u.nombre === nombre)) return false;
-
   usuarios.push({ nombre, clave, puntos: 0 });
-  guardarUsuariosRanking(usuarios);
-
+  guardarUsuarios(usuarios);
   return true;
 };
 
-window.loginRanking = function (nombre, clave) {
-  if (!nombre || !clave) return false;
-
-  const usuarios = obtenerUsuariosRanking();
+window.loginRanking = (nombre, clave) => {
+  const usuarios = obtenerUsuarios();
   const usuario = usuarios.find(u => u.nombre === nombre && u.clave === clave);
-
   if (usuario) {
     localStorage.setItem(KEY_USUARIO_ACTUAL, nombre);
+    actualizarVistaRanking();
     return true;
   }
-
   return false;
 };
 
-window.obtenerUsuarioLogueadoRanking = function () {
-  return localStorage.getItem(KEY_USUARIO_ACTUAL);
-};
-
-window.cerrarSesionRanking = function () {
+window.cerrarSesionRanking = () => {
   localStorage.removeItem(KEY_USUARIO_ACTUAL);
+  actualizarVistaRanking();
 };
 
-// =====================
-// SOLO PARA ranking.html
-// =====================
+/**
+ * SUMAR PUNTOS: Esta es la que vas a usar en trivia.js y acertijos.js
+ * Ejemplo: window.sumarPuntosRanking(10);
+ */
+window.sumarPuntosRanking = (puntosASumar) => {
+  const nombreActual = localStorage.getItem(KEY_USUARIO_ACTUAL);
+  if (!nombreActual) return;
 
+  const usuarios = obtenerUsuarios();
+  const index = usuarios.findIndex(u => u.nombre === nombreActual);
+
+  if (index !== -1) {
+    usuarios[index].puntos = (usuarios[index].puntos || 0) + puntosASumar;
+    guardarUsuarios(usuarios);
+    actualizarVistaRanking(); // Para que el número cambie en el momento
+  }
+};
+
+// --- INTERFAZ ---
 function actualizarVistaRanking() {
-  const usuario = obtenerUsuarioLogueadoRanking();
-
+  const nombre = localStorage.getItem(KEY_USUARIO_ACTUAL);
+  const usuarios = obtenerUsuarios();
+  
   const bienvenida = document.getElementById("bienvenidaRanking");
-  const usuarioSpan = document.getElementById("usuarioActualRanking");
-  const formRegistro = document.getElementById("formRegistroRanking");
-  const formLogin = document.getElementById("formLoginRanking");
+  const userSpan = document.getElementById("usuarioActualRanking");
+  const ptsSpan = document.getElementById("puntosActualRanking");
+  const formReg = document.getElementById("formRegistroRanking");
+  const formLog = document.getElementById("formLoginRanking");
 
-  if (!bienvenida || !formRegistro || !formLogin) return;
+  if (!bienvenida) return; // Seguridad por si no estamos en la página correcta
 
-  if (usuario) {
+  if (nombre) {
+    const datos = usuarios.find(u => u.nombre === nombre);
     bienvenida.style.display = "block";
-    usuarioSpan.textContent = usuario;
-    formRegistro.style.display = "none";
-    formLogin.style.display = "none";
+    userSpan.textContent = nombre;
+    ptsSpan.textContent = datos ? datos.puntos : 0; // <--- MUESTRA LOS PUNTOS
+    
+    if(formReg) formReg.style.display = "none";
+    if(formLog) formLog.style.display = "none";
   } else {
     bienvenida.style.display = "none";
-    formRegistro.style.display = "block";
-    formLogin.style.display = "block";
+    if(formReg) formReg.style.display = "block";
+    if(formLog) formLog.style.display = "block";
   }
 }
 
-// =====================
-// EVENTOS (SEGUROS)
-// =====================
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  const formRegistro = document.getElementById("formRegistroRanking");
-  const formLogin = document.getElementById("formLoginRanking");
-  const btnCerrar = document.getElementById("btnCerrarSesionRanking");
-
-  // REGISTRO
-  if (formRegistro) {
-    formRegistro.addEventListener("submit", e => {
-      e.preventDefault();
-
-      const nombre = document.getElementById("regNombreRanking").value.trim();
-      const clave = document.getElementById("regClaveRanking").value.trim();
-      const mensaje = document.getElementById("mensajeRegistro");
-
-      if (registrarUsuarioRanking(nombre, clave)) {
-        mensaje.style.color = "green";
-        mensaje.textContent = "Registro exitoso! Ya podés iniciar sesión.";
-        e.target.reset();
-      } else {
-        mensaje.style.color = "red";
-        mensaje.textContent = "Ese nombre ya existe o faltan datos.";
-      }
-
-      setTimeout(() => mensaje.textContent = "", 4000);
-    });
-  }
-
-  // LOGIN
-  if (formLogin) {
-    formLogin.addEventListener("submit", e => {
-      e.preventDefault();
-
-      const nombre = document.getElementById("logNombreRanking").value.trim();
-      const clave = document.getElementById("logClaveRanking").value.trim();
-      const mensaje = document.getElementById("mensajeLogin");
-
-      if (loginRanking(nombre, clave)) {
-        mensaje.style.color = "green";
-        mensaje.textContent = `Bienvenido, ${nombre}!`;
-        actualizarVistaRanking();
-        e.target.reset();
-      } else {
-        mensaje.style.color = "red";
-        mensaje.textContent = "Nombre o clave incorrectos.";
-      }
-
-      setTimeout(() => mensaje.textContent = "", 4000);
-    });
-  }
-
-  // LOGOUT
-  if (btnCerrar) {
-    btnCerrar.addEventListener("click", () => {
-      cerrarSesionRanking();
-      actualizarVistaRanking();
-    });
-  }
-
-  // Inicializar vista SOLO si estamos en ranking.html
-  if (formRegistro || formLogin) {
-    actualizarVistaRanking();
-  }
-
-});
+// Escuchador inicial
+document.addEventListener("DOMContentLoaded", actualizarVistaRanking);

@@ -7,7 +7,6 @@ let indiceAcertijo = 0;
 
 export async function setupAcertijos() {
   await cargarAcertijos();
-  // acá podés agregar más inicializaciones si querés después
 }
 
 export async function cargarAcertijos() {
